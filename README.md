@@ -61,6 +61,21 @@ on every row, boxed "pill" nodes around chain words, the collapsed-accordion FAQ
 now simply readable), scroll-reveal animation, and lazy-loaded images that could render as empty
 boxes. Images are square-cornered and used as full-bleed or composed blocks, never as cards.
 
+**Pamir-derived, asset-free moves** (the reference site is ~2 photos + 91 inline SVG/DOM elements,
+so its polish comes from type and motion rather than素材):
+- a **mono register** for numbers and micro-labels (system `ui-monospace`), which is what makes
+  data read as instrumented rather than decorative;
+- a **connection diagram drawn in SVG** in the pivot band — one-way today, two-way as the
+  opportunity — with travelling flow dots (`stroke-dasharray`/`dashoffset`, no libraries, no
+  images), complete and static when JS is off, animated only when it scrolls into view, and
+  fully disabled under `prefers-reduced-motion`;
+- a **concept-sketch section**: three dark "device screen" cards built entirely from DOM
+  (notification / moment / device state), each labelled 概念稿 / CONCEPT so nothing reads as a
+  shipped product;
+- deliberately NOT copied: their studio product render and frame-sequence scroll animation —
+  those are the only genuinely asset-dependent parts, and this project has no physical product
+  to photograph yet.
+
 **Layout variety is deliberate:** hero → fact band → timeline → evidence+table → full-bleed
 photo → dark pivot band → principle grid → numbered rows → form panel. No template repeats seven
 times, which was the main criticism of the previous version.

@@ -105,7 +105,7 @@ export const content = {
       { t: '从瞬间到关系', d: '让陪伴不随着关掉画面而结束' }
     ],
 
-    principlesLabel: '05 / 设计原则',
+    principlesLabel: '06 / 设计原则',
     hmwLabel: '我们要回答的问题',
     hmw: '当主人无法陪伴宠物时，<br>如何让人与宠物之间的情感连接，<br>依然能自然地发生？',
     principles: [
@@ -115,7 +115,7 @@ export const content = {
       { t: '支持', e: 'Supportive', d: '融进你的生活，而不增加负担' }
     ],
 
-    directionsLabel: '06 / 探索方向',
+    directionsLabel: '07 / 探索方向',
     directionsTitle: '我们正在验证的四件事。',
     directions: [
       { n: '01', t: '它也能主动发起', d: '顺着它的自然行为，设计一个能被它触发的连接入口' },
@@ -123,10 +123,23 @@ export const content = {
       { n: '03', t: '留下共享的日常', d: '不止于实时画面，而是能被回看的片段' },
       { n: '04', t: '持续的关系', d: '从一次互动，走向长期的情感连接' }
     ],
+    netLabel: '连接方向',
+    netNow: '现在 · 单向',
+    netNext: '机会 · 双向',
+    netAlt: '示意图：现在连接由主人单方向发起；机会是主人与宠物之间双向、由设备与 AI 承接的连接。',
+    conceptLabel: '05 / 概念示意',
+    conceptTitle: '如果它也能先找你，<br>那一刻会是什么样？',
+    conceptNote: '下面是交互概念草图，用来说明方向。不是可用的产品，也不是真实界面。',
+    conceptTag: '概念稿',
+    concepts: [
+      { kind: '通知', title: '它走近了设备', meta: '14:32 · 客厅', body: '不是你先想起它，而是它先发出了一次邀请。' },
+      { kind: '日常', title: '今天它主动来过一次', meta: '片段 · 6 秒', body: '关掉画面的那段时间，也有东西被留了下来。' },
+      { kind: '设备', title: '它在休息，未打扰', meta: '状态 · 安静', body: '不打扰它的节奏，本身就是设计的一部分。' }
+    ],
     stageTitle: '我们现在在哪',
     stageText: '只有研究、竞品分析和设计原则，没有可用的产品。下一步是访谈养宠人、做原型，观察人与宠物是否真的愿意使用。',
 
-    subLabel: '07 / 参与进来',
+    subLabel: '08 / 参与进来',
     subTitle: '如果你也有这种牵挂，<br>我们想听听你的经历。',
     subText: '留下邮箱，只有出现实质进展时我们才会来信：研究发现、原型进展或体验招募。',
     emailLabel: '邮箱地址',
@@ -246,7 +259,7 @@ export const content = {
       { t: 'From moments to a relationship', d: 'Companionship that doesn’t end when the screen closes' }
     ],
 
-    principlesLabel: '05 / Design principles',
+    principlesLabel: '06 / Design principles',
     hmwLabel: 'The question we’re answering',
     hmw: 'When an owner can’t be with their pet,<br>how can the emotional connection between them<br>still happen naturally?',
     principles: [
@@ -256,7 +269,7 @@ export const content = {
       { t: 'Supportive', e: '支持', d: 'Fit into your life without adding weight' }
     ],
 
-    directionsLabel: '06 / What we’re testing',
+    directionsLabel: '07 / What we’re testing',
     directionsTitle: 'Four things we’re exploring.',
     directions: [
       { n: '01', t: 'They can start it too', d: 'A way in that the pet can trigger through natural behaviour' },
@@ -264,10 +277,23 @@ export const content = {
       { n: '03', t: 'Keep the shared everyday', d: 'Not only live video, but moments you can come back to' },
       { n: '04', t: 'A relationship that lasts', d: 'From a single interaction toward ongoing connection' }
     ],
+    netLabel: 'Direction of connection',
+    netNow: 'Today · one way',
+    netNext: 'The opportunity · two way',
+    netAlt: 'Diagram: today the connection is initiated one way by the owner; the opportunity is a two-way connection between owner and pet, held by the device and AI.',
+    conceptLabel: '05 / Concept sketches',
+    conceptTitle: 'If they could reach you first,<br>what would that moment look like?',
+    conceptNote: 'These are interaction concept sketches, to show direction. They are not a working product and not a real interface.',
+    conceptTag: 'CONCEPT',
+    concepts: [
+      { kind: 'NOTICE', title: 'They walked up to the device', meta: '14:32 · living room', body: 'Not you remembering them first — them sending an invitation.' },
+      { kind: 'MOMENT', title: 'They reached out once today', meta: 'clip · 6s', body: 'Something was kept from the hours the screen was closed.' },
+      { kind: 'DEVICE', title: 'They are resting, undisturbed', meta: 'state · quiet', body: 'Not interrupting their rhythm is part of the design.' }
+    ],
     stageTitle: 'Where we are',
     stageText: 'Research, competitor analysis and design principles — no product yet. Next: interview owners, build prototypes, and observe whether people and pets actually choose to use them.',
 
-    subLabel: '07 / Take part',
+    subLabel: '08 / Take part',
     subTitle: 'If this feels familiar,<br>we’d like to hear what it’s like for you.',
     subText: 'Leave your email. We only write when there is something real: findings, prototype progress, or a testing invitation.',
     emailLabel: 'Email address',

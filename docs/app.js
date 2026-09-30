@@ -70,3 +70,16 @@ document.querySelector('#reset-form').addEventListener('click', () => {
   status.textContent = '';
   form.email.focus();
 });
+
+// The connection diagram draws itself once, when it enters the viewport.
+// Without JS the diagram is already complete (see .net.css defaults).
+const netFig = document.querySelector('.net');
+if (netFig) {
+  if ('IntersectionObserver' in window) {
+    netFig.classList.add('js');
+    const netIO = new IntersectionObserver((entries) => {
+      for (const entry of entries) if (entry.isIntersecting) { entry.target.classList.add('in'); netIO.unobserve(entry.target); }
+    }, { threshold: 0.2 });
+    netIO.observe(netFig);
+  }
+}

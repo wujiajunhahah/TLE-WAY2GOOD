@@ -207,20 +207,71 @@ const html = (c) => {
       ${rail(c.turnLabel, true)}
       <div class="body">
         <h2>${c.turnTitle}</h2>
+        <figure class="net">
+          <figcaption class="net-cap">${c.netLabel}</figcaption>
+          <div class="net-row net-now">
+            <div class="net-track" aria-hidden="true">
+              <svg viewBox="0 0 1000 40" preserveAspectRatio="none">
+                <path class="net-line" d="M 8 20 H 992" pathLength="1" vector-effect="non-scaling-stroke"/>
+                <path class="net-flow" d="M 8 20 H 992" vector-effect="non-scaling-stroke"/>
+                <circle class="net-dot" cx="8" cy="20" r="3.2" vector-effect="non-scaling-stroke"/>
+                <circle class="net-dot" cx="500" cy="20" r="2.4" vector-effect="non-scaling-stroke"/>
+                <circle class="net-dot" cx="992" cy="20" r="3.2" vector-effect="non-scaling-stroke"/>
+                <path class="net-head" d="M 488 14 L 500 20 L 488 26" vector-effect="non-scaling-stroke"/>
+              </svg>
+            </div>
+            <ul class="net-labels">
+              <li>${c.currentChain[0]}</li><li>${c.currentChain[1]}</li><li>${c.currentChain[2]}</li>
+            </ul>
+            <p class="net-sub">${c.currentCap}</p>
+          </div>
+          <div class="net-row net-next">
+            <div class="net-track" aria-hidden="true">
+              <svg viewBox="0 0 1000 40" preserveAspectRatio="none">
+                <path class="net-line net-line-hi" d="M 8 20 H 992" pathLength="1" vector-effect="non-scaling-stroke"/>
+                <path class="net-flow net-flow-hi" d="M 8 20 H 992" vector-effect="non-scaling-stroke"/>
+                <path class="net-flow net-flow-hi net-flow-back" d="M 8 20 H 992" vector-effect="non-scaling-stroke"/>
+                <circle class="net-dot net-dot-hi" cx="8" cy="20" r="3.2" vector-effect="non-scaling-stroke"/>
+                <circle class="net-dot net-dot-hi" cx="500" cy="20" r="2.4" vector-effect="non-scaling-stroke"/>
+                <circle class="net-dot net-dot-hi" cx="992" cy="20" r="3.2" vector-effect="non-scaling-stroke"/>
+                <path class="net-head net-head-l" d="M 20 14 L 8 20 L 20 26" vector-effect="non-scaling-stroke"/>
+                <path class="net-head net-head-r" d="M 980 14 L 992 20 L 980 26" vector-effect="non-scaling-stroke"/>
+              </svg>
+            </div>
+            <ul class="net-labels net-labels-hi">
+              <li>${c.nextChain[0]}</li><li>${c.nextChain[1]}</li><li>${c.nextChain[2]}</li>
+            </ul>
+            <p class="net-sub net-sub-hi">${c.nextCap}</p>
+          </div>
+        </figure>
         <div class="chains">
           <div class="chain chain-now">
             <p class="chain-k">${c.currentTitle}<span>${c.currentSub}</span></p>
-            <p class="chain-line">${chain(c.currentChain, '→')}</p>
-            <p class="chain-cap">${c.currentCap}</p>
             <ul>${c.currentPoints.map(x => `<li>${x}</li>`).join('')}</ul>
           </div>
           <div class="chain chain-next">
             <p class="chain-k">${c.nextTitle}<span>${c.nextSub}</span></p>
-            <p class="chain-line">${chain(c.nextChain, '↔')}</p>
             <p class="chain-cap">${c.nextCap}</p>
             <ul class="opps">${c.nextPoints.map(o => `<li><span class="o-t">${o.t}</span><span class="o-d">${o.d}</span></li>`).join('')}</ul>
           </div>
         </div>
+    </div>
+  </section>
+
+  <section class="sec" id="concept">
+    <div class="shell sec-in">
+      ${rail(c.conceptLabel)}
+      <div class="body">
+        <h2>${c.conceptTitle}</h2>
+        <p class="intro">${c.conceptNote}</p>
+        <ul class="cards">
+          ${c.concepts.map(k => `<li class="card">
+            <p class="card-top"><span class="card-kind">${k.kind}</span><span class="card-tag">${c.conceptTag}</span></p>
+            <p class="card-title">${k.title}</p>
+            <p class="card-meta">${k.meta}</p>
+            <p class="card-body">${k.body}</p>
+          </li>`).join('\n          ')}
+        </ul>
       </div>
     </div>
   </section>
