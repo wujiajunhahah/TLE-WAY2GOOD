@@ -59,6 +59,11 @@ Theme **"Arch"** (pet register):
   template tell in this kind of page.
 - on phones the stretched connection diagram is replaced by an inline arrow sequence
   (`主人 → 摄像头 → 宠物`), because a hairline with dots at 390px no longer carries the idea.
+- the **signup section is a full-bleed amber block** — the page's warmest moment sits exactly at
+  the ask — and a sleeping cat signs off in the footer. Amber is a block colour only: every text
+  colour on it is ink-based, because mid greys fail contrast there.
+- pet register, deliberately restrained: no paw prints, no mascot, no baby talk. The theme is
+  carried by the arch, the honey amber, and two line drawings (the hero cat, the footer cat).
 
 ## 3. Design decisions and why
 
