@@ -23,6 +23,10 @@ const BASE = argv.base ? ('/' + argv.base.replace(/^\/+|\/+$/g, '') + '/') : '/'
 const ORIGIN = argv.origin || '__SITE_ORIGIN__';
 const OUT = argv.out || 'public';
 const STATIC = Boolean(argv.static);
+// --images=all (default) | minimal (hero + full-bleed only) | none (typographic variant)
+const IMGS = argv.images || (argv['no-images'] ? 'none' : 'all');
+const NOIMG = IMGS === 'none';
+const MINIMAL = IMGS === 'minimal';
 const withBase = (s) => (BASE === '/' ? s : s.replace(/(href|src)="\//g, (m, attr) => `${attr}="${BASE}`));
 // ORIGIN is the full public base (it may already contain the repo path), so absolute URLs are
 // built from SITE — never ORIGIN + BASE, which would repeat the sub-path.
@@ -66,6 +70,8 @@ const html = (c) => {
 <meta name="twitter:image" content="__SITE_ORIGIN__/assets/hero.jpg">
 <meta name="pc-base" content="${BASE}">
 <meta name="pc-mode" content="${STATIC ? 'static' : 'server'}">
+<link rel="preload" href="/fonts/pc-serif.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/fonts/pc-sans-400.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="icon" href="/favicon.svg" type="image/svg+xml">
 <link rel="stylesheet" href="/style.css">
 <script src="/app.js" defer></script>
@@ -77,7 +83,7 @@ const html = (c) => {
     ]
   })}</script>
 </head>
-<body>
+<body${NOIMG ? ' class="no-img"' : MINIMAL ? ' class="img-min"' : ''}>
 <a class="skip" href="#main">${c.skip}</a>
 
 <header class="top">
@@ -110,9 +116,9 @@ const html = (c) => {
         </div>
         <p class="hero-stage">${c.stage}</p>
       </div>
-      <figure class="hero-fig rv">
-        <img src="/assets/hero.jpg" width="1056" height="922" alt="${c.heroAlt}" fetchpriority="high" decoding="async">
-      </figure>
+      ${NOIMG ? '' : `<figure class="hero-fig rv">
+        <img src="/assets/hero.jpg" width="1056" height="922" alt="${c.heroAlt}" fetchpriority="high">
+      </figure>`}
     </div>
   </section>
 
@@ -145,10 +151,10 @@ const html = (c) => {
         </blockquote>
       </div>
     </div>
-    <figure class="bleed">
+    ${NOIMG ? '' : `<figure class="bleed">
       <img src="/assets/away.jpg" width="810" height="274" alt="${c.awayCaption}">
       <figcaption class="shell">${c.awayCaption}</figcaption>
-    </figure>
+    </figure>`}
   </section>
 
   <section class="sec">
@@ -168,10 +174,10 @@ const html = (c) => {
               <ul>${c.lacks.map(x => `<li>${x}</li>`).join('')}</ul>
             </div>
           </div>
-          <figure class="devices">
+          ${NOIMG || MINIMAL ? '' : `<figure class="devices">
             <img src="/assets/devices.jpg" width="780" height="396" alt="${c.devicesAlt}">
             <figcaption>${c.devicesCaption}</figcaption>
-          </figure>
+          </figure>`}
         </div>
         <table class="products">
           <caption class="vh">${c.marketLabel}</caption>
@@ -195,7 +201,7 @@ const html = (c) => {
           ${c.users.map(u => `<li><span class="u-t">${u.t}</span><span class="u-d">${u.d}</span></li>`).join('\n          ')}
         </ul>
         <div class="trait">
-          <img src="/assets/hold.jpg" width="466" height="448" alt="" aria-hidden="true">
+          ${NOIMG || MINIMAL ? '' : '<img src="/assets/hold.jpg" width="466" height="448" alt="" aria-hidden="true">'}
           <p>${c.usersTrait}</p>
         </div>
       </div>
@@ -392,6 +398,7 @@ if (STATIC) {
   // the static host needs its own copy of the stylesheet, script and assets
   for (const f of ['style.css', 'app.js', 'favicon.svg']) cpSync(`public/${f}`, `${OUT}/${f}`);
   cpSync('public/assets', `${OUT}/assets`, { recursive: true });
+  cpSync('public/fonts', `${OUT}/fonts`, { recursive: true });
   writeFileSync(`${OUT}/.nojekyll`, '');
   console.log('wrote', `${OUT}/index.html`, 'robots.txt', 'sitemap.xml', '.nojekyll');
 }

@@ -107,7 +107,32 @@ Server fixes applied to this copy (found while reviewing the original):
 directory requests → 404 (was 500); the decoded path is now normalised before the redirect table,
 so a percent-encoded look-alike can no longer serve a file the redirect table means to hide.
 
-## 5. Deployment (GitHub Pages)
+## 5. Typography
+
+All display and body type is **self-hosted and subset to this page's 571 glyphs** — no CDN, no
+third-party request, and a CJK page that does not download 20 MB:
+
+| Role | Face | Weight | Size |
+|---|---|---|---|
+| Display (headlines, step titles, pull-quote) | Noto Serif SC (variable) | 600 | 170 KB |
+| Body CJK | Noto Sans SC | 400 / 700 | 72 + 73 KB |
+| Body Latin | Inter | 400 / 500 | 36 + 11 KB |
+| Numerals, labels, mono register | system `ui-monospace` | — | 0 KB |
+
+CJK and Latin need different display metrics, so `h1`/`h2` carry per-language line-height and
+tracking (`html[lang="zh-CN"]` vs `html[lang="en"]`); negative tracking is only applied to Latin.
+Fonts are OFL 1.1 — see `public/fonts/README.md` and `public/fonts/licenses/`.
+
+## 6. Image variants
+
+`--images=all|minimal|none` builds three compositions from the same content:
+
+- `all` (deployed at the root) — 4 photographs
+- `minimal` (deployed at `/clean/`) — hero + full-bleed only
+- `none` (deployed at `/text-only/`) — no photographs at all; typography, the SVG diagram and
+  the DOM concept sketches carry the page
+
+## 7. Deployment (GitHub Pages)
 
 The repo is served as a project site, so internal links carry the repo sub-path:
 
@@ -126,7 +151,7 @@ needs the Node server (`node server.mjs`) or another endpoint — see §7.
 
 Live: <https://wujiajunhahah.github.io/TLE-WAY2GOOD/>
 
-## 6. Known limitations
+## 8. Known limitations
 
 - The competitor device shot and the three photos come from the source deck, so they are
   decorative rather than documentary; a real photograph of the team's own prototype would be

@@ -1,3 +1,12 @@
+/* ---------- self-hosted type (OFL; subset to this page's 571 glyphs) ----------
+   Relative URLs so the same stylesheet works at the server root and under a
+   project GitHub Pages sub-path. Serif is variable (wght 200-900) in one file. */
+@font-face{font-family:'PC Serif';src:url('fonts/pc-serif.woff2') format('woff2');font-weight:200 900;font-style:normal;font-display:swap}
+@font-face{font-family:'PC Sans';src:url('fonts/pc-sans-400.woff2') format('woff2');font-weight:400;font-style:normal;font-display:swap}
+@font-face{font-family:'PC Sans';src:url('fonts/pc-sans-700.woff2') format('woff2');font-weight:500 800;font-style:normal;font-display:swap}
+@font-face{font-family:'PC Latin';src:url('fonts/pc-latin-400.woff2') format('woff2');font-weight:400;font-style:normal;font-display:swap}
+@font-face{font-family:'PC Latin';src:url('fonts/pc-latin-500.woff2') format('woff2');font-weight:500 700;font-style:normal;font-display:swap}
+
 /* Pet Companionship — landing page v4
    Identity: a printed research brief. A sticky margin rail carries each section's number and
    label; hairline rules divide sections. The two-way thesis is carried structurally (the
@@ -16,12 +25,11 @@
   --dk-rule:rgba(247,244,238,.24);
   --dk-text:#C6CFC9;       /* 7.6:1 on green */
   --gut:48px;
-  --font-serif:'Songti SC','Source Han Serif SC','Noto Serif CJK SC','Iowan Old Style',Palatino,Georgia,'Times New Roman',serif;
+  --font-serif:'PC Serif','Songti SC','Source Han Serif SC','Noto Serif CJK SC',Georgia,serif;
   --font-mono:ui-monospace,'SF Mono',SFMono-Regular,Menlo,Consolas,'Liberation Mono',monospace;
   --card:#151513;--card-2:#1D1D1A;--card-line:rgba(247,244,238,.14);--card-ink:#F2F0EC;--card-ink-2:#A8A49C;
-  --font-sans:-apple-system,BlinkMacSystemFont,'PingFang SC','Hiragino Sans GB','Microsoft YaHei',system-ui,sans-serif;
+  --font-sans:'PC Latin','PC Sans',-apple-system,BlinkMacSystemFont,'PingFang SC','Hiragino Sans GB','Microsoft YaHei',sans-serif;
 }
-html[lang="en"]{--font-serif:'Iowan Old Style',Palatino,'Palatino Linotype',Charter,Georgia,'Songti SC',serif;}
 
 *,*::before,*::after{box-sizing:border-box}
 html{scroll-behavior:smooth;scroll-padding-top:104px;-webkit-text-size-adjust:100%}
@@ -67,7 +75,8 @@ a:hover{text-decoration:underline;text-underline-offset:4px}
 .hero{padding:74px 0 0}
 .hero-in{display:grid;grid-template-columns:minmax(0,1.06fr) minmax(0,.94fr);gap:60px;align-items:end}
 .eyebrow{font-size:12px;letter-spacing:.14em;color:var(--ink-2);text-transform:uppercase;margin-bottom:26px}
-h1{font-family:var(--font-serif);font-weight:600;font-size:clamp(44px,6.3vw,88px);line-height:1.08;letter-spacing:-.02em;text-wrap:balance}
+h1{font-family:var(--font-serif);font-weight:600;font-size:clamp(42px,5.9vw,84px);line-height:1.16;letter-spacing:-.01em;text-wrap:balance}
+html[lang="en"] h1{font-size:clamp(44px,6.2vw,88px);line-height:1.05;letter-spacing:-.025em;font-weight:600}
 h1 em{font-style:normal;color:var(--clay)}
 .lede{margin-top:28px;font-size:19px;line-height:1.85;color:var(--ink-2);max-width:33em}
 .hero-act{display:flex;align-items:center;gap:26px;flex-wrap:wrap;margin-top:34px}
@@ -94,7 +103,8 @@ h1 em{font-style:normal;color:var(--clay)}
 .rail-text{font-size:12.5px;line-height:1.5;color:var(--ink-2)}
 .rail-dk .rail-num{color:var(--clay-soft)}
 .rail-dk .rail-text{color:var(--dk-text)}
-h2{font-family:var(--font-serif);font-weight:600;font-size:clamp(28px,3vw,40px);line-height:1.22;letter-spacing:-.015em;text-wrap:balance}
+h2{font-family:var(--font-serif);font-weight:600;font-size:clamp(27px,2.9vw,38px);line-height:1.32;letter-spacing:.005em;text-wrap:balance}
+html[lang="en"] h2{line-height:1.18;letter-spacing:-.015em}
 .intro{margin-top:24px;font-size:17px;line-height:1.85;color:var(--ink-2);max-width:38em}
 .band h2{font-size:clamp(34px,4.1vw,56px)}
 
@@ -386,3 +396,18 @@ h2{font-family:var(--font-serif);font-weight:600;font-size:clamp(28px,3vw,40px);
   .net-flow{animation:none;opacity:0}
   .net-dot,.net-head{opacity:1!important;transform:none!important}
 }
+
+/* ---------- typographic variant (no photographs) ---------- */
+/* no photographs: the hero becomes a type-only statement, so it gets a bigger voice */
+.no-img .hero-in{grid-template-columns:minmax(0,1fr);gap:0}
+.no-img .hero-copy{max-width:min(100%,900px)}
+.no-img .hero{padding-top:92px}
+.no-img h1{font-size:clamp(48px,7.4vw,104px)}
+.no-img .lede{max-width:min(100%,620px);font-size:20px}
+.no-img .market-mid{grid-template-columns:minmax(0,1fr)}
+.no-img .trait{grid-template-columns:minmax(0,1fr);background:var(--paper-2)}
+.no-img .trait p{padding:34px 0;max-width:38em}
+.no-img .hero-stage{max-width:40em}
+.img-min .market-mid{grid-template-columns:minmax(0,1fr)}
+.img-min .trait p{padding:34px 0;max-width:40em}
+@media(max-width:760px){.no-img .hero{padding-top:56px}.no-img .hero-copy,.no-img .lede,.img-min .hero-copy{max-width:none}}

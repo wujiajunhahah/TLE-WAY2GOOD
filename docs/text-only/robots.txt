@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://wujiajunhahah.github.io/TLE-WAY2GOOD/sitemap.xml
