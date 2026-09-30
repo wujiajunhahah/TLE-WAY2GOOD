@@ -77,7 +77,7 @@ const html = (c) => {
 <title>${c.title}</title>
 <meta name="description" content="${c.desc}">
 <meta name="robots" content="__ROBOTS__">
-<meta name="theme-color" content="#123A35">
+<meta name="theme-color" content="#1E2154">
 <link rel="canonical" href="__SITE_ORIGIN__/${me}/">
 <link rel="alternate" hreflang="zh-CN" href="__SITE_ORIGIN__/zh/">
 <link rel="alternate" hreflang="en" href="__SITE_ORIGIN__/en/">
@@ -359,7 +359,7 @@ const html = (c) => {
     </div>
   </section>
 
-  <section id="subscribe" class="sec">
+  <section id="subscribe" class="sec sub-warm">
     <div class="shell sec-in">
       ${rail(c.subLabel)}
       <div class="body sub-grid">
@@ -400,7 +400,11 @@ const html = (c) => {
 
 <footer class="foot">
   <div class="shell foot-in">
-    <p class="foot-brand">Pet Companionship<small>${c.footerNote}</small></p>
+    <p class="foot-brand"><svg class="foot-cat" viewBox="0 -16 122 80" aria-hidden="true">
+        <path d="M 8 54 C 8 32 26 18 44 18 C 52 18 56 21 60 25 C 64 21 68 18 76 18 C 94 18 112 32 112 54"/>
+        <path d="M 20 20 L 30 6 L 40 18"/><path d="M 80 18 L 90 6 L 100 20"/>
+        <path d="M 96 6 h 12 l -12 10 h 12"/><path d="M 106 -4 h 10 l -10 8 h 10"/>
+      </svg>Pet Companionship<small>${c.footerNote}</small></p>
     <p class="foot-links">
       <a class="foot-lang" href="/${other}/" lang="${otherLang}" hreflang="${other}">${c.footerLang}</a>
       <span>${c.copyright}</span>

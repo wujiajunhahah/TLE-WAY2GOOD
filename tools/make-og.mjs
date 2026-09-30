@@ -37,15 +37,15 @@ const html = (locale) => {
 @font-face{font-family:'PC Latin';src:url(${FONTS.latin}) format('woff2');font-weight:100 900}
 @font-face{font-family:'PC Mono';src:url(${FONTS.mono}) format('woff2');font-weight:100 800}
 *{margin:0;box-sizing:border-box}
-body{width:1200px;height:630px;background:#123A35;color:#F7F4EE;font:17px/1.7 'PC Latin','PC Sans',sans-serif;padding:64px 72px;display:flex;flex-direction:column;justify-content:space-between}
+body{width:1200px;height:630px;background:#1E2154;color:#F5F1E8;font:17px/1.7 'PC Latin','PC Sans',sans-serif;padding:64px 72px;display:flex;flex-direction:column;justify-content:space-between}
 .top{display:flex;justify-content:space-between;align-items:baseline}
 .brand{font-family:'PC Serif';font-size:30px;font-weight:600}
-.brand small{display:block;font-family:'PC Latin','PC Sans';font-size:14px;font-weight:400;color:#C6CFC9;margin-top:6px;letter-spacing:.04em}
-.eyebrow{font-family:'PC Mono','PC Sans',ui-monospace,Menlo,monospace;font-size:14px;letter-spacing:.14em;color:#E8A08D}
+.brand small{display:block;font-family:'PC Latin','PC Sans';font-size:14px;font-weight:400;color:#B9BAC8;margin-top:6px;letter-spacing:.04em}
+.eyebrow{font-family:'PC Mono','PC Sans',ui-monospace,Menlo,monospace;font-size:14px;letter-spacing:.14em;color:#F2B264}
 h1{font-family:'PC Serif';font-size:76px;font-weight:600;line-height:1.16;letter-spacing:-.01em}
-h1 em{font-style:normal;color:#E8A08D}
-.rule{height:1px;background:rgba(247,244,238,.24);margin:28px 0 22px}
-.foot{display:flex;justify-content:space-between;align-items:baseline;font-family:'PC Mono','PC Sans',ui-monospace,Menlo,monospace;font-size:13px;color:#C6CFC9}
+h1 em{font-style:normal;color:#F2B264}
+.rule{height:1px;background:rgba(245,241,232,.24);margin:28px 0 22px}
+.foot{display:flex;justify-content:space-between;align-items:baseline;font-family:'PC Mono','PC Sans',ui-monospace,Menlo,monospace;font-size:13px;color:#B9BAC8}
 </style></head><body>
 <div class="top">
   <div class="brand">Pet Companionship<small>${t.brandLine} · ${t.brandNote}</small></div>
@@ -53,6 +53,10 @@ h1 em{font-style:normal;color:#E8A08D}
 </div>
 <div>
   <h1>${t.h1}</h1>
+  <svg viewBox="0 0 1000 90" width="1000" height="90" aria-hidden="true" style="display:block;margin:8px 0 18px">
+    <path d="M 0 62 C 180 62 240 14 420 14 C 600 14 660 62 840 62 C 900 62 950 52 1000 34" fill="none" stroke="#F2B264" stroke-width="2"/>
+    <circle cx="0" cy="62" r="7" fill="#F2B264"/>
+  </svg>
   <div class="rule"></div>
   <div class="foot"><span>${t.stage}</span><span>wujiajunhahah.github.io/TLE-WAY2GOOD</span></div>
 </div>

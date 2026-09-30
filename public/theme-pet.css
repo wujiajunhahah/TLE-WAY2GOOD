@@ -175,8 +175,8 @@ html[lang="en"] h2{line-height:1.06;letter-spacing:-.03em}
 /* ---------- footer ---------- */
 .foot{padding:52px 0 44px}
 .foot-brand{font-size:21px}
-.foot-lang{font-family:var(--font-mono);font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-2);border:1px solid var(--rule);border-radius:999px;padding:7px 14px;min-height:34px}
-.foot-lang:hover{color:var(--ink);border-color:var(--ink);text-decoration:none}
+.foot .foot-lang{font-family:var(--font-mono);font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-2);border:1px solid var(--rule);border-radius:999px;padding:7px 14px;min-height:34px;text-decoration:none}
+.foot .foot-lang:hover{color:var(--ink);border-color:var(--ink);text-decoration:none;background:var(--paper-2)}
 
 /* ---------- responsive: the theme's shape rules must not out-specify the base
    breakpoints, so every column change is re-asserted here ---------- */
@@ -312,3 +312,36 @@ html[lang="en"] h2{line-height:1.06;letter-spacing:-.03em}
 
 /* the diagram above already states both directions — don't repeat the caption below */
 .net + .chains .chain-next .chain-cap{display:none}
+
+/* ==========================================================================
+   Warmer pet register: the signup section becomes a full-bleed amber block
+   (the page's warmest moment, right where the ask is), and a sleeping cat
+   signs off in the footer. Text on amber is ink-based — mid greys fail here.
+   ========================================================================== */
+.sub-warm{background:var(--amber);border-top:0}
+.sub-warm .sec-in{padding:78px 0 84px}
+.sub-warm .rail-num{color:rgba(25,23,19,.55)}
+.sub-warm .rail-text{color:rgba(25,23,19,.72)}
+.sub-warm h2,.sub-warm .faq-h{color:var(--ink)}
+.sub-warm h2{font-size:clamp(28px,3.2vw,46px);letter-spacing:-.01em;line-height:1.22}
+.sub-warm .intro,.sub-warm .privacy,.sub-warm .privacy-note,.sub-warm .qa-a{color:rgba(25,23,19,.8)}
+.sub-warm .qa-q{color:var(--ink)}
+.sub-warm .qa{border-top-color:rgba(25,23,19,.24)}
+.sub-warm .form{border-top-color:var(--ink)}
+.sub-warm .em-l,.sub-warm .consent{color:rgba(25,23,19,.82)}
+.sub-warm .em-row input{border-color:rgba(25,23,19,.35);color:var(--ink)}
+.sub-warm .em-row input::placeholder{color:rgba(25,23,19,.5)}
+.sub-warm .em-row input:focus{border-color:var(--ink)}
+.sub-warm .em-row .btn{background:var(--ink);border-color:var(--ink);color:var(--paper)}
+.sub-warm .em-row .btn:hover{background:#000;border-color:#000}
+.sub-warm .consent input{accent-color:var(--ink)}
+.sub-warm .status{color:var(--ink)}
+.sub-warm .success{background:var(--paper);border-color:var(--ink);color:var(--ink)}
+.sub-warm .success .s-k{color:var(--clay-deep)}
+.sub-warm .success .s-t{color:rgba(25,23,19,.8)}
+.sub-warm .success .link-quiet{border-bottom-color:rgba(25,23,19,.35);color:var(--ink)}
+.sub-warm :focus-visible{outline-color:var(--ink)}
+
+.foot-cat{width:84px;height:auto;display:inline-block;vertical-align:-2px;margin-right:14px}
+.foot-cat path{fill:none;stroke:var(--ink);stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+.foot-brand{align-items:center}
