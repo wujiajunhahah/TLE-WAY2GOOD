@@ -61,13 +61,15 @@ const html = (c) => {
 <meta property="og:title" content="${c.title}">
 <meta property="og:description" content="${c.desc}">
 <meta property="og:url" content="__SITE_ORIGIN__/${me}/">
-<meta property="og:image" content="__SITE_ORIGIN__/assets/hero.jpg">
+<meta property="og:image" content="__SITE_ORIGIN__/og-${me}.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
 <meta property="og:locale" content="${c.ogLocale}">
 <meta property="og:locale:alternate" content="${c.ogLocaleAlt}">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="${c.title}">
 <meta name="twitter:description" content="${c.desc}">
-<meta name="twitter:image" content="__SITE_ORIGIN__/assets/hero.jpg">
+<meta name="twitter:image" content="__SITE_ORIGIN__/og-${me}.jpg">
 <meta name="pc-base" content="${BASE}">
 <meta name="pc-mode" content="${STATIC ? 'static' : 'server'}">
 <link rel="preload" href="/fonts/pc-serif.woff2" as="font" type="font/woff2" crossorigin>
@@ -396,8 +398,8 @@ if (STATIC) {
   writeFileSync(`${OUT}/robots.txt`, `User-agent: *\nAllow: /\nSitemap: ${SITE}sitemap.xml\n`);
   writeFileSync(`${OUT}/sitemap.xml`, `<?xml version="1.0" encoding="UTF-8"?><urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">${['zh', 'en'].map((l) => `<url><loc>${SITE}${l}/</loc><xhtml:link rel="alternate" hreflang="zh-CN" href="${SITE}zh/"/><xhtml:link rel="alternate" hreflang="en" href="${SITE}en/"/><xhtml:link rel="alternate" hreflang="x-default" href="${SITE}zh/"/></url>`).join('')}</urlset>`);
   // the static host needs its own copy of the stylesheet, script and assets
-  for (const f of ['style.css', 'app.js', 'favicon.svg']) cpSync(`public/${f}`, `${OUT}/${f}`);
-  cpSync('public/assets', `${OUT}/assets`, { recursive: true });
+  for (const f of ['style.css', 'app.js', 'favicon.svg', 'og-zh.jpg', 'og-en.jpg']) cpSync(`public/${f}`, `${OUT}/${f}`);
+  if (IMGS !== 'none') cpSync('public/assets', `${OUT}/assets`, { recursive: true });
   cpSync('public/fonts', `${OUT}/fonts`, { recursive: true });
   writeFileSync(`${OUT}/.nojekyll`, '');
   console.log('wrote', `${OUT}/index.html`, 'robots.txt', 'sitemap.xml', '.nojekyll');
