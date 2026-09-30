@@ -73,7 +73,7 @@ const html = (c) => {
 <meta name="pc-base" content="${BASE}">
 <meta name="pc-mode" content="${STATIC ? 'static' : 'server'}">
 <link rel="preload" href="/fonts/pc-serif.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="preload" href="/fonts/pc-sans-400.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/fonts/pc-sans.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="icon" href="/favicon.svg" type="image/svg+xml">
 <link rel="stylesheet" href="/style.css">
 <script src="/app.js" defer></script>

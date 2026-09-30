@@ -23,9 +23,9 @@ const { chromium } = req(mod);
 const font = (file) => `data:font/woff2;base64,${readFileSync(`public/fonts/${file}`).toString('base64')}`;
 const FONTS = {
   serif: font('pc-serif.woff2'),
-  sans400: font('pc-sans-400.woff2'),
-  sans700: font('pc-sans-700.woff2'),
-  latin400: font('pc-latin-400.woff2'),
+  sans: font('pc-sans.woff2'),
+  latin: font('pc-latin.woff2'),
+  mono: font('pc-mono.woff2'),
 };
 
 const html = (locale) => {
@@ -33,19 +33,19 @@ const html = (locale) => {
   return `<!doctype html><html lang="${t.lang}"><head><meta charset="utf-8">
 <style>
 @font-face{font-family:'PC Serif';src:url(${FONTS.serif}) format('woff2');font-weight:200 900}
-@font-face{font-family:'PC Sans';src:url(${FONTS.sans400}) format('woff2');font-weight:400}
-@font-face{font-family:'PC Sans';src:url(${FONTS.sans700}) format('woff2');font-weight:500 800}
-@font-face{font-family:'PC Latin';src:url(${FONTS.latin400}) format('woff2');font-weight:400}
+@font-face{font-family:'PC Sans';src:url(${FONTS.sans}) format('woff2');font-weight:100 900}
+@font-face{font-family:'PC Latin';src:url(${FONTS.latin}) format('woff2');font-weight:100 900}
+@font-face{font-family:'PC Mono';src:url(${FONTS.mono}) format('woff2');font-weight:100 800}
 *{margin:0;box-sizing:border-box}
 body{width:1200px;height:630px;background:#123A35;color:#F7F4EE;font:17px/1.7 'PC Latin','PC Sans',sans-serif;padding:64px 72px;display:flex;flex-direction:column;justify-content:space-between}
 .top{display:flex;justify-content:space-between;align-items:baseline}
 .brand{font-family:'PC Serif';font-size:30px;font-weight:600}
 .brand small{display:block;font-family:'PC Latin','PC Sans';font-size:14px;font-weight:400;color:#C6CFC9;margin-top:6px;letter-spacing:.04em}
-.eyebrow{font-family:ui-monospace,'SF Mono',Menlo,monospace;font-size:14px;letter-spacing:.14em;color:#E8A08D}
+.eyebrow{font-family:'PC Mono','PC Sans',ui-monospace,Menlo,monospace;font-size:14px;letter-spacing:.14em;color:#E8A08D}
 h1{font-family:'PC Serif';font-size:76px;font-weight:600;line-height:1.16;letter-spacing:-.01em}
 h1 em{font-style:normal;color:#E8A08D}
 .rule{height:1px;background:rgba(247,244,238,.24);margin:28px 0 22px}
-.foot{display:flex;justify-content:space-between;align-items:baseline;font-family:ui-monospace,'SF Mono',Menlo,monospace;font-size:13px;color:#C6CFC9}
+.foot{display:flex;justify-content:space-between;align-items:baseline;font-family:'PC Mono','PC Sans',ui-monospace,Menlo,monospace;font-size:13px;color:#C6CFC9}
 </style></head><body>
 <div class="top">
   <div class="brand">Pet Companionship<small>${t.brandLine} · ${t.brandNote}</small></div>

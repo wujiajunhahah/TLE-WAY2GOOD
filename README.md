@@ -112,12 +112,15 @@ so a percent-encoded look-alike can no longer serve a file the redirect table me
 All display and body type is **self-hosted and subset to this page's 571 glyphs** — no CDN, no
 third-party request, and a CJK page that does not download 20 MB:
 
-| Role | Face | Weight | Size |
+| Role | Face | Axes | Size |
 |---|---|---|---|
-| Display (headlines, step titles, pull-quote) | Noto Serif SC (variable) | 600 | 170 KB |
-| Body CJK | Noto Sans SC | 400 / 700 | 72 + 73 KB |
-| Body Latin | Inter | 400 / 500 | 36 + 11 KB |
-| Numerals, labels, mono register | system `ui-monospace` | — | 0 KB |
+| Display (headlines, step titles, pull-quote) | Noto Serif SC | wght 200–900 | 170 KB |
+| Body CJK | Noto Sans SC | wght 100–900 | 131 KB |
+| Body Latin | Inter | opsz + wght | 39 KB |
+| Numerals, prices, micro-labels | JetBrains Mono | wght 100–800 | 29 KB |
+
+369 KB for four variable families; regenerate with `python3 tools/subset-fonts.py` after any copy
+change (a glyph missing from the subset falls back silently).
 
 CJK and Latin need different display metrics, so `h1`/`h2` carry per-language line-height and
 tracking (`html[lang="zh-CN"]` vs `html[lang="en"]`); negative tracking is only applied to Latin.

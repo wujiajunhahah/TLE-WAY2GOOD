@@ -1,11 +1,10 @@
-/* ---------- self-hosted type (OFL; subset to this page's 571 glyphs) ----------
-   Relative URLs so the same stylesheet works at the server root and under a
-   project GitHub Pages sub-path. Serif is variable (wght 200-900) in one file. */
+/* ---------- self-hosted type (OFL; subset to this page's 566 glyphs) ----------
+   Four variable faces, relative URLs (so one stylesheet serves the root and a Pages sub-path).
+   Monospace carries the "instrument" register: data, counts, micro-labels. */
 @font-face{font-family:'PC Serif';src:url('fonts/pc-serif.woff2') format('woff2');font-weight:200 900;font-style:normal;font-display:swap}
-@font-face{font-family:'PC Sans';src:url('fonts/pc-sans-400.woff2') format('woff2');font-weight:400;font-style:normal;font-display:swap}
-@font-face{font-family:'PC Sans';src:url('fonts/pc-sans-700.woff2') format('woff2');font-weight:500 800;font-style:normal;font-display:swap}
-@font-face{font-family:'PC Latin';src:url('fonts/pc-latin-400.woff2') format('woff2');font-weight:400;font-style:normal;font-display:swap}
-@font-face{font-family:'PC Latin';src:url('fonts/pc-latin-500.woff2') format('woff2');font-weight:500 700;font-style:normal;font-display:swap}
+@font-face{font-family:'PC Sans';src:url('fonts/pc-sans.woff2') format('woff2');font-weight:100 900;font-style:normal;font-display:swap}
+@font-face{font-family:'PC Latin';src:url('fonts/pc-latin.woff2') format('woff2');font-weight:100 900;font-style:normal;font-display:swap}
+@font-face{font-family:'PC Mono';src:url('fonts/pc-mono.woff2') format('woff2');font-weight:100 800;font-style:normal;font-display:swap}
 
 /* Pet Companionship — landing page v4
    Identity: a printed research brief. A sticky margin rail carries each section's number and
@@ -26,7 +25,7 @@
   --dk-text:#C6CFC9;       /* 7.6:1 on green */
   --gut:48px;
   --font-serif:'PC Serif','Songti SC','Source Han Serif SC','Noto Serif CJK SC',Georgia,serif;
-  --font-mono:ui-monospace,'SF Mono',SFMono-Regular,Menlo,Consolas,'Liberation Mono',monospace;
+  --font-mono:'PC Mono','PC Sans',ui-monospace,'SF Mono',SFMono-Regular,Menlo,Consolas,monospace;
   --card:#151513;--card-2:#1D1D1A;--card-line:rgba(247,244,238,.14);--card-ink:#F2F0EC;--card-ink-2:#A8A49C;
   --font-sans:'PC Latin','PC Sans',-apple-system,BlinkMacSystemFont,'PingFang SC','Hiragino Sans GB','Microsoft YaHei',sans-serif;
 }
