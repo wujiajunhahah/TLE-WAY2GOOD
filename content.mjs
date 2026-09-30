@@ -36,6 +36,8 @@ export const content = {
     ctaPrimary: '订阅项目进展',
     ctaQuiet: '从五个时刻看起',
     heroAlt: '猫把脸贴向主人，两者之间有一条细线',
+    petAlt: '一只猫的线稿：它的尾巴延伸成一条线，连到主人的位置，线上有来回移动的光点。',
+    petCap: '它的尾巴，就是我们想补上的那条连接线。',
 
     factsLabel: '这件事有多大',
     facts: [
@@ -190,6 +192,8 @@ export const content = {
     ctaPrimary: 'Get project updates',
     ctaQuiet: 'Start with the five moments',
     heroAlt: 'A cat leaning its face against its owner, a thin line between them',
+    petAlt: 'A line drawing of a cat whose tail extends into a line reaching the owner, with pulses travelling both ways.',
+    petCap: 'The tail is the connection we want to restore.',
 
     factsLabel: 'The size of this',
     facts: [

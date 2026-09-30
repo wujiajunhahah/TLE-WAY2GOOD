@@ -76,6 +76,7 @@ const html = (c) => {
 <link rel="preload" href="/fonts/pc-sans.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="icon" href="/favicon.svg" type="image/svg+xml">
 <link rel="stylesheet" href="/style.css">
+<link rel="stylesheet" href="/theme-pet.css">
 <script src="/app.js" defer></script>
 <script type="application/ld+json">${JSON.stringify({
     '@context': 'https://schema.org',
@@ -118,7 +119,28 @@ const html = (c) => {
         </div>
         <p class="hero-stage">${c.stage}</p>
       </div>
-      ${NOIMG ? '' : `<figure class="hero-fig rv">
+      ${NOIMG ? `<div class="arch-panel rv">
+        <span class="arch-whisker" style="transform:rotate(-7deg)"></span>
+        <span class="arch-whisker" style="top:172px;transform:rotate(-3deg)"></span>
+        <svg viewBox="0 0 520 470" role="img" aria-label="${c.petAlt}">
+          <g class="pet-whiskers" aria-hidden="true">
+            <path d="M -46 4 L -104 -8"/><path d="M -46 14 L -108 14"/><path d="M -46 24 L -102 36"/>
+            <path d="M 46 4 L 104 -8"/><path d="M 46 14 L 108 14"/><path d="M 46 24 L 102 36"/>
+          </g>
+          <g transform="translate(330 158) scale(1.3)">
+            <path class="pet-line" d="M 0 48 C 0 132 -62 168 -124 198 C -162 216 -186 236 -192 258" pathLength="1"/>
+            <path class="pet-flow" d="M 0 48 C 0 132 -62 168 -124 198 C -162 216 -186 236 -192 258"/>
+            <path class="pet-flow pet-flow-back" d="M 0 48 C 0 132 -62 168 -124 198 C -162 216 -186 236 -192 258"/>
+            <circle class="pet-owner" cx="-192" cy="258" r="11"/>
+            <path class="pet-ear" d="M -44 -20 L -34 -74 L -4 -36"/>
+            <path class="pet-ear" d="M 44 -20 L 34 -74 L 4 -36"/>
+            <circle class="pet-head" cx="0" cy="0" r="47"/>
+            <circle class="pet-eye" cx="-17" cy="-3" r="5"/>
+            <circle class="pet-eye" cx="17" cy="-3" r="5"/>
+          </g>
+        </svg>
+        <p class="arch-cap">${c.petCap}</p>
+      </div>` : `<figure class="hero-fig rv">
         <img src="/assets/hero.jpg" width="1056" height="922" alt="${c.heroAlt}" fetchpriority="high">
       </figure>`}
     </div>
@@ -398,7 +420,7 @@ if (STATIC) {
   writeFileSync(`${OUT}/robots.txt`, `User-agent: *\nAllow: /\nSitemap: ${SITE}sitemap.xml\n`);
   writeFileSync(`${OUT}/sitemap.xml`, `<?xml version="1.0" encoding="UTF-8"?><urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">${['zh', 'en'].map((l) => `<url><loc>${SITE}${l}/</loc><xhtml:link rel="alternate" hreflang="zh-CN" href="${SITE}zh/"/><xhtml:link rel="alternate" hreflang="en" href="${SITE}en/"/><xhtml:link rel="alternate" hreflang="x-default" href="${SITE}zh/"/></url>`).join('')}</urlset>`);
   // the static host needs its own copy of the stylesheet, script and assets
-  for (const f of ['style.css', 'app.js', 'favicon.svg', 'og-zh.jpg', 'og-en.jpg']) cpSync(`public/${f}`, `${OUT}/${f}`);
+  for (const f of ['style.css', 'theme-pet.css', 'app.js', 'favicon.svg', 'og-zh.jpg', 'og-en.jpg']) cpSync(`public/${f}`, `${OUT}/${f}`);
   if (IMGS !== 'none') cpSync('public/assets', `${OUT}/assets`, { recursive: true });
   cpSync('public/fonts', `${OUT}/fonts`, { recursive: true });
   writeFileSync(`${OUT}/.nojekyll`, '');

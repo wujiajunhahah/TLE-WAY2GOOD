@@ -73,7 +73,7 @@ document.querySelector('#reset-form').addEventListener('click', () => {
 
 // The connection diagram draws itself once, when it enters the viewport.
 // Without JS the diagram is already complete (see .net.css defaults).
-const netFig = document.querySelector('.net');
+const netFig = document.querySelector('.net, .arch-panel');
 if (netFig) {
   if ('IntersectionObserver' in window) {
     netFig.classList.add('js');

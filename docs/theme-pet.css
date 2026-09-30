@@ -1,0 +1,249 @@
+/* ============================================================================
+   Theme "Arch" — pet-first identity layered over the base stylesheet.
+
+   What the references actually do (measured, not guessed):
+     Tuft & Paw   bone #f2f1f0 + brick #d0433a + indigo #1c1f51 blocks, Centra No 2,
+                  h1 72px at line-height 1.0, asymmetric pill radii (0 200 200 0), 247 SVGs
+     Petlibro     white + deep olive #315800 as the only accent, sharp 4px corners
+     Litter-Robot white + amber #fbb040, StabilGrotesk, h1 64/700
+     Tractive     #121623 ink + violet #4a14a2, pill 400px radii
+     Raycast      #07080a near-black, Inter + GeistMono, 16/8/6px radii, 173 SVGs
+     J!NX         #1f1f21 + acid lime #e03fc02, condensed display
+
+   Shared DNA → one loud accent, deep ink, huge tight display type, arch/pill geometry,
+   and vector (not photographic) imagery. Applied here with a pet register: honey amber
+   for warmth, deep indigo for night/trust, clay for the problem side, and the arch
+   (a cat door, a cat's back) as the signature shape.
+   Every colour below was contrast-checked; amber is used as a BLOCK with ink text on it,
+   never as small text on bone.
+   ============================================================================ */
+
+:root{
+  --paper:#F5F1E8;         /* bone */
+  --paper-2:#EDE7DA;
+  --sand:#E7DCC8;
+  --rule:#DCD3C2;
+  --ink:#191713;           /* 15.9:1 */
+  --ink-2:#5A5548;         /* 6.6:1  */
+  --ink-3:#6E6A5C;         /* 4.8:1  */
+  --amber:#E8912F;         /* block colour; ink on amber = 7.3:1 */
+  --amber-lt:#F2B264;      /* on indigo 8.1:1 */
+  --amber-deep:#9A5410;    /* small text on bone 5.1:1 */
+  --indigo:#1E2154;        /* block colour; bone on indigo 13.3:1 */
+  --clay:#C0442B;          /* 4.5:1 on bone */
+  --clay-deep:#A63A22;     /* 5.7:1 */
+  --card:#1E2154;--card-2:#262A63;--card-ink:#F5F1E8;--card-ink-2:#B9BAC8;--card-line:rgba(245,241,232,.2);
+  --dk-rule:rgba(245,241,232,.24);
+  --dk-text:#B9BAC8;       /* 7.8:1 on indigo */
+  --clay-soft:#F2B264;     /* accent on dark = amber-lt */
+  --green:#1E2154;--green-2:#2A2E6B;   /* legacy hooks now map to indigo */
+}
+
+/* ---------- display type: bigger, tighter, more opinionated ---------- */
+h1{font-size:clamp(42px,5.7vw,94px);line-height:1.12;letter-spacing:-.02em}
+html[lang="en"] h1{font-size:clamp(44px,6.1vw,102px);line-height:1.02;letter-spacing:-.035em}
+h1 em{color:var(--clay)}
+h2{font-size:clamp(30px,4vw,60px);line-height:1.16;letter-spacing:-.02em}
+html[lang="en"] h2{line-height:1.06;letter-spacing:-.03em}
+.band h2{font-size:clamp(34px,4.6vw,68px)}
+.hmw{font-size:clamp(30px,4vw,58px);line-height:1.24}
+.lede{font-size:20px;line-height:1.7;color:var(--ink-2);max-width:30em}
+.eyebrow{font-family:var(--font-mono);font-size:12px;letter-spacing:.12em;color:var(--ink-2);border:1px solid var(--rule);border-radius:999px;padding:6px 14px;display:inline-block;text-transform:uppercase}
+
+/* ---------- section labels become mono pills ---------- */
+.rail{flex-direction:column;gap:10px}
+.rail-num{font-size:26px;color:var(--ink)}
+.rail-text{font-family:var(--font-mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--ink-2)}
+.sec{border-top:1px solid var(--rule)}
+.sec-in{padding:80px 0 88px}
+
+/* ---------- buttons ---------- */
+.btn{background:var(--indigo);border-color:var(--indigo);border-radius:999px;padding:0 26px;font-weight:500}
+.btn:hover{background:var(--amber);border-color:var(--amber);color:var(--ink)}
+.link-quiet{border-bottom:1px solid var(--ink-3)}
+.link-quiet:hover{color:var(--ink);border-color:var(--ink)}
+
+/* ---------- hero: statement + the arch (pet line drawing) ---------- */
+.hero{padding:64px 0 0}
+.hero-in{grid-template-columns:minmax(0,1.5fr) minmax(0,.72fr);gap:56px;align-items:center}
+.hero-act{margin-top:38px}
+.hero-stage{font-family:var(--font-mono);font-size:12px;letter-spacing:.04em}
+
+.arch-panel{position:relative;background:var(--amber);border-radius:999px 999px 0 0;padding:54px 34px 0;overflow:hidden}
+.arch-panel svg{display:block;width:100%;height:auto}
+.arch-cap{margin-top:18px;padding-bottom:30px;font-family:var(--font-mono);font-size:11.5px;letter-spacing:.06em;color:rgba(25,23,19,.72);text-align:center}
+.arch-whisker{position:absolute;top:110px;left:-10%;width:130%;height:1px;background:rgba(25,23,19,.16);transform-origin:left center}
+
+@media(max-width:1080px){.hero-in{grid-template-columns:minmax(0,1fr);gap:38px}.arch-panel{max-width:520px;margin-inline:auto}}
+
+/* ---------- fact band: indigo bar ---------- */
+.facts{background:var(--indigo);border-color:transparent;padding:44px 0 30px;margin-top:64px}
+.facts .fact-v{color:var(--paper);font-size:clamp(36px,4.4vw,58px)}
+.facts .fact-u{color:var(--amber-lt)}
+.facts .fact-t{color:var(--dk-text)}
+.facts .fact + .fact{border-left:1px solid var(--dk-rule)}
+.facts .src{color:rgba(185,186,200,.85)}
+.facts .src a{color:var(--amber-lt)}
+
+/* ---------- five moments: thicker rail, amber nodes ---------- */
+.steps{margin-top:56px}
+.step{border-top:2px solid var(--ink);padding:58px 26px 0 0}
+.step::before{top:-8px;width:14px;height:14px;border:0;background:var(--amber);border-radius:999px}
+.step-n{font-size:15px;color:var(--ink-2)}
+.step-t{font-size:clamp(21px,2.4vw,31px)}
+.step-break{border-top-color:var(--clay)}
+.step-break::before{top:-10px;width:18px;height:18px;background:var(--clay)}
+.step-break .step-n,.step-break .step-t{color:var(--clay-deep)}
+.break{border-left:0;background:var(--amber);border-radius:0 999px 999px 0;padding:34px 46px 34px 38px;max-width:34em}
+.break-l{color:rgba(25,23,19,.7)}
+.break-t{color:var(--ink)}
+
+/* ---------- market: two arch-topped panels ---------- */
+.market-mid{grid-template-columns:minmax(0,1fr);gap:0}
+.pair{gap:28px}
+.pair-col{background:#FFFDF9;border:1px solid var(--rule);border-radius:999px 999px 0 0;padding:34px 30px 14px}
+.pair-col h3{border-bottom:0;color:var(--ink)}
+.pair-lacks{background:var(--indigo);border-color:var(--indigo)}
+.pair-lacks h3{color:var(--amber-lt)}
+.pair-lacks li{color:var(--dk-text);border-color:var(--dk-rule)}
+.pair-lacks li::before{color:var(--amber-lt)}
+.pair-has li::before{content:"✓";color:var(--amber-deep)}
+.products{margin-top:56px}
+.products thead th{border-bottom:1px solid var(--ink)}
+.products tbody th{font-size:17px}
+.note{font-size:15.5px}
+
+/* ---------- users + trait: amber arch ---------- */
+.users li{border-bottom:1px solid var(--rule)}
+.u-t{font-size:23px}
+.trait{background:var(--amber);border-radius:999px 999px 0 0;grid-template-columns:minmax(0,1fr);padding:56px 46px 46px}
+.trait p{padding:0;color:var(--ink);max-width:34em;font-size:clamp(20px,2.2vw,30px)}
+
+/* ---------- pivot band: indigo, pet line drawing ---------- */
+.band{background:var(--indigo);border-top:0}
+.band .sec-in{padding:84px 0 92px}
+.net-cap{color:var(--amber-lt);border-color:var(--dk-rule)}
+.net-labels{color:var(--paper);font-size:clamp(16px,1.7vw,22px)}
+.net-sub{color:var(--dk-text)}
+.net-sub-hi{color:var(--amber-lt)}
+.net-line{stroke:var(--dk-rule)}
+.net-line-hi{stroke:rgba(242,178,100,.55)}
+.net-dot{fill:var(--indigo);stroke:var(--amber-lt)}
+.net-flow{stroke:var(--paper)}
+.net-flow-hi{stroke:var(--amber-lt)}
+.net-head{stroke:var(--paper)}
+.net-head-l,.net-head-r{stroke:var(--amber-lt)}
+.chain-k{color:var(--dk-text);border-color:var(--dk-rule)}
+.chain-k span{color:var(--amber-lt)}
+.chain-next{border-left-color:rgba(242,178,100,.4)}
+.o-t{color:var(--paper)}
+.o-d{color:var(--dk-text)}
+.chain li{border-color:var(--dk-rule)}
+
+/* ---------- principles: bigger, amber numerals ---------- */
+.principles{gap:32px;margin-top:52px}
+.principles li{border-top:3px solid var(--indigo);padding-top:24px}
+.pr-t{font-size:30px}
+.pr-e{color:var(--amber-deep)}
+.pr-d{font-size:15px}
+
+/* ---------- concept cards ---------- */
+.cards{gap:22px}
+.card{border-radius:20px 20px 20px 4px;padding:26px 24px 28px;min-height:250px}
+.card-title{font-size:21px}
+.card-kind{color:var(--amber-lt)}
+
+/* ---------- directions: big mono numerals ---------- */
+.dirs li{padding:28px 0;grid-template-columns:76px minmax(0,1fr) minmax(0,1.05fr)}
+.d-n{font-size:24px;color:var(--amber-deep)}
+.d-t{font-size:24px}
+.d-d{font-size:15px}
+.stage{border-color:var(--rule);grid-template-columns:132px minmax(0,1fr)}
+
+/* ---------- subscribe ---------- */
+.sub-grid{gap:64px}
+.form{border-top:3px solid var(--indigo);padding-top:28px}
+.em-row input{border-radius:999px;padding:0 20px;border-color:var(--rule)}
+.consent input{accent-color:var(--indigo)}
+.success{border:0;background:var(--amber);border-radius:20px 20px 20px 4px;color:var(--ink)}
+.success h3{color:var(--ink)}
+.s-t{color:rgba(25,23,19,.78)}
+.s-k{color:rgba(25,23,19,.7)}
+.faq-h{font-size:26px}
+.qa-q{font-size:17px}
+.qa-a{font-size:15.5px}
+
+/* ---------- footer ---------- */
+.foot{padding:52px 0 44px}
+.foot-brand{font-size:21px}
+
+/* ---------- responsive: the theme's shape rules must not out-specify the base
+   breakpoints, so every column change is re-asserted here ---------- */
+@media(max-width:1080px){
+  .no-img .hero-in,.img-min .hero-in,.hero-in{grid-template-columns:minmax(0,1fr);gap:38px}
+  .arch-panel{max-width:540px;margin-inline:auto}
+  .pair{gap:22px}
+  .principles{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .sub-grid{grid-template-columns:minmax(0,1fr);gap:44px}
+  .chains{grid-template-columns:minmax(0,1fr)}
+  .market-mid{grid-template-columns:minmax(0,1fr)}
+}
+
+@media(max-width:760px){
+  h1,.no-img h1{font-size:clamp(40px,11vw,58px)}
+  html[lang="en"] h1{font-size:clamp(42px,11.5vw,62px)}
+  .sec-in{padding:56px 0 62px}
+  .arch-panel{padding:34px 22px 0}
+  .facts{padding:34px 0 24px}
+  .facts-in{grid-template-columns:minmax(0,1fr)}
+  .facts .fact + .fact{border-left:0;border-top:1px solid var(--dk-rule)}
+  .steps{grid-template-columns:minmax(0,1fr);border-top:0}
+  .step{padding:0 0 26px 26px;border-top:0;border-left:2px solid var(--ink)}
+  .step::before{top:8px;left:-8px;width:14px;height:14px}
+  .step-break{border-left-color:var(--clay)}
+  .break{padding:26px 30px 26px 24px;border-radius:0 28px 28px 0;margin-top:38px}
+  .pair-col{border-radius:28px 28px 0 0;padding:26px 22px 10px}
+  .trait{padding:40px 26px 34px;border-radius:28px 28px 0 0}
+  .card{border-radius:18px 18px 18px 4px;min-height:0}
+  .principles{grid-template-columns:minmax(0,1fr);gap:26px}
+  .dirs li{grid-template-columns:44px minmax(0,1fr);gap:14px;padding:20px 0}
+  .d-d{grid-column:2}
+  .users li{grid-template-columns:minmax(0,1fr);gap:6px}
+  .stage{grid-template-columns:minmax(0,1fr);gap:12px}
+  .cards{grid-template-columns:minmax(0,1fr)}
+}
+
+@media(prefers-reduced-motion:reduce){
+  .pet-line{stroke-dashoffset:0!important;transition:none}
+  .pet-flow{animation:none;opacity:.85}
+}
+
+/* ---------- the typographic build keeps a two-column hero: the arch IS the hero object ---------- */
+.no-img .hero-in,.img-min .hero-in{grid-template-columns:minmax(0,1.5fr) minmax(0,.72fr);gap:56px}
+.no-img .hero-copy{max-width:min(100%,980px)}
+.no-img h1{font-size:clamp(42px,5.7vw,94px)}
+.no-img .lede{max-width:32em}
+.no-img .trait{background:var(--amber);border-radius:999px 999px 0 0}
+.no-img .trait p{padding:0;color:var(--ink)}
+
+/* ---------- the cat: a single line whose tail becomes the connection ---------- */
+.pet-whiskers path{fill:none;stroke:rgba(25,23,19,.32);stroke-width:1.4;stroke-linecap:round}
+.pet-ear,.pet-head{fill:var(--amber);stroke:var(--ink);stroke-width:2.6;stroke-linejoin:round}
+.pet-eye,.pet-owner{fill:var(--ink)}
+.pet-line{fill:none;stroke:rgba(25,23,19,.4);stroke-width:1.6;stroke-dasharray:1;stroke-dashoffset:0;
+  transition:stroke-dashoffset 1.8s cubic-bezier(.2,.7,.2,1)}
+.arch-panel.js .pet-line{stroke-dashoffset:1}
+.arch-panel.js.in .pet-line{stroke-dashoffset:0}
+.pet-flow{fill:none;stroke:var(--ink);stroke-width:5;stroke-linecap:round;stroke-dasharray:.01 30;
+  opacity:0;transition:opacity .6s ease .8s;animation:petflow 4.6s linear infinite}
+.pet-flow-back{animation-duration:6.2s;animation-direction:reverse}
+.arch-panel.js.in .pet-flow{opacity:.85}
+@keyframes petflow{to{stroke-dashoffset:-30}}
+
+@media(max-width:1080px){
+  .no-img .hero-in,.img-min .hero-in{grid-template-columns:minmax(0,1fr);gap:38px}
+}
+@media(prefers-reduced-motion:reduce){
+  .pet-line{stroke-dashoffset:0!important;transition:none}
+  .pet-flow{animation:none;opacity:.85}
+}
