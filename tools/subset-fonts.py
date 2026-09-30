@@ -10,7 +10,9 @@ down to the glyphs the page actually contains (.fontwork/chars.txt) and writes p
 The character set comes from the built pages + app.js + content.mjs, so **re-run this after any
 copy change** — a missing glyph falls back to a system font and is easy to miss.
 """
+import html
 import os
+import re
 import subprocess
 import sys
 from fontTools.ttLib import TTFont
@@ -48,10 +50,25 @@ def fetch(name: str, url: str, refetch: bool) -> str:
     return dest
 
 
+def extract_chars() -> set:
+    """Every printable character the page can render: the built HTML, the script, and the
+    content source. Missing one means a silent fallback to a system font."""
+    chars = set()
+    for rel in ('public/zh/index.html', 'public/en/index.html', 'public/app.js', 'content.mjs'):
+        path = os.path.join(ROOT, rel)
+        if not os.path.exists(path):
+            continue
+        raw = open(path, encoding='utf-8').read()
+        raw = re.sub(r'<script.*?</script>', '', raw, flags=re.S)
+        raw = re.sub(r'<style.*?</style>', '', raw, flags=re.S)
+        chars |= set(html.unescape(re.sub(r'<[^>]+>', ' ', raw)))
+    return chars
+
+
 def main() -> None:
     refetch = '--refetch' in sys.argv
-    # keep every printable character used by the page, plus the runtime margin
-    chars = set(open(TEXT, encoding='utf-8').read()) | set(EXTRA)
+    # union of the current page copy, whatever was here before, and the runtime margin
+    chars = extract_chars() | set(open(TEXT, encoding='utf-8').read()) | set(EXTRA)
     text = ''.join(sorted(c for c in chars if c.isprintable()))
     open(TEXT, 'w', encoding='utf-8').write(text)
     cjk = sum(1 for c in text if '\u4e00' <= c <= '\u9fff')

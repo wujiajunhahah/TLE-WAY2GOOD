@@ -69,8 +69,6 @@
         <p class="hero-stage">Research and concept stage · Nothing is available to buy</p>
       </div>
       <div class="arch-panel rv">
-        <span class="arch-whisker" style="transform:rotate(-7deg)"></span>
-        <span class="arch-whisker" style="top:172px;transform:rotate(-3deg)"></span>
         <svg viewBox="0 0 520 470" role="img" aria-label="A line drawing of a cat whose tail extends into a line reaching the owner, with pulses travelling both ways.">
           <g class="pet-whiskers" aria-hidden="true">
             <path d="M -46 4 L -104 -8"/><path d="M -46 14 L -108 14"/><path d="M -46 24 L -102 36"/>
@@ -226,7 +224,7 @@
               </svg>
             </div>
             <ul class="net-labels">
-              <li>Owner</li><li>Camera</li><li>Pet</li>
+              <li>Owner</li><li class="net-arrow" aria-hidden="true">→</li><li>Camera</li><li class="net-arrow" aria-hidden="true">→</li><li>Pet</li>
             </ul>
             <p class="net-sub">The owner starts the connection, and the owner ends it.</p>
           </div>
@@ -244,7 +242,7 @@
               </svg>
             </div>
             <ul class="net-labels net-labels-hi">
-              <li>Owner</li><li>Device and AI</li><li>Pet</li>
+              <li>Owner</li><li class="net-arrow" aria-hidden="true">↔</li><li>Device and AI</li><li class="net-arrow" aria-hidden="true">↔</li><li>Pet</li>
             </ul>
             <p class="net-sub net-sub-hi">Connection can start from either side.</p>
           </div>
@@ -252,7 +250,7 @@
         <div class="chains">
           <div class="chain chain-now">
             <p class="chain-k">Today<span>Remote Monitoring</span></p>
-            <ul><li>See what the pet is doing</li><li>Owner talks to the pet</li><li>Owner feeds or plays remotely</li><li>Interaction ends and disconnects</li></ul>
+            <ul class="opps"><li><span class="o-t">See what the pet is doing</span><span class="o-d">The screen shows where they are, not how they feel</span></li><li><span class="o-t">Owner talks to the pet</span><span class="o-d">You call out; whether they respond depends on the moment</span></li><li><span class="o-t">Owner feeds or plays remotely</span><span class="o-d">You start it, and you decide when it ends</span></li><li><span class="o-t">Interaction ends and disconnects</span><span class="o-d">The screen closes and the connection stops there</span></li></ul>
           </div>
           <div class="chain chain-next">
             <p class="chain-k">The opportunity<span>Remote Companionship</span></p>
@@ -269,24 +267,41 @@
       <div class="body">
         <h2>If they could reach you first,<br>what would that moment look like?</h2>
         <p class="intro">These are interaction concept sketches, to show direction. They are not a working product and not a real interface.</p>
-        <ul class="cards">
-          <li class="card">
-            <p class="card-top"><span class="card-kind">NOTICE</span><span class="card-tag">CONCEPT</span></p>
-            <p class="card-title">They walked up to the device</p>
-            <p class="card-meta">14:32 · living room</p>
-            <p class="card-body">Not you remembering them first — them sending an invitation.</p>
+        <ul class="sketches">
+          <li class="sketch">
+            <figure class="sk"><svg viewBox="0 0 220 120" aria-hidden="true">
+    <path class="sk-line" d="M 52 60 H 168"/><path class="sk-hi" d="M 96 60 H 168"/>
+    <circle class="sk-dot" cx="52" cy="60" r="7"/>
+    <path class="sk-line" d="M 74 44 A 26 26 0 0 1 74 76"/>
+    <path class="sk-line" d="M 92 30 A 44 44 0 0 1 92 90"/>
+    <circle class="sk-node" cx="186" cy="60" r="9"/>
+  </svg></figure>
+            <p class="sk-kind">INVITATION<span>14:32 · living room</span></p>
+            <p class="sk-title">They walked up to the device</p>
+            <p class="sk-body">Not you remembering them first — them sending an invitation.</p>
           </li>
-          <li class="card">
-            <p class="card-top"><span class="card-kind">MOMENT</span><span class="card-tag">CONCEPT</span></p>
-            <p class="card-title">They reached out once today</p>
-            <p class="card-meta">clip · 6s</p>
-            <p class="card-body">Something was kept from the hours the screen was closed.</p>
+          <li class="sketch">
+            <figure class="sk"><svg viewBox="0 0 220 120" aria-hidden="true">
+    <path class="sk-line" d="M 24 74 H 196"/>
+    <path class="sk-tick" d="M 52 66 V 82"/><path class="sk-tick" d="M 88 66 V 82"/>
+    <path class="sk-hi-tick" d="M 124 58 V 90"/>
+    <path class="sk-tick" d="M 160 66 V 82"/>
+    <rect class="sk-bar" x="112" y="98" width="24" height="6" rx="3"/>
+  </svg></figure>
+            <p class="sk-kind">MOMENT<span>6s clip</span></p>
+            <p class="sk-title">They reached out once today</p>
+            <p class="sk-body">Something was kept from the hours the screen was closed.</p>
           </li>
-          <li class="card">
-            <p class="card-top"><span class="card-kind">DEVICE</span><span class="card-tag">CONCEPT</span></p>
-            <p class="card-title">They are resting, undisturbed</p>
-            <p class="card-meta">state · quiet</p>
-            <p class="card-body">Not interrupting their rhythm is part of the design.</p>
+          <li class="sketch">
+            <figure class="sk"><svg viewBox="0 0 220 120" aria-hidden="true">
+    <path class="sk-line" d="M 24 92 H 196"/>
+    <path class="sk-line" d="M 62 92 C 62 62 88 48 110 48 C 132 48 158 62 158 92"/>
+    <path class="sk-hi" d="M 140 34 h 18 l -18 14 h 18"/>
+    <path class="sk-line" d="M 154 16 h 14 l -14 11 h 14"/>
+  </svg></figure>
+            <p class="sk-kind">QUIET<span>no alert</span></p>
+            <p class="sk-title">They are resting, undisturbed</p>
+            <p class="sk-body">Not interrupting their rhythm is part of the design.</p>
           </li>
         </ul>
       </div>
@@ -372,7 +387,7 @@
   <div class="shell foot-in">
     <p class="foot-brand">Pet Companionship<small>Remote pet companionship · Early-stage research project</small></p>
     <p class="foot-links">
-      <a href="/zh/" lang="zh-CN" hreflang="zh">中文</a>
+      <a class="foot-lang" href="/zh/" lang="zh-CN" hreflang="zh">中文</a>
       <span>© 2026</span>
     </p>
   </div>

@@ -54,6 +54,11 @@ Theme **"Arch"** (pet register):
 - the hero object is **a cat drawn as one continuous line whose tail becomes the connection
   line**, with pulses travelling both ways — SVG, no assets, animated once on scroll, static and
   complete under `prefers-reduced-motion` and with JavaScript disabled.
+- the concept section is three **drawn sketches** (a signal, a kept moment, a resting arch) on
+  hairlines — deliberately not a row of rounded notification cards, which is the most common
+  template tell in this kind of page.
+- on phones the stretched connection diagram is replaced by an inline arrow sequence
+  (`主人 → 摄像头 → 宠物`), because a hairline with dots at 390px no longer carries the idea.
 
 ## 3. Design decisions and why
 

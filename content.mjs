@@ -95,7 +95,12 @@ export const content = {
     currentSub: 'Remote Monitoring',
     currentChain: ['主人', '摄像头', '宠物'],
     currentCap: '连接由主人发起，也由主人结束。',
-    currentPoints: ['看它在做什么', '主人主动说话', '主人主动投喂或逗它', '互动结束后再次断开'],
+    currentPoints: [
+      { t: '看它在做什么', d: '画面告诉你它在哪里，但不知道它怎么想' },
+      { t: '主人主动说话', d: '叫它一声，回应取决于它当时在不在' },
+      { t: '主人主动投喂或逗它', d: '互动由你发起，也由你决定何时结束' },
+      { t: '互动结束后再次断开', d: '关掉画面，连接就停在这一刻' }
+    ],
     nextTitle: '机会',
     nextSub: 'Remote Companionship',
     nextChain: ['主人', '设备与 AI', '宠物'],
@@ -134,9 +139,9 @@ export const content = {
     conceptNote: '下面是交互概念草图，用来说明方向。不是可用的产品，也不是真实界面。',
     conceptTag: '概念稿',
     concepts: [
-      { kind: '通知', title: '它走近了设备', meta: '14:32 · 客厅', body: '不是你先想起它，而是它先发出了一次邀请。' },
-      { kind: '日常', title: '今天它主动来过一次', meta: '片段 · 6 秒', body: '关掉画面的那段时间，也有东西被留了下来。' },
-      { kind: '设备', title: '它在休息，未打扰', meta: '状态 · 安静', body: '不打扰它的节奏，本身就是设计的一部分。' }
+      { glyph: 'signal', kind: '邀请', title: '它走近了设备', meta: '14:32 · 客厅', body: '不是你先想起它，而是它先发出了一次邀请。' },
+      { glyph: 'moment', kind: '片段', title: '今天它主动来过一次', meta: '6 秒', body: '关掉画面的那段时间，也有东西被留了下来。' },
+      { glyph: 'rest', kind: '静默', title: '它在休息，未打扰', meta: '无提醒', body: '不打扰它的节奏，本身就是设计的一部分。' }
     ],
     stageTitle: '我们现在在哪',
     stageText: '只有研究、竞品分析和设计原则，没有可用的产品。下一步是访谈养宠人、做原型，观察人与宠物是否真的愿意使用。',
@@ -251,7 +256,12 @@ export const content = {
     currentSub: 'Remote Monitoring',
     currentChain: ['Owner', 'Camera', 'Pet'],
     currentCap: 'The owner starts the connection, and the owner ends it.',
-    currentPoints: ['See what the pet is doing', 'Owner talks to the pet', 'Owner feeds or plays remotely', 'Interaction ends and disconnects'],
+    currentPoints: [
+      { t: 'See what the pet is doing', d: 'The screen shows where they are, not how they feel' },
+      { t: 'Owner talks to the pet', d: 'You call out; whether they respond depends on the moment' },
+      { t: 'Owner feeds or plays remotely', d: 'You start it, and you decide when it ends' },
+      { t: 'Interaction ends and disconnects', d: 'The screen closes and the connection stops there' }
+    ],
     nextTitle: 'The opportunity',
     nextSub: 'Remote Companionship',
     nextChain: ['Owner', 'Device and AI', 'Pet'],
@@ -290,9 +300,9 @@ export const content = {
     conceptNote: 'These are interaction concept sketches, to show direction. They are not a working product and not a real interface.',
     conceptTag: 'CONCEPT',
     concepts: [
-      { kind: 'NOTICE', title: 'They walked up to the device', meta: '14:32 · living room', body: 'Not you remembering them first — them sending an invitation.' },
-      { kind: 'MOMENT', title: 'They reached out once today', meta: 'clip · 6s', body: 'Something was kept from the hours the screen was closed.' },
-      { kind: 'DEVICE', title: 'They are resting, undisturbed', meta: 'state · quiet', body: 'Not interrupting their rhythm is part of the design.' }
+      { glyph: 'signal', kind: 'INVITATION', title: 'They walked up to the device', meta: '14:32 · living room', body: 'Not you remembering them first — them sending an invitation.' },
+      { glyph: 'moment', kind: 'MOMENT', title: 'They reached out once today', meta: '6s clip', body: 'Something was kept from the hours the screen was closed.' },
+      { glyph: 'rest', kind: 'QUIET', title: 'They are resting, undisturbed', meta: 'no alert', body: 'Not interrupting their rhythm is part of the design.' }
     ],
     stageTitle: 'Where we are',
     stageText: 'Research, competitor analysis and design principles — no product yet. Next: interview owners, build prototypes, and observe whether people and pets actually choose to use them.',

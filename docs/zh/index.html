@@ -69,8 +69,6 @@
         <p class="hero-stage">研究与概念探索阶段 · 目前没有可购买的产品</p>
       </div>
       <div class="arch-panel rv">
-        <span class="arch-whisker" style="transform:rotate(-7deg)"></span>
-        <span class="arch-whisker" style="top:172px;transform:rotate(-3deg)"></span>
         <svg viewBox="0 0 520 470" role="img" aria-label="一只猫的线稿：它的尾巴延伸成一条线，连到主人的位置，线上有来回移动的光点。">
           <g class="pet-whiskers" aria-hidden="true">
             <path d="M -46 4 L -104 -8"/><path d="M -46 14 L -108 14"/><path d="M -46 24 L -102 36"/>
@@ -226,7 +224,7 @@
               </svg>
             </div>
             <ul class="net-labels">
-              <li>主人</li><li>摄像头</li><li>宠物</li>
+              <li>主人</li><li class="net-arrow" aria-hidden="true">→</li><li>摄像头</li><li class="net-arrow" aria-hidden="true">→</li><li>宠物</li>
             </ul>
             <p class="net-sub">连接由主人发起，也由主人结束。</p>
           </div>
@@ -244,7 +242,7 @@
               </svg>
             </div>
             <ul class="net-labels net-labels-hi">
-              <li>主人</li><li>设备与 AI</li><li>宠物</li>
+              <li>主人</li><li class="net-arrow" aria-hidden="true">↔</li><li>设备与 AI</li><li class="net-arrow" aria-hidden="true">↔</li><li>宠物</li>
             </ul>
             <p class="net-sub net-sub-hi">连接可以从任一侧开始。</p>
           </div>
@@ -252,7 +250,7 @@
         <div class="chains">
           <div class="chain chain-now">
             <p class="chain-k">现在<span>Remote Monitoring</span></p>
-            <ul><li>看它在做什么</li><li>主人主动说话</li><li>主人主动投喂或逗它</li><li>互动结束后再次断开</li></ul>
+            <ul class="opps"><li><span class="o-t">看它在做什么</span><span class="o-d">画面告诉你它在哪里，但不知道它怎么想</span></li><li><span class="o-t">主人主动说话</span><span class="o-d">叫它一声，回应取决于它当时在不在</span></li><li><span class="o-t">主人主动投喂或逗它</span><span class="o-d">互动由你发起，也由你决定何时结束</span></li><li><span class="o-t">互动结束后再次断开</span><span class="o-d">关掉画面，连接就停在这一刻</span></li></ul>
           </div>
           <div class="chain chain-next">
             <p class="chain-k">机会<span>Remote Companionship</span></p>
@@ -269,24 +267,41 @@
       <div class="body">
         <h2>如果它也能先找你，<br>那一刻会是什么样？</h2>
         <p class="intro">下面是交互概念草图，用来说明方向。不是可用的产品，也不是真实界面。</p>
-        <ul class="cards">
-          <li class="card">
-            <p class="card-top"><span class="card-kind">通知</span><span class="card-tag">概念稿</span></p>
-            <p class="card-title">它走近了设备</p>
-            <p class="card-meta">14:32 · 客厅</p>
-            <p class="card-body">不是你先想起它，而是它先发出了一次邀请。</p>
+        <ul class="sketches">
+          <li class="sketch">
+            <figure class="sk"><svg viewBox="0 0 220 120" aria-hidden="true">
+    <path class="sk-line" d="M 52 60 H 168"/><path class="sk-hi" d="M 96 60 H 168"/>
+    <circle class="sk-dot" cx="52" cy="60" r="7"/>
+    <path class="sk-line" d="M 74 44 A 26 26 0 0 1 74 76"/>
+    <path class="sk-line" d="M 92 30 A 44 44 0 0 1 92 90"/>
+    <circle class="sk-node" cx="186" cy="60" r="9"/>
+  </svg></figure>
+            <p class="sk-kind">邀请<span>14:32 · 客厅</span></p>
+            <p class="sk-title">它走近了设备</p>
+            <p class="sk-body">不是你先想起它，而是它先发出了一次邀请。</p>
           </li>
-          <li class="card">
-            <p class="card-top"><span class="card-kind">日常</span><span class="card-tag">概念稿</span></p>
-            <p class="card-title">今天它主动来过一次</p>
-            <p class="card-meta">片段 · 6 秒</p>
-            <p class="card-body">关掉画面的那段时间，也有东西被留了下来。</p>
+          <li class="sketch">
+            <figure class="sk"><svg viewBox="0 0 220 120" aria-hidden="true">
+    <path class="sk-line" d="M 24 74 H 196"/>
+    <path class="sk-tick" d="M 52 66 V 82"/><path class="sk-tick" d="M 88 66 V 82"/>
+    <path class="sk-hi-tick" d="M 124 58 V 90"/>
+    <path class="sk-tick" d="M 160 66 V 82"/>
+    <rect class="sk-bar" x="112" y="98" width="24" height="6" rx="3"/>
+  </svg></figure>
+            <p class="sk-kind">片段<span>6 秒</span></p>
+            <p class="sk-title">今天它主动来过一次</p>
+            <p class="sk-body">关掉画面的那段时间，也有东西被留了下来。</p>
           </li>
-          <li class="card">
-            <p class="card-top"><span class="card-kind">设备</span><span class="card-tag">概念稿</span></p>
-            <p class="card-title">它在休息，未打扰</p>
-            <p class="card-meta">状态 · 安静</p>
-            <p class="card-body">不打扰它的节奏，本身就是设计的一部分。</p>
+          <li class="sketch">
+            <figure class="sk"><svg viewBox="0 0 220 120" aria-hidden="true">
+    <path class="sk-line" d="M 24 92 H 196"/>
+    <path class="sk-line" d="M 62 92 C 62 62 88 48 110 48 C 132 48 158 62 158 92"/>
+    <path class="sk-hi" d="M 140 34 h 18 l -18 14 h 18"/>
+    <path class="sk-line" d="M 154 16 h 14 l -14 11 h 14"/>
+  </svg></figure>
+            <p class="sk-kind">静默<span>无提醒</span></p>
+            <p class="sk-title">它在休息，未打扰</p>
+            <p class="sk-body">不打扰它的节奏，本身就是设计的一部分。</p>
           </li>
         </ul>
       </div>
@@ -373,7 +388,7 @@
   <div class="shell foot-in">
     <p class="foot-brand">Pet Companionship<small>宠物远程陪伴 · 早期研究项目</small></p>
     <p class="foot-links">
-      <a href="/TLE-WAY2GOOD/en/" lang="en" hreflang="en">English</a>
+      <a class="foot-lang" href="/TLE-WAY2GOOD/en/" lang="en" hreflang="en">English</a>
       <span>© 2026</span>
     </p>
   </div>

@@ -32,6 +32,32 @@ const withBase = (s) => (BASE === '/' ? s : s.replace(/(href|src)="\//g, (m, att
 // built from SITE — never ORIGIN + BASE, which would repeat the sub-path.
 const SITE = ORIGIN === '__SITE_ORIGIN__' ? ORIGIN + '/' : ORIGIN.replace(/\/+$/, '') + '/';
 
+
+// Each concept sketch is a small line drawing, not a card: the page's visual language is
+// ink lines on bone with amber as the only highlight.
+const SKETCH = {
+  signal: `<svg viewBox="0 0 220 120" aria-hidden="true">
+    <path class="sk-line" d="M 52 60 H 168"/><path class="sk-hi" d="M 96 60 H 168"/>
+    <circle class="sk-dot" cx="52" cy="60" r="7"/>
+    <path class="sk-line" d="M 74 44 A 26 26 0 0 1 74 76"/>
+    <path class="sk-line" d="M 92 30 A 44 44 0 0 1 92 90"/>
+    <circle class="sk-node" cx="186" cy="60" r="9"/>
+  </svg>`,
+  moment: `<svg viewBox="0 0 220 120" aria-hidden="true">
+    <path class="sk-line" d="M 24 74 H 196"/>
+    <path class="sk-tick" d="M 52 66 V 82"/><path class="sk-tick" d="M 88 66 V 82"/>
+    <path class="sk-hi-tick" d="M 124 58 V 90"/>
+    <path class="sk-tick" d="M 160 66 V 82"/>
+    <rect class="sk-bar" x="112" y="98" width="24" height="6" rx="3"/>
+  </svg>`,
+  rest: `<svg viewBox="0 0 220 120" aria-hidden="true">
+    <path class="sk-line" d="M 24 92 H 196"/>
+    <path class="sk-line" d="M 62 92 C 62 62 88 48 110 48 C 132 48 158 62 158 92"/>
+    <path class="sk-hi" d="M 140 34 h 18 l -18 14 h 18"/>
+    <path class="sk-line" d="M 154 16 h 14 l -14 11 h 14"/>
+  </svg>`,
+};
+
 const rail = (label, dark = false) => {
   const [num, text] = label.split(' / ');
   return `<p class="rail${dark ? ' rail-dk' : ''}"><span class="rail-num">${num}</span><span class="rail-text">${text}</span></p>`;
@@ -120,8 +146,6 @@ const html = (c) => {
         <p class="hero-stage">${c.stage}</p>
       </div>
       ${NOIMG ? `<div class="arch-panel rv">
-        <span class="arch-whisker" style="transform:rotate(-7deg)"></span>
-        <span class="arch-whisker" style="top:172px;transform:rotate(-3deg)"></span>
         <svg viewBox="0 0 520 470" role="img" aria-label="${c.petAlt}">
           <g class="pet-whiskers" aria-hidden="true">
             <path d="M -46 4 L -104 -8"/><path d="M -46 14 L -108 14"/><path d="M -46 24 L -102 36"/>
@@ -251,7 +275,7 @@ const html = (c) => {
               </svg>
             </div>
             <ul class="net-labels">
-              <li>${c.currentChain[0]}</li><li>${c.currentChain[1]}</li><li>${c.currentChain[2]}</li>
+              <li>${c.currentChain[0]}</li><li class="net-arrow" aria-hidden="true">→</li><li>${c.currentChain[1]}</li><li class="net-arrow" aria-hidden="true">→</li><li>${c.currentChain[2]}</li>
             </ul>
             <p class="net-sub">${c.currentCap}</p>
           </div>
@@ -269,7 +293,7 @@ const html = (c) => {
               </svg>
             </div>
             <ul class="net-labels net-labels-hi">
-              <li>${c.nextChain[0]}</li><li>${c.nextChain[1]}</li><li>${c.nextChain[2]}</li>
+              <li>${c.nextChain[0]}</li><li class="net-arrow" aria-hidden="true">↔</li><li>${c.nextChain[1]}</li><li class="net-arrow" aria-hidden="true">↔</li><li>${c.nextChain[2]}</li>
             </ul>
             <p class="net-sub net-sub-hi">${c.nextCap}</p>
           </div>
@@ -277,7 +301,7 @@ const html = (c) => {
         <div class="chains">
           <div class="chain chain-now">
             <p class="chain-k">${c.currentTitle}<span>${c.currentSub}</span></p>
-            <ul>${c.currentPoints.map(x => `<li>${x}</li>`).join('')}</ul>
+            <ul class="opps">${c.currentPoints.map(o => `<li><span class="o-t">${o.t}</span><span class="o-d">${o.d}</span></li>`).join('')}</ul>
           </div>
           <div class="chain chain-next">
             <p class="chain-k">${c.nextTitle}<span>${c.nextSub}</span></p>
@@ -294,12 +318,12 @@ const html = (c) => {
       <div class="body">
         <h2>${c.conceptTitle}</h2>
         <p class="intro">${c.conceptNote}</p>
-        <ul class="cards">
-          ${c.concepts.map(k => `<li class="card">
-            <p class="card-top"><span class="card-kind">${k.kind}</span><span class="card-tag">${c.conceptTag}</span></p>
-            <p class="card-title">${k.title}</p>
-            <p class="card-meta">${k.meta}</p>
-            <p class="card-body">${k.body}</p>
+        <ul class="sketches">
+          ${c.concepts.map(k => `<li class="sketch">
+            <figure class="sk">${SKETCH[k.glyph] || ''}</figure>
+            <p class="sk-kind">${k.kind}<span>${k.meta}</span></p>
+            <p class="sk-title">${k.title}</p>
+            <p class="sk-body">${k.body}</p>
           </li>`).join('\n          ')}
         </ul>
       </div>
@@ -378,7 +402,7 @@ const html = (c) => {
   <div class="shell foot-in">
     <p class="foot-brand">Pet Companionship<small>${c.footerNote}</small></p>
     <p class="foot-links">
-      <a href="/${other}/" lang="${otherLang}" hreflang="${other}">${c.footerLang}</a>
+      <a class="foot-lang" href="/${other}/" lang="${otherLang}" hreflang="${other}">${c.footerLang}</a>
       <span>${c.copyright}</span>
     </p>
   </div>

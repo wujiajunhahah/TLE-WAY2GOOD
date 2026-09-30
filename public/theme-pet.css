@@ -48,7 +48,7 @@ html[lang="en"] h2{line-height:1.06;letter-spacing:-.03em}
 .band h2{font-size:clamp(34px,4.6vw,68px)}
 .hmw{font-size:clamp(30px,4vw,58px);line-height:1.24}
 .lede{font-size:20px;line-height:1.7;color:var(--ink-2);max-width:30em}
-.eyebrow{font-family:var(--font-mono);font-size:12px;letter-spacing:.12em;color:var(--ink-2);border:1px solid var(--rule);border-radius:999px;padding:6px 14px;display:inline-block;text-transform:uppercase}
+.eyebrow{font-family:var(--font-mono);font-size:12px;letter-spacing:.14em;color:var(--ink-2);display:inline-block;text-transform:uppercase}
 
 /* ---------- section labels become mono pills ---------- */
 .rail{flex-direction:column;gap:10px}
@@ -72,14 +72,13 @@ html[lang="en"] h2{line-height:1.06;letter-spacing:-.03em}
 .arch-panel{position:relative;background:var(--amber);border-radius:999px 999px 0 0;padding:54px 34px 0;overflow:hidden}
 .arch-panel svg{display:block;width:100%;height:auto}
 .arch-cap{margin-top:18px;padding-bottom:30px;font-family:var(--font-mono);font-size:11.5px;letter-spacing:.06em;color:rgba(25,23,19,.72);text-align:center}
-.arch-whisker{position:absolute;top:110px;left:-10%;width:130%;height:1px;background:rgba(25,23,19,.16);transform-origin:left center}
 
 @media(max-width:1080px){.hero-in{grid-template-columns:minmax(0,1fr);gap:38px}.arch-panel{max-width:520px;margin-inline:auto}}
 
 /* ---------- fact band: indigo bar ---------- */
 .facts{background:var(--indigo);border-color:transparent;padding:44px 0 30px;margin-top:64px}
-.facts .fact-v{color:var(--paper);font-size:clamp(36px,4.4vw,58px)}
-.facts .fact-u{color:var(--amber-lt)}
+.facts .fact-v{color:var(--paper);font-size:clamp(36px,4.4vw,58px);display:flex;align-items:baseline;gap:9px}
+.facts .fact-u{color:var(--amber-lt);font-size:15px}
 .facts .fact-t{color:var(--dk-text)}
 .facts .fact + .fact{border-left:1px solid var(--dk-rule)}
 .facts .src{color:rgba(185,186,200,.85)}
@@ -94,14 +93,14 @@ html[lang="en"] h2{line-height:1.06;letter-spacing:-.03em}
 .step-break{border-top-color:var(--clay)}
 .step-break::before{top:-10px;width:18px;height:18px;background:var(--clay)}
 .step-break .step-n,.step-break .step-t{color:var(--clay-deep)}
-.break{border-left:0;background:var(--amber);border-radius:0 999px 999px 0;padding:34px 46px 34px 38px;max-width:34em}
+.break{border-left:0;background:var(--amber);border-radius:0 999px 999px 0 / 0 88px 88px 0;padding:34px 64px 34px 38px;max-width:34em}
 .break-l{color:rgba(25,23,19,.7)}
 .break-t{color:var(--ink)}
 
 /* ---------- market: two arch-topped panels ---------- */
 .market-mid{grid-template-columns:minmax(0,1fr);gap:0}
 .pair{gap:28px}
-.pair-col{background:#FFFDF9;border:1px solid var(--rule);border-radius:999px 999px 0 0;padding:34px 30px 14px}
+.pair-col{background:#FFFDF9;border:1px solid var(--rule);border-radius:999px 999px 0 0 / 88px 88px 0 0;padding:52px 30px 20px}
 .pair-col h3{border-bottom:0;color:var(--ink)}
 .pair-lacks{background:var(--indigo);border-color:var(--indigo)}
 .pair-lacks h3{color:var(--amber-lt)}
@@ -116,7 +115,7 @@ html[lang="en"] h2{line-height:1.06;letter-spacing:-.03em}
 /* ---------- users + trait: amber arch ---------- */
 .users li{border-bottom:1px solid var(--rule)}
 .u-t{font-size:23px}
-.trait{background:var(--amber);border-radius:999px 999px 0 0;grid-template-columns:minmax(0,1fr);padding:56px 46px 46px}
+.trait{background:var(--amber);border-radius:999px 999px 0 0 / 88px 88px 0 0;grid-template-columns:minmax(0,1fr);padding:72px 46px 52px}
 .trait p{padding:0;color:var(--ink);max-width:34em;font-size:clamp(20px,2.2vw,30px)}
 
 /* ---------- pivot band: indigo, pet line drawing ---------- */
@@ -176,6 +175,8 @@ html[lang="en"] h2{line-height:1.06;letter-spacing:-.03em}
 /* ---------- footer ---------- */
 .foot{padding:52px 0 44px}
 .foot-brand{font-size:21px}
+.foot-lang{font-family:var(--font-mono);font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-2);border:1px solid var(--rule);border-radius:999px;padding:7px 14px;min-height:34px}
+.foot-lang:hover{color:var(--ink);border-color:var(--ink);text-decoration:none}
 
 /* ---------- responsive: the theme's shape rules must not out-specify the base
    breakpoints, so every column change is re-asserted here ---------- */
@@ -223,7 +224,7 @@ html[lang="en"] h2{line-height:1.06;letter-spacing:-.03em}
 .no-img .hero-copy{max-width:min(100%,980px)}
 .no-img h1{font-size:clamp(42px,5.7vw,94px)}
 .no-img .lede{max-width:32em}
-.no-img .trait{background:var(--amber);border-radius:999px 999px 0 0}
+.no-img .trait{background:var(--amber);border-radius:999px 999px 0 0 / 88px 88px 0 0}
 .no-img .trait p{padding:0;color:var(--ink)}
 
 /* ---------- the cat: a single line whose tail becomes the connection ---------- */
@@ -247,3 +248,67 @@ html[lang="en"] h2{line-height:1.06;letter-spacing:-.03em}
   .pet-line{stroke-dashoffset:0!important;transition:none}
   .pet-flow{animation:none;opacity:.85}
 }
+
+/* ==========================================================================
+   Review round: drawn sketches replace the notification-card row; fixes for
+   mobile leading, brand, hero CTA order, the collapsed diagram, and arches.
+   ========================================================================== */
+
+.sketches{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:40px;margin-top:48px}
+.sketch{border-top:2px solid var(--ink);padding-top:26px}
+.sk{margin:0 0 22px}
+.sk svg{display:block;width:100%;max-width:230px;height:auto}
+.sk-line{fill:none;stroke:rgba(25,23,19,.45);stroke-width:1.8;stroke-linecap:round}
+.sk-hi,.sk-hi-tick{fill:none;stroke:var(--amber-deep);stroke-width:2.4;stroke-linecap:round}
+.sk-tick{fill:none;stroke:rgba(25,23,19,.3);stroke-width:1.8;stroke-linecap:round}
+.sk-dot{fill:var(--ink)}
+.sk-node{fill:none;stroke:var(--ink);stroke-width:2}
+.sk-bar{fill:var(--amber)}
+.sk-kind{margin-top:0;font-family:var(--font-mono);font-size:11.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--amber-deep)}
+.sk-kind span{margin-left:10px;color:var(--ink-3);letter-spacing:.04em}
+.sk-title{margin-top:10px;font-family:var(--font-serif);font-size:clamp(20px,2vw,26px);line-height:1.3}
+.sk-body{margin-top:12px;font-size:14.5px;line-height:1.75;color:var(--ink-2);max-width:30em}
+
+/* the stretched diagram track cannot carry meaning at phone widths: fall back to
+   an inline arrow sequence, which is what the labels always said anyway */
+.net-arrow{display:none;font-family:var(--font-mono);color:var(--amber-lt);font-size:15px;padding-inline:2px}
+
+@media(max-width:760px){
+  h1,.no-img h1{line-height:1.2}
+  html[lang="en"] h1{line-height:1.14}
+  .brand-text{display:block;font-size:12px;max-width:104px}
+  .brand-text small{display:none}
+  .nav{gap:10px}
+  .nav .lang{padding-left:10px}
+  .btn-sm{padding:0 12px;font-size:12.5px}
+  .hero-act{gap:16px}
+  .hero-act .btn{width:auto}
+  .net-track{display:none}
+  .net-labels{display:flex;align-items:baseline;justify-content:flex-start;gap:8px;flex-wrap:wrap;font-size:18px}
+  .net-labels li:nth-child(2){text-align:left}
+  .net-labels li:nth-child(3){text-align:left}
+  .net-arrow{display:inline}
+  .net-next{margin-top:8px}
+  .sketches{grid-template-columns:minmax(0,1fr);gap:34px}
+  .sk svg{max-width:200px}
+}
+@media(max-width:1080px){
+  .sketches{grid-template-columns:repeat(3,minmax(0,1fr));gap:30px}
+}
+@media(max-width:900px){
+  .sketches{grid-template-columns:minmax(0,1fr)}
+}
+
+/* the diagram's column rule must not out-specify the phone breakpoint */
+@media(max-width:1080px){
+  .net + .chains{grid-template-columns:minmax(0,1fr);gap:40px}
+  .net + .chains .chain-next{padding-left:0;border-left:0;padding-top:36px;border-top:1px solid var(--dk-rule)}
+}
+@media(max-width:760px){
+  .net-labels{font-size:17px}
+  .net-sub{font-size:13.5px}
+  .chain li{font-size:14.5px}
+}
+
+/* the diagram above already states both directions — don't repeat the caption below */
+.net + .chains .chain-next .chain-cap{display:none}
