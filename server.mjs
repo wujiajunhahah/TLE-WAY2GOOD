@@ -1,6 +1,6 @@
 import http from 'node:http';
 import { readFile, mkdir, appendFile } from 'node:fs/promises';
-import { resolve, dirname, extname } from 'node:path';
+import { resolve, dirname, extname, normalize } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { randomUUID } from 'node:crypto';
 const root=dirname(fileURLToPath(import.meta.url));
@@ -20,7 +20,8 @@ const server=http.createServer(async(req,res)=>{
   res.setHeader('X-Content-Type-Options','nosniff');
   res.setHeader('Referrer-Policy','strict-origin-when-cross-origin');
   const url=new URL(req.url,'http://localhost');
-  if(['/','/index.html','/zh','/en','/zh/index.html','/en/index.html'].includes(url.pathname)&&['GET','HEAD'].includes(req.method)){
+  let clean;try{clean=normalize(decodeURIComponent(url.pathname));}catch{res.writeHead(400,{'Content-Type':'text/plain; charset=utf-8'});return res.end('Bad request');}
+  if(['/','/index.html','/zh','/en','/zh/index.html','/en/index.html'].includes(clean)&&['GET','HEAD'].includes(req.method)){
    const locale=url.pathname.startsWith('/en')?'en':'zh';res.writeHead(308,{Location:`/${locale}/${url.search}`});return res.end();
   }
   if(['/robots.txt','/sitemap.xml'].includes(url.pathname)&&['GET','HEAD'].includes(req.method)){
@@ -37,6 +38,7 @@ const server=http.createServer(async(req,res)=>{
    attempts.set(key,[...history,now]);
    let raw='';for await(const chunk of req){raw+=chunk;if(Buffer.byteLength(raw)>4096)return json(res,413,{error:'提交内容过长。'});}
    let body;try{body=JSON.parse(raw)}catch{return json(res,400,{error:'提交格式不正确。'})}
+   if(!body||typeof body!=='object'||Array.isArray(body))return json(res,400,{error:'提交格式不正确。'});
    if(body.website) return json(res,400,{error:'请重新提交。'});
    const email=typeof body.email==='string'?body.email.trim().toLowerCase():'';
    if(email.length>254||! /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email))return json(res,400,{error:'请填写有效的邮箱地址。'});
@@ -46,12 +48,12 @@ const server=http.createServer(async(req,res)=>{
    return json(res,201,{ok:true});
   }
   if(!['GET','HEAD'].includes(req.method)){res.writeHead(405);return res.end();}
-  const pagePath=['/zh/','/en/'].includes(url.pathname)?url.pathname+'index.html':url.pathname;
-  const path=resolve(publicRoot,'.'+decodeURIComponent(pagePath));
+  const pagePath=['/zh/','/en/'].includes(clean)?clean+'index.html':clean;
+  const path=resolve(publicRoot,'.'+pagePath);
   if(!path.startsWith(publicRoot+'/')){res.writeHead(403);return res.end();}
   let file=await readFile(path);if(extname(path)==='.html'){file=file.toString().replaceAll('__SITE_ORIGIN__',siteOrigin).replaceAll('__ROBOTS__',robots);}
   res.writeHead(200,{'Content-Type':types[extname(path)]||'application/octet-stream','Cache-Control':'no-cache'});res.end(req.method==='HEAD'?undefined:file);
- }catch(error){if(error.code==='ENOENT'){res.writeHead(404);res.end('Page not found');}else{console.error('Request failed:',error.code||error.name);json(res,500,{error:'暂时没有保存成功，请稍后再试。'});}}
+ }catch(error){if(['ENOENT','EISDIR','ENOTDIR'].includes(error.code)){res.writeHead(404);res.end('Page not found');}else{console.error('Request failed:',error.code||error.name);json(res,500,{error:'暂时没有保存成功，请稍后再试。'});}}
 });
 setInterval(()=>{const now=Date.now();for(const[key,list]of attempts)if(list.every(t=>now-t>60000))attempts.delete(key);},60000).unref();
 server.listen(Number(process.env.PORT)||4317,process.env.HOST||'127.0.0.1',()=>console.log(`Pet Companionship preview: http://localhost:${Number(process.env.PORT)||4317}`));
