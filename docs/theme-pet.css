@@ -29,14 +29,14 @@
   --amber:#E8912F;         /* block colour; ink on amber = 7.3:1 */
   --amber-lt:#F2B264;      /* on indigo 8.1:1 */
   --amber-deep:#9A5410;    /* small text on bone 5.1:1 */
-  --indigo:#1E2154;        /* block colour; bone on indigo 13.3:1 */
+  --indigo:#2A1C12;        /* warm espresso ink: bone 14.6:1, amber-lt 8.9:1 — no cold navy on a warm page */
   --clay:#C0442B;          /* 4.5:1 on bone */
   --clay-deep:#A63A22;     /* 5.7:1 */
-  --card:#1E2154;--card-2:#262A63;--card-ink:#F5F1E8;--card-ink-2:#B9BAC8;--card-line:rgba(245,241,232,.2);
+  --card:#2A1C12;--card-2:#3A2A1E;--card-ink:#F5F1E8;--card-ink-2:#E0D3C4;--card-line:rgba(245,241,232,.2);
   --dk-rule:rgba(245,241,232,.24);
-  --dk-text:#B9BAC8;       /* 7.8:1 on indigo */
+  --dk-text:#E0D3C4;       /* 9.0:1 on the espresso ink */
   --clay-soft:#F2B264;     /* accent on dark = amber-lt */
-  --green:#1E2154;--green-2:#2A2E6B;   /* legacy hooks now map to indigo */
+  --green:#2A1C12;--green-2:#3A2A1E;   /* legacy hooks map to the warm ink */
 }
 
 /* ---------- display type: bigger, tighter, more opinionated ---------- */
@@ -285,8 +285,7 @@ html[lang="en"] h2{line-height:1.06;letter-spacing:-.03em}
   .hero-act .btn{width:auto}
   .net-track{display:none}
   .net-labels{display:flex;align-items:baseline;justify-content:flex-start;gap:8px;flex-wrap:wrap;font-size:18px}
-  .net-labels li:nth-child(2){text-align:left}
-  .net-labels li:nth-child(3){text-align:left}
+  .net-labels .nl-a,.net-labels .nl-b,.net-labels .nl-c{text-align:left}
   .net-arrow{display:inline}
   .net-next{margin-top:8px}
   .sketches{grid-template-columns:minmax(0,1fr);gap:34px}
@@ -345,3 +344,52 @@ html[lang="en"] h2{line-height:1.06;letter-spacing:-.03em}
 .foot-cat{width:84px;height:auto;display:inline-block;vertical-align:-2px;margin-right:14px}
 .foot-cat path{fill:none;stroke:var(--ink);stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
 .foot-brand{align-items:center}
+
+/* ==========================================================================
+   Second review round: colour warmth, the leaking old light-green text colour
+   in the dark band, quiet labels, a bigger hero cat, and the cat as the
+   diagram's actor (it is the pet end of the connection, not a dot).
+   ========================================================================== */
+
+/* kill the green-era colour that leaked through the base stylesheet */
+.band .chain li,.band .chain-now li{color:var(--dk-text)}
+.band .chain .o-d{color:var(--dk-text)}
+
+/* in-block labels sit one volume below the section rail labels */
+.break-l,.net-cap,.stage-t{font-size:11.5px;letter-spacing:.08em}
+.net-cap{color:var(--amber-lt)}
+
+/* the amber form: a barely-visible hairline field becomes a real field */
+.sub-warm .em-row input{background:rgba(245,241,232,.55);border-color:rgba(25,23,19,.45)}
+.sub-warm .em-row input::placeholder{color:rgba(25,23,19,.45)}
+
+/* footer lockup: cat and wordmark on one optical line */
+.foot-brand{display:flex;align-items:center;gap:16px;flex-wrap:wrap;min-width:0}
+.foot-brand small{margin-top:5px}
+
+/* the cat owns more of the hero, which is the brand's one big move */
+.hero-in,.no-img .hero-in,.img-min .hero-in{grid-template-columns:minmax(0,1.3fr) minmax(0,.88fr);gap:52px}
+h1,.no-img h1{font-size:clamp(42px,5.5vw,88px)}
+html[lang="en"] h1{font-size:clamp(44px,5.8vw,96px)}
+.arch-panel{min-height:540px;display:flex;flex-direction:column;justify-content:flex-end}
+.arch-panel svg{flex:1 1 auto;min-height:380px;max-height:470px}
+
+/* the pet end of the diagram is a cat, not a dot */
+.net-cat{fill:none;stroke:var(--dk-text);stroke-width:1.6;stroke-linejoin:round;stroke-linecap:round}
+.net-next .net-cat{stroke:var(--amber-lt);stroke-width:1.8}
+.net .net-cat{opacity:0;transition:opacity .6s ease .5s}
+.net.js.in .net-cat{opacity:1}
+.net:not(.js) .net-cat{opacity:1}
+
+@media(max-width:1080px){
+  .hero-in,.no-img .hero-in,.img-min .hero-in{grid-template-columns:minmax(0,1fr);gap:38px}
+  .arch-panel{min-height:0}
+}
+@media(max-width:760px){
+  .arch-panel svg{min-height:0}
+  .foot-brand{flex-direction:column;align-items:flex-start;gap:12px}
+  .foot-cat{width:64px}
+}
+@media(prefers-reduced-motion:reduce){
+  .net .net-cat{opacity:1;transition:none}
+}

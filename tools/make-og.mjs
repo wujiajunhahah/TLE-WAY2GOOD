@@ -37,15 +37,15 @@ const html = (locale) => {
 @font-face{font-family:'PC Latin';src:url(${FONTS.latin}) format('woff2');font-weight:100 900}
 @font-face{font-family:'PC Mono';src:url(${FONTS.mono}) format('woff2');font-weight:100 800}
 *{margin:0;box-sizing:border-box}
-body{width:1200px;height:630px;background:#1E2154;color:#F5F1E8;font:17px/1.7 'PC Latin','PC Sans',sans-serif;padding:64px 72px;display:flex;flex-direction:column;justify-content:space-between}
+body{width:1200px;height:630px;background:#2A1C12;color:#F5F1E8;font:17px/1.7 'PC Latin','PC Sans',sans-serif;padding:64px 72px;display:flex;flex-direction:column;justify-content:space-between}
 .top{display:flex;justify-content:space-between;align-items:baseline}
 .brand{font-family:'PC Serif';font-size:30px;font-weight:600}
-.brand small{display:block;font-family:'PC Latin','PC Sans';font-size:14px;font-weight:400;color:#B9BAC8;margin-top:6px;letter-spacing:.04em}
+.brand small{display:block;font-family:'PC Latin','PC Sans';font-size:14px;font-weight:400;color:#E0D3C4;margin-top:6px;letter-spacing:.04em}
 .eyebrow{font-family:'PC Mono','PC Sans',ui-monospace,Menlo,monospace;font-size:14px;letter-spacing:.14em;color:#F2B264}
 h1{font-family:'PC Serif';font-size:76px;font-weight:600;line-height:1.16;letter-spacing:-.01em}
 h1 em{font-style:normal;color:#F2B264}
 .rule{height:1px;background:rgba(245,241,232,.24);margin:28px 0 22px}
-.foot{display:flex;justify-content:space-between;align-items:baseline;font-family:'PC Mono','PC Sans',ui-monospace,Menlo,monospace;font-size:13px;color:#B9BAC8}
+.foot{display:flex;justify-content:space-between;align-items:baseline;font-family:'PC Mono','PC Sans',ui-monospace,Menlo,monospace;font-size:13px;color:#E0D3C4}
 </style></head><body>
 <div class="top">
   <div class="brand">Pet Companionship<small>${t.brandLine} · ${t.brandNote}</small></div>

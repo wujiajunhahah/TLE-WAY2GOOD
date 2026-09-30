@@ -371,8 +371,8 @@ html[lang="en"] h2{line-height:1.18;letter-spacing:-.015em}
 .net-head-l,.net-head-r{stroke:var(--clay-soft)}
 .net.in .net-head{opacity:1}
 .net-labels{display:grid;grid-template-columns:1fr auto 1fr;align-items:baseline;margin-top:14px;font-family:var(--font-serif);font-size:clamp(15px,1.5vw,20px);color:var(--card-ink)}
-.net-labels li:nth-child(2){text-align:center}
-.net-labels li:nth-child(3){text-align:right}
+.net-labels .nl-b{text-align:center}
+.net-labels .nl-c{text-align:right}
 .net-labels-hi{color:var(--card-ink)}
 .net-sub{margin-top:10px;font-size:13px;line-height:1.7;color:var(--dk-text)}
 .net-sub-hi{color:var(--clay-soft)}

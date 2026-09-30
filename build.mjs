@@ -270,12 +270,15 @@ const html = (c) => {
                 <path class="net-flow" d="M 8 20 H 992" vector-effect="non-scaling-stroke"/>
                 <circle class="net-dot" cx="8" cy="20" r="3.2" vector-effect="non-scaling-stroke"/>
                 <circle class="net-dot" cx="500" cy="20" r="2.4" vector-effect="non-scaling-stroke"/>
-                <circle class="net-dot" cx="992" cy="20" r="3.2" vector-effect="non-scaling-stroke"/>
                 <path class="net-head" d="M 488 14 L 500 20 L 488 26" vector-effect="non-scaling-stroke"/>
+                <g class="net-cat">
+                <path d="M 973 21 L 976 7 L 984 17"/><path d="M 991 21 L 988 7 L 980 17"/>
+                <circle cx="982" cy="26" r="9"/>
+              </g>
               </svg>
             </div>
             <ul class="net-labels">
-              <li>${c.currentChain[0]}</li><li class="net-arrow" aria-hidden="true">→</li><li>${c.currentChain[1]}</li><li class="net-arrow" aria-hidden="true">→</li><li>${c.currentChain[2]}</li>
+              <li class="nl nl-a">${c.currentChain[0]}</li><li class="net-arrow" aria-hidden="true">→</li><li class="nl nl-b">${c.currentChain[1]}</li><li class="net-arrow" aria-hidden="true">→</li><li class="nl nl-c">${c.currentChain[2]}</li>
             </ul>
             <p class="net-sub">${c.currentCap}</p>
           </div>
@@ -287,13 +290,16 @@ const html = (c) => {
                 <path class="net-flow net-flow-hi net-flow-back" d="M 8 20 H 992" vector-effect="non-scaling-stroke"/>
                 <circle class="net-dot net-dot-hi" cx="8" cy="20" r="3.2" vector-effect="non-scaling-stroke"/>
                 <circle class="net-dot net-dot-hi" cx="500" cy="20" r="2.4" vector-effect="non-scaling-stroke"/>
-                <circle class="net-dot net-dot-hi" cx="992" cy="20" r="3.2" vector-effect="non-scaling-stroke"/>
                 <path class="net-head net-head-l" d="M 20 14 L 8 20 L 20 26" vector-effect="non-scaling-stroke"/>
+                <g class="net-cat">
+                <path d="M 973 21 L 976 7 L 984 17"/><path d="M 991 21 L 988 7 L 980 17"/>
+                <circle cx="982" cy="26" r="9"/>
+              </g>
                 <path class="net-head net-head-r" d="M 980 14 L 992 20 L 980 26" vector-effect="non-scaling-stroke"/>
               </svg>
             </div>
             <ul class="net-labels net-labels-hi">
-              <li>${c.nextChain[0]}</li><li class="net-arrow" aria-hidden="true">↔</li><li>${c.nextChain[1]}</li><li class="net-arrow" aria-hidden="true">↔</li><li>${c.nextChain[2]}</li>
+              <li class="nl nl-a">${c.nextChain[0]}</li><li class="net-arrow" aria-hidden="true">↔</li><li class="nl nl-b">${c.nextChain[1]}</li><li class="net-arrow" aria-hidden="true">↔</li><li class="nl nl-c">${c.nextChain[2]}</li>
             </ul>
             <p class="net-sub net-sub-hi">${c.nextCap}</p>
           </div>
