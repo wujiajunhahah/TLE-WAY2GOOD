@@ -6,8 +6,27 @@
 // Layout variety is deliberate: hero, fact band, timeline, evidence + table, full-bleed photo,
 // dark pivot band, principle grid, numbered rows, form panel. Nothing repeats seven times.
 // Run: node build.mjs
-import { writeFileSync, mkdirSync } from 'node:fs';
+import { writeFileSync, mkdirSync, cpSync } from 'node:fs';
 import { content, sourceLinks } from './content.mjs';
+
+// Usage:
+//   node build.mjs                                     -> server build into public/ (placeholders kept)
+//   node build.mjs --static --base=/REPO/ --origin=https://user.github.io/REPO --out=docs
+// Static mode substitutes the origin, prefixes internal links with the base path, and writes
+// a root redirect, robots.txt, sitemap.xml and .nojekyll so a project GitHub Pages site works.
+const argv = {};
+for (const a of process.argv.slice(2)) {
+  const [k, ...rest] = a.replace(/^--/, '').split('=');
+  argv[k] = rest.length ? rest.join('=') : true;   // bare flags must not be dropped
+}
+const BASE = argv.base ? ('/' + argv.base.replace(/^\/+|\/+$/g, '') + '/') : '/';
+const ORIGIN = argv.origin || '__SITE_ORIGIN__';
+const OUT = argv.out || 'public';
+const STATIC = Boolean(argv.static);
+const withBase = (s) => (BASE === '/' ? s : s.replace(/(href|src)="\//g, (m, attr) => `${attr}="${BASE}`));
+// ORIGIN is the full public base (it may already contain the repo path), so absolute URLs are
+// built from SITE — never ORIGIN + BASE, which would repeat the sub-path.
+const SITE = ORIGIN === '__SITE_ORIGIN__' ? ORIGIN + '/' : ORIGIN.replace(/\/+$/, '') + '/';
 
 const rail = (label, dark = false) => {
   const [num, text] = label.split(' / ');
@@ -45,6 +64,8 @@ const html = (c) => {
 <meta name="twitter:title" content="${c.title}">
 <meta name="twitter:description" content="${c.desc}">
 <meta name="twitter:image" content="__SITE_ORIGIN__/assets/hero.jpg">
+<meta name="pc-base" content="${BASE}">
+<meta name="pc-mode" content="${STATIC ? 'static' : 'server'}">
 <link rel="icon" href="/favicon.svg" type="image/svg+xml">
 <link rel="stylesheet" href="/style.css">
 <script src="/app.js" defer></script>
@@ -115,7 +136,7 @@ const html = (c) => {
           ${c.steps.map(s => `<li class="step${s.isBreak ? ' step-break' : ''}">
             <span class="step-n">${s.n}</span>
             <span class="step-t">${s.t}</span>
-            <span class="step-d">${s.d}</span>${s.isBreak ? `<span class="step-tag">${c.breakLabel}</span>` : ''}
+            <span class="step-d">${s.d}</span>
           </li>`).join('\n          ')}
         </ol>
         <blockquote class="break">
@@ -125,7 +146,7 @@ const html = (c) => {
       </div>
     </div>
     <figure class="bleed">
-      <img src="/assets/away.jpg" width="810" height="274" alt="${c.awayCaption}" decoding="async">
+      <img src="/assets/away.jpg" width="810" height="274" alt="${c.awayCaption}">
       <figcaption class="shell">${c.awayCaption}</figcaption>
     </figure>
   </section>
@@ -148,7 +169,7 @@ const html = (c) => {
             </div>
           </div>
           <figure class="devices">
-            <img src="/assets/devices.jpg" width="780" height="396" alt="${c.devicesAlt}" decoding="async">
+            <img src="/assets/devices.jpg" width="780" height="396" alt="${c.devicesAlt}">
             <figcaption>${c.devicesCaption}</figcaption>
           </figure>
         </div>
@@ -174,7 +195,7 @@ const html = (c) => {
           ${c.users.map(u => `<li><span class="u-t">${u.t}</span><span class="u-d">${u.d}</span></li>`).join('\n          ')}
         </ul>
         <div class="trait">
-          <img src="/assets/hold.jpg" width="466" height="448" alt="" decoding="async" aria-hidden="true">
+          <img src="/assets/hold.jpg" width="466" height="448" alt="" aria-hidden="true">
           <p>${c.usersTrait}</p>
         </div>
       </div>
@@ -240,10 +261,6 @@ const html = (c) => {
         <div class="sub-l">
           <h2>${c.subTitle}</h2>
           <p class="intro">${c.subText}</p>
-          <div class="faq">
-            <h3 class="faq-h">${c.faqTitle}</h3>
-            ${c.faqs.map(f => `<div class="qa"><p class="qa-q">${f.q}</p><p class="qa-a">${f.a}</p></div>`).join('\n            ')}
-          </div>
         </div>
         <div class="sub-r">
           <form id="subscribe-form" class="form">
@@ -256,7 +273,8 @@ const html = (c) => {
             <label class="consent"><input name="consent" id="consent" type="checkbox" required><span>${c.consent}</span></label>
             <p id="form-status" class="status" role="status" aria-live="polite"></p>
             <p class="privacy" id="email-help">${c.consentNote}</p>
-            <p class="privacy-note">${c.privacyText}</p>
+            <p class="privacy-note">${c.privacyText}</p>${STATIC ? `
+            <p class="static-note">${c.staticNote}</p>` : ''}
           </form>
           <div id="success" class="success" hidden role="status" tabindex="-1">
             <p class="s-k">${c.successLabel}</p>
@@ -264,6 +282,10 @@ const html = (c) => {
             <p class="s-t">${c.successLead} <strong id="saved-email"></strong> ${c.successAfter}<br>${c.successText}</p>
             <button class="link-quiet" id="reset-form" type="button">${c.reset}</button>
           </div>
+        </div>
+        <div class="faq">
+          <h3 class="faq-h">${c.faqTitle}</h3>
+          ${c.faqs.map(f => `<div class="qa"><p class="qa-q">${f.q}</p><p class="qa-a">${f.a}</p></div>`).join('\n          ')}
         </div>
       </div>
     </div>
@@ -287,8 +309,38 @@ const html = (c) => {
 };
 
 for (const [locale, c] of Object.entries(content)) {
-  mkdirSync(`public/${locale}`, { recursive: true });
-  const out = `public/${locale}/index.html`;
-  writeFileSync(out, html(c));
-  console.log('wrote', out);
+  mkdirSync(`${OUT}/${locale}`, { recursive: true });
+  let out = html(c);
+  if (ORIGIN !== '__SITE_ORIGIN__') out = out.replaceAll('__SITE_ORIGIN__', ORIGIN);
+  if (STATIC) out = out.replaceAll('__ROBOTS__', 'index, follow');
+  out = withBase(out);
+  writeFileSync(`${OUT}/${locale}/index.html`, out);
+  console.log('wrote', `${OUT}/${locale}/index.html`);
+}
+
+if (STATIC) {
+  const zhUrl = `${SITE}zh/`;
+  writeFileSync(`${OUT}/index.html`, `<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Pet Companionship · 宠物远程陪伴</title>
+<meta http-equiv="refresh" content="0; url=${BASE}zh/">
+<link rel="canonical" href="${zhUrl}">
+<link rel="alternate" hreflang="zh-CN" href="${SITE}zh/">
+<link rel="alternate" hreflang="en" href="${SITE}en/">
+</head>
+<body>
+<p><a href="${BASE}zh/">中文</a> · <a href="${BASE}en/">English</a></p>
+</body>
+</html>
+`);
+  writeFileSync(`${OUT}/robots.txt`, `User-agent: *\nAllow: /\nSitemap: ${SITE}sitemap.xml\n`);
+  writeFileSync(`${OUT}/sitemap.xml`, `<?xml version="1.0" encoding="UTF-8"?><urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">${['zh', 'en'].map((l) => `<url><loc>${SITE}${l}/</loc><xhtml:link rel="alternate" hreflang="zh-CN" href="${SITE}zh/"/><xhtml:link rel="alternate" hreflang="en" href="${SITE}en/"/><xhtml:link rel="alternate" hreflang="x-default" href="${SITE}zh/"/></url>`).join('')}</urlset>`);
+  // the static host needs its own copy of the stylesheet, script and assets
+  for (const f of ['style.css', 'app.js', 'favicon.svg']) cpSync(`public/${f}`, `${OUT}/${f}`);
+  cpSync('public/assets', `${OUT}/assets`, { recursive: true });
+  writeFileSync(`${OUT}/.nojekyll`, '');
+  console.log('wrote', `${OUT}/index.html`, 'robots.txt', 'sitemap.xml', '.nojekyll');
 }

@@ -92,7 +92,26 @@ Server fixes applied to this copy (found while reviewing the original):
 directory requests → 404 (was 500); the decoded path is now normalised before the redirect table,
 so a percent-encoded look-alike can no longer serve a file the redirect table means to hide.
 
-## 5. Known limitations
+## 5. Deployment (GitHub Pages)
+
+The repo is served as a project site, so internal links carry the repo sub-path:
+
+```sh
+node build.mjs --static --base=/TLE-WAY2GOOD/ \
+  --origin=https://wujiajunhahah.github.io/TLE-WAY2GOOD --out=docs
+```
+
+`docs/` (committed) is the Pages source: branch `main`, folder `/docs`. It contains both
+locales, the root redirect, `robots.txt`, `sitemap.xml`, `.nojekyll`, the stylesheet, the script
+and the assets.
+
+**Static hosting has no signup endpoint.** On Pages the form says so plainly
+(`当前为静态预览，订阅暂未开启保存。`) instead of pretending to save. Collecting real signups
+needs the Node server (`node server.mjs`) or another endpoint — see §7.
+
+Live: <https://wujiajunhahah.github.io/TLE-WAY2GOOD/>
+
+## 6. Known limitations
 
 - The competitor device shot and the three photos come from the source deck, so they are
   decorative rather than documentary; a real photograph of the team's own prototype would be

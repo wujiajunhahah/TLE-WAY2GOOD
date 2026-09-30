@@ -6,8 +6,8 @@
 // Only links we actually verified are clickable; the USDA FAS report stays plain text
 // rather than inventing a URL.
 export const sourceLinks = {
-  zh: '。KPMG 报告：<a href="https://kpmg.com/cn/zh/insights/2025/06/2025-china-pet-industry-market-report.html" rel="noopener">2025 年中国宠物行业市场报告</a>',
-  en: '. KPMG report: <a href="https://kpmg.com/cn/zh/insights/2025/06/2025-china-pet-industry-market-report.html" rel="noopener">2025 China Pet Industry Market Report</a>'
+  zh: '（<a href="https://kpmg.com/cn/zh/insights/2025/06/2025-china-pet-industry-market-report.html" rel="noopener">查看 KPMG 报告</a>）',
+  en: ' (<a href="https://kpmg.com/cn/zh/insights/2025/06/2025-china-pet-industry-market-report.html" rel="noopener">see the KPMG report</a>)'
 };
 
 export const content = {
