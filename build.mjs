@@ -77,7 +77,7 @@ const html = (c) => {
 <title>${c.title}</title>
 <meta name="description" content="${c.desc}">
 <meta name="robots" content="__ROBOTS__">
-<meta name="theme-color" content="#1E2154">
+<meta name="theme-color" content="#2A1C12">
 <link rel="canonical" href="__SITE_ORIGIN__/${me}/">
 <link rel="alternate" hreflang="zh-CN" href="__SITE_ORIGIN__/zh/">
 <link rel="alternate" hreflang="en" href="__SITE_ORIGIN__/en/">
