@@ -108,7 +108,7 @@ const html = (c) => {
     '@context': 'https://schema.org',
     '@graph': [
       { '@type': 'WebSite', '@id': '__SITE_ORIGIN__/#website', url: '__SITE_ORIGIN__/', name: 'Pet Companionship', inLanguage: ['zh-CN', 'en'] },
-      { '@type': 'WebPage', '@id': `__SITE_ORIGIN__/${me}/#webpage`, url: `__SITE_ORIGIN__/${me}/`, name: c.title, description: c.desc, inLanguage: c.lang, isPartOf: { '@id': '__SITE_ORIGIN__/#website' } }
+      { '@type': 'WebPage', '@id': `__SITE_ORIGIN__/${me}/#webpage`, url: `__SITE_ORIGIN__/${me}/`, name: c.title, description: c.desc, dateModified: '2026-10-06', inLanguage: c.lang, isPartOf: { '@id': '__SITE_ORIGIN__/#website' } }
     ]
   })}</script>
 </head>
@@ -124,7 +124,7 @@ const html = (c) => {
     <nav class="nav" aria-label="${c.nav}">
       <a href="#gap">${c.navGap}</a>
       <a href="#turn">${c.navTurn}</a>
-      <a href="#users">${c.navUsers}</a>
+      <a href="#research">${c.navUsers}</a>
       <a class="lang" href="/${other}/" lang="${otherLang}" hreflang="${other}" aria-label="${c.langSwitchLabel}">${c.langSwitch}</a>
       <a class="btn btn-sm" href="#subscribe">${c.navCta}</a>
     </nav>
@@ -251,6 +251,32 @@ const html = (c) => {
         <div class="trait">
           ${NOIMG || MINIMAL ? '' : '<img src="/assets/hold.jpg" width="466" height="448" alt="" aria-hidden="true">'}
           <p>${c.usersTrait}</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="research" class="sec">
+    <div class="shell sec-in">
+      ${rail(c.researchLabel)}
+      <div class="body">
+        <h2>${c.researchTitle}</h2>
+        <p class="intro">${c.researchIntro}</p>
+        <ul class="research-findings">
+          ${c.researchFindings.map(f => `<li><p class="research-value">${f.value}</p><h3>${f.t}</h3><p>${f.d}</p></li>`).join('\n          ')}
+        </ul>
+        <p class="note">${c.researchNote}</p>
+        <div class="research-materials">
+          <h3>${c.materialsTitle}</h3>
+          <p>${c.materialsNote}</p>
+          <div class="research-downloads">
+            <a class="link-quiet" href="/research/Customer_Discovery_Group6.pdf">${c.reportPdf}<span aria-hidden="true"> ↗</span></a>
+            <a class="link-quiet" href="/research/Customer_Discovery_Group6.pptx" download>${c.reportPpt}<span aria-hidden="true"> ↓</span></a>
+            <a class="link-quiet" href="/research/Group6_MISO_Submission.zip" download>${c.bundleLabel}<span aria-hidden="true"> ↓</span></a>
+          </div>
+          <ul class="document-links">
+            ${c.documents.map(d => `<li><a href="/research/${me}/${encodeURIComponent(d.file)}" download><span>${d.name}</span><span class="document-type">DOCX ↓</span></a></li>`).join('\n            ')}
+          </ul>
         </div>
       </div>
     </div>
@@ -457,6 +483,7 @@ if (STATIC) {
   for (const f of ['style.css', 'theme-pet.css', 'app.js', 'favicon.svg', 'og-zh.jpg', 'og-en.jpg']) cpSync(`public/${f}`, `${OUT}/${f}`);
   if (IMGS !== 'none') cpSync('public/assets', `${OUT}/assets`, { recursive: true });
   cpSync('public/fonts', `${OUT}/fonts`, { recursive: true });
+  cpSync('public/research', `${OUT}/research`, { recursive: true });
   writeFileSync(`${OUT}/.nojekyll`, '');
   console.log('wrote', `${OUT}/index.html`, 'robots.txt', 'sitemap.xml', '.nojekyll');
 }

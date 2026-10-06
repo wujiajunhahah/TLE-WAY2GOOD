@@ -1,0 +1,144 @@
+{
+  "synced_on": "2026-10-06",
+  "source": "tle-way2good/submission",
+  "files": [
+    {
+      "path": "01-Interview-目标假设与问题.docx",
+      "bytes": 27843,
+      "source_sha256": "85d9a0545af6bb74f51334c8dc3cd2392cb82534d9fbe38d391ae1b12016007d",
+      "sha256": "85d9a0545af6bb74f51334c8dc3cd2392cb82534d9fbe38d391ae1b12016007d"
+    },
+    {
+      "path": "02-Interview-访谈记录与结果.docx",
+      "bytes": 32012,
+      "source_sha256": "8a033fed17d50d85798801d4ad439af8d949b6ec90b9bfb6711918efb94c57e2",
+      "sha256": "8a033fed17d50d85798801d4ad439af8d949b6ec90b9bfb6711918efb94c57e2"
+    },
+    {
+      "path": "03-Media-来源发现与偏差.docx",
+      "bytes": 57346,
+      "source_sha256": "e79596bd64a1be4dfdb427a9a64d88149b3e27e144b3bdfd8c3b31df403467cf",
+      "sha256": "e79596bd64a1be4dfdb427a9a64d88149b3e27e144b3bdfd8c3b31df403467cf"
+    },
+    {
+      "path": "04-Survey-目标题目与结果.docx",
+      "bytes": 33032,
+      "source_sha256": "a7665a65804d2119a2e9b86ee745db40768d8ab21a9564c13fc465dee9efd264",
+      "sha256": "a7665a65804d2119a2e9b86ee745db40768d8ab21a9564c13fc465dee9efd264"
+    },
+    {
+      "path": "05-Observation-目标指标与记录.docx",
+      "bytes": 30363,
+      "source_sha256": "a648ec999c9fe555dac776c2f698eaa7cef59ad41151c3ca5e061e2388342b1b",
+      "sha256": "a648ec999c9fe555dac776c2f698eaa7cef59ad41151c3ca5e061e2388342b1b"
+    },
+    {
+      "path": "en/00_README.md",
+      "bytes": 3576,
+      "source_sha256": "39ef13ea78f5410b321e993db294bbeab47489992898d6217357fb1a50d25e54",
+      "sha256": "73f26eeac5c7539ada93d11d1f21ceae1c478284eebfbc2594ea4db8357dbf77"
+    },
+    {
+      "path": "en/01-Interview-Goals-Hypotheses-Questions.docx",
+      "bytes": 27596,
+      "source_sha256": "87702b4956fd41dda37cd74b4c68f14315ec101536a5f0d04991f04348df4791",
+      "sha256": "87702b4956fd41dda37cd74b4c68f14315ec101536a5f0d04991f04348df4791"
+    },
+    {
+      "path": "en/02-Interview-Records-Results.docx",
+      "bytes": 32120,
+      "source_sha256": "17d0d934d760e39aa6a38028add8ca2a886b9dd065a37aa5b6275c950a15ade5",
+      "sha256": "17d0d934d760e39aa6a38028add8ca2a886b9dd065a37aa5b6275c950a15ade5"
+    },
+    {
+      "path": "en/03-Media-Sources-Findings-Biases.docx",
+      "bytes": 55066,
+      "source_sha256": "16e1d690c718682887468a0b45728e1cb7b99b9a1fdba9d291d6155aec759670",
+      "sha256": "16e1d690c718682887468a0b45728e1cb7b99b9a1fdba9d291d6155aec759670"
+    },
+    {
+      "path": "en/04-Survey-Goals-Questions-Results.docx",
+      "bytes": 31903,
+      "source_sha256": "0205330a2d5f71bc90e7a583cf54d7d536c489fe11c42ff4db54cc9435167813",
+      "sha256": "0205330a2d5f71bc90e7a583cf54d7d536c489fe11c42ff4db54cc9435167813"
+    },
+    {
+      "path": "en/05-Observation-Goals-Indicators-Records.docx",
+      "bytes": 29976,
+      "source_sha256": "19087c403fe072c32ee3bc98b523d4b7cc32c551cf3027ca72b435402ec0ce04",
+      "sha256": "19087c403fe072c32ee3bc98b523d4b7cc32c551cf3027ca72b435402ec0ce04"
+    },
+    {
+      "path": "en/src/01-Interview-Goals-Hypotheses-Questions.md",
+      "bytes": 7771,
+      "source_sha256": "cd20bff17c5ae0af829ef38185180a082929188a69bfa46f21c36bdedad8a63b",
+      "sha256": "cd20bff17c5ae0af829ef38185180a082929188a69bfa46f21c36bdedad8a63b"
+    },
+    {
+      "path": "en/src/02-Interview-Records-Results.md",
+      "bytes": 17835,
+      "source_sha256": "80e9849947b2507df6c288378c25f7af400b23bd5e764b2375cdf046c3b2cea2",
+      "sha256": "80e9849947b2507df6c288378c25f7af400b23bd5e764b2375cdf046c3b2cea2"
+    },
+    {
+      "path": "en/src/03-Media-Sources-Findings-Biases.md",
+      "bytes": 63812,
+      "source_sha256": "f74979518ff31761d38a9adfd0fee82a9aefecd861011b18d12fc98b3df76ec2",
+      "sha256": "f74979518ff31761d38a9adfd0fee82a9aefecd861011b18d12fc98b3df76ec2"
+    },
+    {
+      "path": "en/src/04-Survey-Goals-Questions-Results.md",
+      "bytes": 14762,
+      "source_sha256": "defc5c83f615a5dd9b400b76c438fdb55dffc5dfde9b9842ddb445c6907a72e7",
+      "sha256": "defc5c83f615a5dd9b400b76c438fdb55dffc5dfde9b9842ddb445c6907a72e7"
+    },
+    {
+      "path": "en/src/05-Observation-Goals-Indicators-Records.md",
+      "bytes": 12902,
+      "source_sha256": "8146be7217913b6a8d84a69c2cb2f83ce3fdf4ca103484cbaa998b063d44b110",
+      "sha256": "8146be7217913b6a8d84a69c2cb2f83ce3fdf4ca103484cbaa998b063d44b110"
+    },
+    {
+      "path": "src/01-Interview-目标假设与问题.md",
+      "bytes": 6517,
+      "source_sha256": "8278c37729d82d9fb7a7cd31120adef6bce206339d74cd34a6f2952b647034c0",
+      "sha256": "8278c37729d82d9fb7a7cd31120adef6bce206339d74cd34a6f2952b647034c0"
+    },
+    {
+      "path": "src/02-Interview-访谈记录与结果.md",
+      "bytes": 13427,
+      "source_sha256": "467163a017e22f585fd9f9ef8ae4789fc2db788b8be2c9ff248ddc0475084b32",
+      "sha256": "467163a017e22f585fd9f9ef8ae4789fc2db788b8be2c9ff248ddc0475084b32"
+    },
+    {
+      "path": "src/03-Media-来源发现与偏差.md",
+      "bytes": 50100,
+      "source_sha256": "a9a34c08cbc5ab339f5845d3b2e491bbe6489602c60f628786710f349f5183eb",
+      "sha256": "a9a34c08cbc5ab339f5845d3b2e491bbe6489602c60f628786710f349f5183eb"
+    },
+    {
+      "path": "src/04-Survey-目标题目与结果.md",
+      "bytes": 13824,
+      "source_sha256": "ee84a88871cc638d29ce624b2a3f1f7eb48e507df8a2d6d1d594cb7a4b8e7d16",
+      "sha256": "ee84a88871cc638d29ce624b2a3f1f7eb48e507df8a2d6d1d594cb7a4b8e7d16"
+    },
+    {
+      "path": "src/05-Observation-目标指标与记录.md",
+      "bytes": 9928,
+      "source_sha256": "9759d8916e37d6c3135d15432d05dc33137a9be468916aafbc24e85108ba9fcd",
+      "sha256": "9759d8916e37d6c3135d15432d05dc33137a9be468916aafbc24e85108ba9fcd"
+    }
+  ],
+  "report_files": [
+    {
+      "path": "report/Customer_Discovery_Group6.pdf",
+      "bytes": 10322414,
+      "sha256": "d3ac575f11d76470e069759fb3f0d1fc5f13f827925acfe7eadfef7f3365f8c1"
+    },
+    {
+      "path": "report/Customer_Discovery_Group6.pptx",
+      "bytes": 2628826,
+      "sha256": "e991306244d3cde798bea59ee7bb0aaa347507a7a1548ce4fe499be3913c246f"
+    }
+  ]
+}

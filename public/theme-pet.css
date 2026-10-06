@@ -393,3 +393,21 @@ html[lang="en"] h1{font-size:clamp(44px,5.8vw,96px)}
 @media(prefers-reduced-motion:reduce){
   .net .net-cat{opacity:1;transition:none}
 }
+/* Research update: existing warm-paper typography and responsive layout. */
+.research-findings{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:28px;margin-top:44px;list-style:none;padding:0}
+.research-findings li{border-top:2px solid var(--ink);padding-top:20px;min-width:0}
+.research-value{font-family:var(--font-mono);font-size:30px;line-height:1.2;color:var(--ink);font-variant-numeric:tabular-nums}
+.research-findings h3{font-size:18px;line-height:1.5;margin:16px 0 10px}
+.research-findings li>p:last-child{font-size:15px;line-height:1.8;color:var(--ink-2)}
+.research-materials{margin-top:48px;padding-top:32px;border-top:1px solid var(--rule)}
+.research-materials>h3{font-size:24px;margin-bottom:12px}
+.research-materials>p{color:var(--ink-2);font-size:15px;line-height:1.8}
+.research-downloads{display:flex;flex-wrap:wrap;gap:16px 28px;margin:24px 0}
+.research-downloads a{font-size:15px;min-height:44px;display:inline-flex;align-items:center;gap:8px}
+.document-links{list-style:none;margin:0;padding:0}
+.document-links li{border-bottom:1px solid var(--rule)}
+.document-links a{display:flex;align-items:center;justify-content:space-between;gap:24px;padding:16px 0;font-size:15px;min-height:52px}
+.document-links a:hover{color:var(--ink);text-decoration:underline;text-underline-offset:4px}
+.document-type{font-family:var(--font-mono);font-size:12px;white-space:nowrap;color:var(--ink-3)}
+@media(max-width:700px){.research-findings{grid-template-columns:minmax(0,1fr);gap:24px}.research-findings h3{margin-top:10px}.research-downloads{flex-direction:column;gap:8px}.document-links a{gap:14px}.document-links a span:first-child{min-width:0;overflow-wrap:anywhere}}
+@media(max-width:700px){.products .p-form{white-space:normal;overflow-wrap:anywhere}}
