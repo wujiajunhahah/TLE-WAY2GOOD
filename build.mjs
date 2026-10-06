@@ -8,6 +8,7 @@
 // Run: node build.mjs
 import { writeFileSync, mkdirSync, cpSync } from 'node:fs';
 import { content, sourceLinks } from './content.mjs';
+import { typesetChineseBody, headingBreaks, documentLabel } from './tools/typography.mjs';
 
 // Usage:
 //   node build.mjs                                     -> server build into public/ (placeholders kept)
@@ -275,7 +276,7 @@ const html = (c) => {
             <a class="link-quiet" href="/research/Group6_MISO_Submission.zip" download>${c.bundleLabel}<span aria-hidden="true"> ↓</span></a>
           </div>
           <ul class="document-links">
-            ${c.documents.map(d => `<li><a href="/research/${me}/${encodeURIComponent(d.file)}" download><span>${d.name}</span><span class="document-type">DOCX ↓</span></a></li>`).join('\n            ')}
+            ${c.documents.map(d => `<li><a href="/research/${me}/${encodeURIComponent(d.file)}" download>${documentLabel(d.name)}<span class="document-type">DOCX ↓</span></a></li>`).join('\n            ')}
           </ul>
         </div>
       </div>
@@ -452,6 +453,9 @@ const html = (c) => {
 for (const [locale, c] of Object.entries(content)) {
   mkdirSync(`${OUT}/${locale}`, { recursive: true });
   let out = html(c);
+  // Let smaller screens rebalance section headings instead of inheriting desktop line breaks.
+  out = out.replace(/<h2>([\s\S]*?)<\/h2>/g, (_, text) => `<h2>${headingBreaks(text, c.lang)}</h2>`);
+  if (c.lang === 'zh-CN') out = typesetChineseBody(out);
   if (ORIGIN !== '__SITE_ORIGIN__') out = out.replaceAll('__SITE_ORIGIN__', ORIGIN);
   if (STATIC) out = out.replaceAll('__ROBOTS__', 'index, follow');
   out = withBase(out);

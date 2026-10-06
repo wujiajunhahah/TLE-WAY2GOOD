@@ -411,3 +411,26 @@ html[lang="en"] h1{font-size:clamp(44px,5.8vw,96px)}
 .document-type{font-family:var(--font-mono);font-size:12px;white-space:nowrap;color:var(--ink-3)}
 @media(max-width:700px){.research-findings{grid-template-columns:minmax(0,1fr);gap:24px}.research-findings h3{margin-top:10px}.research-downloads{flex-direction:column;gap:8px}.document-links a{gap:14px}.document-links a span:first-child{min-width:0;overflow-wrap:anywhere}}
 @media(max-width:700px){.products .p-form{white-space:normal;overflow-wrap:anywhere}}
+
+/* Editorial typography: semantic breaks, stable bilingual spacing and short unit groups. */
+.text-unit,.text-phrase,.research-value,.document-label{white-space:nowrap}
+html[lang="zh-CN"]{line-break:strict}
+html[lang="zh-CN"] h1,html[lang="zh-CN"] h2{letter-spacing:0}
+.lede,.intro,.research-materials>p,.research-findings li>p:last-child,.qa-a{ text-wrap:pretty }
+.nav .btn{color:var(--paper)}
+.nav .btn:hover{color:var(--ink)}
+.document-copy{display:grid;grid-template-columns:112px minmax(0,1fr);gap:20px;min-width:0;flex:1}
+.document-label{font-size:13px;font-weight:500;color:var(--ink-3)}
+.document-detail{line-height:1.65;text-wrap:pretty}
+.document-type{flex-shrink:0}
+.document-links a{align-items:baseline}
+.document-links a:hover .document-label{color:var(--ink)}
+@media(max-width:760px){
+  .title-break{display:none}
+  html[lang="en"] h1{font-size:clamp(32px,9.4vw,58px);line-height:1.14;letter-spacing:-.025em}
+  .lede{font-size:18px;line-height:1.8}
+  .hero-stage{letter-spacing:.01em;line-height:1.8}
+  .document-copy{grid-template-columns:minmax(0,1fr);gap:3px}
+  .document-links a .document-copy{overflow-wrap:normal}
+  .document-links a{gap:16px;padding-block:18px;align-items:center}
+}

@@ -358,15 +358,15 @@ export const content = {
         "file": "02-Interview-访谈记录与结果.docx"
       },
       {
-        "name": "Media：来源、发现与偏差",
+        "name": "媒体：来源、发现与偏差",
         "file": "03-Media-来源发现与偏差.docx"
       },
       {
-        "name": "Survey：目标、题目与结果",
+        "name": "问卷：目标、题目与结果",
         "file": "04-Survey-目标题目与结果.docx"
       },
       {
-        "name": "Observation：目标、指标与记录",
+        "name": "观察：目标、指标与记录",
         "file": "05-Observation-目标指标与记录.docx"
       }
     ],
@@ -390,7 +390,7 @@ export const content = {
     "langSwitch": "中文",
     "langSwitchLabel": "阅读中文版",
     "eyebrow": "REMOTE PET COMPANIONSHIP · CUSTOMER DISCOVERY · 2026",
-    "h1": "You can see them.<br>You still wonder<br><em>how they are doing.</em>",
+    "h1": "You see them.<br>You still wonder:<br><em>are they okay?</em>",
     "lede": "A quiet camera view can reassure you—or leave you wondering.<br>We want to understand how care can feel more connected while respecting your pet’s own rhythm.",
     "stage": "5 interviews and 31 survey responses completed · Research and concept stage",
     "ctaPrimary": "Get project updates",
