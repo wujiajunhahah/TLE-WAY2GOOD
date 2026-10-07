@@ -1,1 +1,17 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64"><rect width="64" height="64" rx="12" fill="#143c39"/><path d="M32 48 16 31C4 16 26 10 32 24 38 10 60 16 48 31Z" fill="#ed7357"/></svg>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-label="way2good">
+  <title>way2good</title>
+  <style>
+    .w2g-bg { fill: #F5F1E8; }
+    .w2g-cat { stroke: #2A1C12; }
+    @media (prefers-color-scheme: dark) {
+      .w2g-bg { fill: #2A1C12; }
+      .w2g-cat { stroke: #F5F1E8; }
+    }
+  </style>
+  <rect class="w2g-bg" width="64" height="64" rx="13"/>
+  <g transform="translate(0 -6.95)">
+    <path class="w2g-cat" d="M15.5 46.5 C16.8 39.5 19.4 34.6 22.2 31.6 L25.2 23.4 L30.6 30.9 C31.3 30.6 32.7 30.6 33.4 30.9 L38.8 23.4 L41.8 31.6 C44.6 34.6 47.2 39.5 48.5 46.5" fill="none" stroke-width="6.2"
+          stroke-linecap="round" stroke-linejoin="round"/>
+    <path d="M5 52 L59 52" fill="none" stroke="#E8912F" stroke-width="6.4" stroke-linecap="round"/>
+  </g>
+</svg>

@@ -119,8 +119,18 @@ const html = (c) => {
 <header class="top">
   <div class="shell top-in">
     <a class="brand" href="/${me}/">
-      <span class="brand-mark" aria-hidden="true">pc.</span>
-      <span class="brand-text">Pet Companionship<small>${c.brandLine} · ${c.brandNote}</small></span>
+      <span class="brand-mark" aria-hidden="true">
+        <svg class="w2g" viewBox="0 0 64 64">
+          <clipPath id="w2g-hdr-clip"><rect x="0" y="0" width="64" height="49.5"/></clipPath>
+          <path class="w2g-way" d="M5 52 L59 52" fill="none" stroke="#E8912F" stroke-width="5"
+                stroke-linecap="round" stroke-dasharray="54" stroke-dashoffset="54"/>
+          <g clip-path="url(#w2g-hdr-clip)"><g class="w2g-cat">
+            <path d="M15.5 46.5 C16.8 39.5 19.4 34.6 22.2 31.6 L25.2 23.4 L30.6 30.9 C31.3 30.6 32.7 30.6 33.4 30.9 L38.8 23.4 L41.8 31.6 C44.6 34.6 47.2 39.5 48.5 46.5" fill="none" stroke="#2A1C12" stroke-width="4.8"
+                  stroke-linecap="round" stroke-linejoin="round"/>
+          </g></g>
+        </svg>
+      </span>
+      <span class="brand-text">way2good<small>${c.brandLine} · ${c.brandNote}</small></span>
     </a>
     <nav class="nav" aria-label="${c.nav}">
       <a href="#gap">${c.navGap}</a>
@@ -485,6 +495,7 @@ if (STATIC) {
   writeFileSync(`${OUT}/sitemap.xml`, `<?xml version="1.0" encoding="UTF-8"?><urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">${['zh', 'en'].map((l) => `<url><loc>${SITE}${l}/</loc><xhtml:link rel="alternate" hreflang="zh-CN" href="${SITE}zh/"/><xhtml:link rel="alternate" hreflang="en" href="${SITE}en/"/><xhtml:link rel="alternate" hreflang="x-default" href="${SITE}zh/"/></url>`).join('')}</urlset>`);
   // the static host needs its own copy of the stylesheet, script and assets
   for (const f of ['style.css', 'theme-pet.css', 'app.js', 'favicon.svg', 'og-zh.jpg', 'og-en.jpg']) cpSync(`public/${f}`, `${OUT}/${f}`);
+  cpSync('public/brand', `${OUT}/brand`, { recursive: true });
   if (IMGS !== 'none') cpSync('public/assets', `${OUT}/assets`, { recursive: true });
   cpSync('public/fonts', `${OUT}/fonts`, { recursive: true });
   cpSync('public/research', `${OUT}/research`, { recursive: true });
