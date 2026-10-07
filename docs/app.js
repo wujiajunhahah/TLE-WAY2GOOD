@@ -117,3 +117,15 @@ if (netFig) {
     netIO.observe(netFig);
   }
 }
+
+// Wake the brand cat on hover. The class is what gates the leave animation in the
+// stylesheet: without it the base-state animation fires on page load. Touch devices
+// get the same gesture on tap, since there is no hover to trigger it there.
+for (const brand of document.querySelectorAll('.brand')) {
+  brand.addEventListener('mouseenter', () => brand.classList.add('was-awake'));
+  brand.addEventListener('pointerdown', (e) => {
+    if (e.pointerType === 'mouse') return;
+    brand.classList.toggle('woke');
+    brand.classList.add('was-awake');
+  });
+}

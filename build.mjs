@@ -161,8 +161,13 @@ ${c.lang === 'en' ? '' : '<link rel="preload" href="/fonts/pc-serif.woff2" as="f
           <path class="w2g-way" d="M5 52 L59 52" fill="none" stroke="#E8912F" stroke-width="5"
                 stroke-linecap="round" stroke-dasharray="54" stroke-dashoffset="54"/>
           <g clip-path="url(#w2g-hdr-clip)"><g class="w2g-cat">
-            <path d="M15.5 46.5 C16.8 39.5 19.4 34.6 22.2 31.6 L25.2 23.4 L30.6 30.9 C31.3 30.6 32.7 30.6 33.4 30.9 L38.8 23.4 L41.8 31.6 C44.6 34.6 47.2 39.5 48.5 46.5" fill="none" stroke="#2A1C12" stroke-width="4.8"
-                  stroke-linecap="round" stroke-linejoin="round"/>
+            <!-- .w2g-cat runs the load intro (the head rises past the clip);
+                 .w2g-head is the hover pivot, so the two never fight. -->
+            <g class="w2g-head">
+              <path d="M15.5 46.5 C16.8 39.5 19.4 34.6 22.2 31.6 L25.2 23.4 L30.6 30.9 C31.3 30.6 32.7 30.6 33.4 30.9 L38.8 23.4 L41.8 31.6 C44.6 34.6 47.2 39.5 48.5 46.5" fill="none" stroke="#2A1C12" stroke-width="4.8"
+                    stroke-linecap="round" stroke-linejoin="round"/>
+              <g class="w2g-eyes"><circle cx="25.6" cy="41.4" r="2.7"/><circle cx="38.4" cy="41.4" r="2.7"/></g>
+            </g>
           </g></g>
         </svg>
       </span>
