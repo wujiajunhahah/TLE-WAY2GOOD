@@ -69,7 +69,7 @@ html[lang="en"] h2{line-height:1.06;letter-spacing:-.03em}
 .hero-act{margin-top:38px}
 .hero-stage{font-family:var(--font-mono);font-size:12px;letter-spacing:.04em}
 
-.arch-panel{position:relative;background:var(--amber);border-radius:999px 999px 0 0;padding:54px 34px 0;overflow:hidden}
+.arch-panel{position:relative;background:var(--paper-2);border-radius:999px 999px 0 0;padding:54px 34px 0;overflow:hidden}
 .arch-panel svg{display:block;width:100%;height:auto}
 .arch-cap{margin-top:18px;padding-bottom:30px;font-family:var(--font-mono);font-size:11.5px;letter-spacing:.06em;color:rgba(25,23,19,.72);text-align:center}
 
@@ -216,8 +216,12 @@ html[lang="en"] h2{line-height:1.06;letter-spacing:-.03em}
 
 @media(prefers-reduced-motion:reduce){
   .pet-headgroup{transform:none!important;transition:none;animation:none!important}
+  /* !important is load-bearing: the base hero rules are declared further down the file,
+     so at equal specificity they would otherwise win and leave the cat parked at
+     translateY(150px) for exactly the visitors who asked for no motion. */
+  .arch-panel.js .pet-rise{transform:none!important}
+  .arch-panel.js.in .pet-rise{animation:none!important}
   .pet-line{stroke-dashoffset:0!important;transition:none}
-  .pet-flow{animation:none;opacity:.85}
 }
 
 /* ---------- the typographic build keeps a two-column hero: the arch IS the hero object ---------- */
@@ -228,40 +232,51 @@ html[lang="en"] h2{line-height:1.06;letter-spacing:-.03em}
 .no-img .trait{background:var(--amber);border-radius:999px 999px 0 0 / 88px 88px 0 0}
 .no-img .trait p{padding:0;color:var(--ink)}
 
-/* ---------- the cat: a single line whose tail becomes the connection ---------- */
-/* The hero is the mark, reversed onto the amber arch. On an amber ground the mark's
-   own amber line would be invisible, so the whole figure takes --paper: the cat, the
-   tail, the way, and the pulse that travels along it. */
-.pet-headgroup{transform-origin:280px 390px;transition:transform .3s cubic-bezier(.22,.61,.36,1)}
+/* ---------- the hero: the mark itself ----------
+   The hero is the brand mark at 8.4x, not an illustration of a similar cat. Every
+   proportion is the mark's own: the head is 33 units wide in a 64 box carrying a 4.8
+   stroke, so scaling means the stroke scales with it. An earlier version redrew the cat
+   at 0.9% stroke weight instead of 14.5% and read as a delicate sketch that happened to
+   have ears — which is why it never looked like the logo.
+   ------------------------------------------------------------------------- */
+.pet-headgroup{transform-origin:260px 343.8px;transition:transform .3s cubic-bezier(.22,.61,.36,1)}
+/* the mark's own colours. On the old amber panel the amber line was invisible, which is
+   what pushed the figure to paper; the panel is pale now, so the mark can be itself. */
+.pet-head{fill:none;stroke:#2A1C12;stroke-width:40.3;stroke-linejoin:round;stroke-linecap:round}
+.pet-eye{fill:#2A1C12}
+.pet-line{fill:none;stroke:#E8912F;stroke-width:42;stroke-linecap:round;
+  stroke-dasharray:1;stroke-dashoffset:0;transition:stroke-dashoffset 1.8s cubic-bezier(.2,.7,.2,1)}
+.arch-panel.js .pet-line{stroke-dashoffset:1}
+.arch-panel.js.in .pet-line{stroke-dashoffset:0}
+/* the way draws itself first, then the cat comes up over it, exactly as in the header */
+.pet-rise{transform-origin:260px 343.8px}
+.arch-panel.js .pet-rise{transform:translateY(150px)}
+.arch-panel.js.in .pet-rise{animation:pet-rise .95s cubic-bezier(.22,.61,.36,1) .95s both}
+@keyframes pet-rise{
+  0%{transform:translateY(150px)}62%{transform:translateY(0)}
+  79%{transform:translateY(22px)}100%{transform:translateY(0)}}
+/* On a fine pointer, entering the panel is the same acknowledgement as hovering the
+   header mark: the cat shakes once. There is no leave gesture here — the panel is 540px
+   tall and the pointer crosses it constantly while scrolling, which would be noise. */
+@media (hover: hover) and (pointer: fine) {
+  .arch-panel:hover .pet-headgroup{animation:pet-shake .46s cubic-bezier(.36,.07,.19,.97)}
+}
+
 /* Touch has no hover and no cursor, and the header mark cannot react at all — it sits
    inside a link, so tapping it navigates and any gesture is erased by the reload. The
-   hero cat is not a link, so that is where a tap can mean "poke": it shakes, once. */
+   hero is not a link, so that is where a tap can mean "poke": the cat shakes, once. */
 .arch-panel.poked .pet-headgroup{animation:pet-shake .46s cubic-bezier(.36,.07,.19,.97)}
 @keyframes pet-shake{
   0%{transform:rotate(0)}16%{transform:rotate(-5deg)}34%{transform:rotate(4.4deg)}
   52%{transform:rotate(-2.8deg)}70%{transform:rotate(1.5deg)}86%{transform:rotate(-.5deg)}
   100%{transform:rotate(0)}}
-.pet-head{fill:none;stroke:var(--paper);stroke-width:2.6;stroke-linejoin:round;stroke-linecap:round}
-/* the tail is a stroke, not a filled mass: a solid shape next to a 2.6u
-   outlined head reads as two different drawings in one picture */
-.pet-tail{fill:none;stroke:var(--paper);stroke-width:3;stroke-linecap:round}
-.pet-eye,.pet-owner{fill:var(--paper)}
-.pet-line{fill:none;stroke:rgba(245,241,232,.5);stroke-width:1.6;stroke-dasharray:1;stroke-dashoffset:0;
-  transition:stroke-dashoffset 1.8s cubic-bezier(.2,.7,.2,1)}
-.arch-panel.js .pet-line{stroke-dashoffset:1}
-.arch-panel.js.in .pet-line{stroke-dashoffset:0}
-.pet-flow{fill:none;stroke:var(--paper);stroke-width:5;stroke-linecap:round;stroke-dasharray:.01 30;
-  opacity:0;transition:opacity .6s ease .8s;animation:petflow 4.6s linear infinite}
-.pet-flow-back{animation-duration:6.2s;animation-direction:reverse}
-.arch-panel.js.in .pet-flow{opacity:.85}
-@keyframes petflow{to{stroke-dashoffset:-30}}
+
 
 @media(max-width:1080px){
   .no-img .hero-in,.img-min .hero-in{grid-template-columns:minmax(0,1fr);gap:38px}
 }
 @media(prefers-reduced-motion:reduce){
   .pet-line{stroke-dashoffset:0!important;transition:none}
-  .pet-flow{animation:none;opacity:.85}
 }
 
 /* ==========================================================================

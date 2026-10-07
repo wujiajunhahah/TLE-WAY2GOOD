@@ -205,25 +205,19 @@ ${c.lang === 'en' ? '' : '<link rel="preload" href="/fonts/pc-serif.woff2" as="f
         <p class="hero-stage">${c.stage}</p>
       </div>
       ${NOIMG ? `<div class="arch-panel rv">
-        <svg viewBox="0 0 520 470" role="img" aria-label="${c.petAlt}">
-          <path class="pet-tail" d="M440 391 C464 366 476 328 478 288 C480 252 472 224 456 210 C444 200 432 204 430 214"/>
-          <g class="pet-headgroup">
-
-            <path class="pet-head" d="M135.0 390.0 C146.4 328.5 169.3 285.4 193.9 259.1 L220.2 187.0 L267.7 252.9 C273.8 250.3 286.2 250.3 292.3 252.9 L339.8 187.0 L366.1 259.1 C390.7 285.4 413.6 328.5 425.0 390.0"/>
-
-            
-            <ellipse class="pet-eye" cx="223.8" cy="345.2" rx="14" ry="16"/>
-
-            <ellipse class="pet-eye" cx="336.2" cy="345.2" rx="14" ry="16"/>
-
+                <svg viewBox="0 0 520 470" role="img" aria-label="${c.petAlt}">
+          <clipPath id="hero-clip"><rect x="0" y="0" width="520" height="369.00"/></clipPath>
+          <g clip-path="url(#hero-clip)">
+            <g class="pet-headgroup">
+              <g class="pet-rise">
+                <path class="pet-head" d="M121.4 343.8 C132.3 285.0 154.2 243.8 177.7 218.6 L202.9 149.8 L248.2 212.8 C254.1 210.2 265.9 210.2 271.8 212.8 L317.1 149.8 L342.3 218.6 C365.8 243.8 387.7 285.0 398.6 343.8"/>
+                <ellipse class="pet-eye" cx="206.2" cy="301.0" rx="22.7" ry="22.7"/>
+                <ellipse class="pet-eye" cx="313.8" cy="301.0" rx="22.7" ry="22.7"/>
+              </g>
+            </g>
           </g>
-          <path class="pet-line" d="M26 390 L520 390" pathLength="1"/>
-          <path class="pet-flow" d="M26 390 L520 390"/>
-          <path class="pet-flow pet-flow-back" d="M26 390 L520 390"/>
-          <circle class="pet-owner" cx="50" cy="388" r="9"/>
-        </svg>
-        <p class="arch-cap">${c.petCap}</p>
-      </div>` : `<figure class="hero-fig rv">
+          <path class="pet-line" d="M33.2 390.0 L486.8 390.0" pathLength="1"/>
+        </svg>` : `<figure class="hero-fig rv">
         <img src="/assets/hero.jpg" width="1056" height="922" alt="${c.heroAlt}" fetchpriority="high">
       </figure>`}
     </div>
