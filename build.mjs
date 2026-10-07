@@ -84,7 +84,7 @@ const html = (c) => {
 <link rel="alternate" hreflang="en" href="__SITE_ORIGIN__/en/">
 <link rel="alternate" hreflang="x-default" href="__SITE_ORIGIN__/zh/">
 <meta property="og:type" content="website">
-<meta property="og:site_name" content="Pet Companionship">
+<meta property="og:site_name" content="way2good">
 <meta property="og:title" content="${c.title}">
 <meta property="og:description" content="${c.desc}">
 <meta property="og:url" content="__SITE_ORIGIN__/${me}/">
@@ -108,7 +108,7 @@ const html = (c) => {
 <script type="application/ld+json">${JSON.stringify({
     '@context': 'https://schema.org',
     '@graph': [
-      { '@type': 'WebSite', '@id': '__SITE_ORIGIN__/#website', url: '__SITE_ORIGIN__/', name: 'Pet Companionship', inLanguage: ['zh-CN', 'en'] },
+      { '@type': 'WebSite', '@id': '__SITE_ORIGIN__/#website', url: '__SITE_ORIGIN__/', name: 'way2good', inLanguage: ['zh-CN', 'en'] },
       { '@type': 'WebPage', '@id': `__SITE_ORIGIN__/${me}/#webpage`, url: `__SITE_ORIGIN__/${me}/`, name: c.title, description: c.desc, dateModified: '2026-10-06', inLanguage: c.lang, isPartOf: { '@id': '__SITE_ORIGIN__/#website' } }
     ]
   })}</script>
