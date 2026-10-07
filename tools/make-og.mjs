@@ -39,7 +39,9 @@ const html = (locale) => {
 *{margin:0;box-sizing:border-box}
 body{width:1200px;height:630px;background:#2A1C12;color:#F5F1E8;font:17px/1.7 'PC Latin','PC Sans',sans-serif;padding:64px 72px;display:flex;flex-direction:column;justify-content:space-between}
 .top{display:flex;justify-content:space-between;align-items:baseline}
-.brand{font-family:'PC Serif';font-size:30px;font-weight:600}
+.brand{display:flex;align-items:center;gap:17px}
+.brand svg{width:50px;height:50px;flex:none;display:block}
+.brand .bt{font-family:'PC Serif';font-size:30px;font-weight:600}
 .brand small{display:block;font-family:'PC Latin','PC Sans';font-size:14px;font-weight:400;color:#E0D3C4;margin-top:6px;letter-spacing:.04em}
 .eyebrow{font-family:'PC Mono','PC Sans',ui-monospace,Menlo,monospace;font-size:14px;letter-spacing:.14em;color:#F2B264}
 h1{font-family:'PC Serif';font-size:76px;font-weight:600;line-height:1.16;letter-spacing:-.01em}
@@ -48,7 +50,12 @@ h1 em{font-style:normal;color:#F2B264}
 .foot{display:flex;justify-content:space-between;align-items:baseline;font-family:'PC Mono','PC Sans',ui-monospace,Menlo,monospace;font-size:13px;color:#E0D3C4}
 </style></head><body>
 <div class="top">
-  <div class="brand">Pet Companionship<small>${t.brandLine} · ${t.brandNote}</small></div>
+  <div class="brand">
+    <svg viewBox="0 0 64 64" aria-hidden="true">
+      <path d="M15.5 46.5 C16.8 39.5 19.4 34.6 22.2 31.6 L25.2 23.4 L30.6 30.9 C31.3 30.6 32.7 30.6 33.4 30.9 L38.8 23.4 L41.8 31.6 C44.6 34.6 47.2 39.5 48.5 46.5" fill="none" stroke="#F5F1E8" stroke-width="4.8" stroke-linecap="round" stroke-linejoin="round"/>
+      <path d="M5 52 L59 52" fill="none" stroke="#E8912F" stroke-width="5" stroke-linecap="round"/>
+    </svg>
+    <span class="bt">way2good<small>${t.brandLine} · ${t.brandNote}</small></span></div>
   <div class="eyebrow">${t.eyebrow}</div>
 </div>
 <div>
