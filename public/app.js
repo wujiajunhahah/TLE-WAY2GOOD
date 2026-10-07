@@ -5,12 +5,7 @@ const m = en
   ? { saving: 'Saving…', submit: 'Get project updates', failed: 'We couldn’t confirm your signup. Please try again.', timeout: 'The connection timed out. Your signup has not been confirmed.', network: 'Connection lost. Your signup has not been confirmed.', rate: 'Too many attempts. Please try again in a minute.', invalid: 'Please enter a valid email and agree to receive updates.' }
   : { saving: '正在保存…', submit: '订阅项目进展', failed: '暂时没有确认保存成功，请稍后重试。', timeout: '连接超时，尚未确认保存。请稍后重试。', network: '网络连接出了点问题，还没有确认保存。请稍后重试。', rate: '提交有些频繁，请一分钟后再试。', invalid: '请填写有效邮箱并同意接收项目邮件。' };
 
-// Static hosting (GitHub Pages) has no /api/subscribe: use the build's base path and say so
-// plainly instead of showing a generic failure.
-const pageBase = document.querySelector('meta[name="pc-base"]')?.content || '/';
-const isStatic = document.querySelector('meta[name="pc-mode"]')?.content === 'static';
-const staticMsg = en ? 'This is a static preview — signups can’t be saved here yet.' : '当前为静态预览，订阅暂未开启保存。';
-m.staticHost = staticMsg;
+const signupAPI = document.querySelector('meta[name="pc-subscribe-api"]')?.content || '';
 
 const switchLink = document.querySelector('.nav .lang');
 if (switchLink) {
@@ -24,6 +19,9 @@ const form = document.querySelector('#subscribe-form');
 const status = document.querySelector('#form-status');
 const submit = document.querySelector('#submit-button');
 
+if (form && signupAPI) {
+submit.disabled = false;
+const submitLabel = submit.textContent;
 form.addEventListener('submit', async (event) => {
   event.preventDefault();
   if (submit.disabled) return;
@@ -35,7 +33,7 @@ form.addEventListener('submit', async (event) => {
   const controller = new AbortController();
   const timer = setTimeout(() => controller.abort(), 15000);
   try {
-    const response = await fetch(pageBase + 'api/subscribe', {
+    const response = await fetch(signupAPI, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       signal: controller.signal,
@@ -52,13 +50,11 @@ form.addEventListener('submit', async (event) => {
     success.hidden = false;
     success.focus();
   } catch (error) {
-    status.textContent = isStatic
-      ? staticMsg
-      : error.name === 'AbortError' ? m.timeout : error instanceof TypeError ? m.network : error.message;
+    status.textContent = error.name === 'AbortError' ? m.timeout : error instanceof TypeError ? m.network : error.message;
   } finally {
     clearTimeout(timer);
     submit.disabled = false;
-    submit.textContent = m.submit;
+    submit.textContent = submitLabel;
     form.removeAttribute('aria-busy');
   }
 });
@@ -67,8 +63,22 @@ document.querySelector('#reset-form').addEventListener('click', () => {
   form.reset();
   form.hidden = false;
   document.querySelector('#success').hidden = true;
+  document.querySelector('#saved-email').textContent = '';
   status.textContent = '';
   form.email.focus();
+});
+}
+
+document.querySelector('#copy-link')?.addEventListener('click', async () => {
+  const copyStatus = document.querySelector('#copy-status');
+  const link = new URL(location.href);
+  link.hash = '';
+  try {
+    await navigator.clipboard.writeText(link.href);
+    copyStatus.textContent = en ? 'Link copied. Save it or share it with a friend.' : '链接已复制，可以保存或分享给朋友。';
+  } catch {
+    copyStatus.textContent = en ? 'Copy the page address from your browser to save or share it.' : '请从浏览器地址栏复制链接，保存或分享这个页面。';
+  }
 });
 
 // The connection diagram draws itself once, when it enters the viewport.

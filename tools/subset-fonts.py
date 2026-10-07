@@ -54,7 +54,7 @@ def extract_chars() -> set:
     """Every printable character the page can render: the built HTML, the script, and the
     content source. Missing one means a silent fallback to a system font."""
     chars = set()
-    for rel in ('public/zh/index.html', 'public/en/index.html', 'public/app.js', 'content.mjs'):
+    for rel in ('public/zh/index.html', 'public/en/index.html', 'public/app.js', 'content.mjs', 'build.mjs'):
         path = os.path.join(ROOT, rel)
         if not os.path.exists(path):
             continue

@@ -1,0 +1,8 @@
+{
+  "name": "way2good-signup",
+  "private": true,
+  "type": "module",
+  "engines": { "node": "24.x" },
+  "scripts": { "test": "node --test test/*.test.mjs" },
+  "dependencies": { "@vercel/blob": "^2.3.0" }
+}

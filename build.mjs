@@ -8,6 +8,7 @@
 // Run: node build.mjs
 import { writeFileSync, mkdirSync, cpSync } from 'node:fs';
 import { content, sourceLinks } from './content.mjs';
+import { signupEndpoint } from './site.config.mjs';
 import { typesetChineseBody, headingBreaks, documentLabel } from './tools/typography.mjs';
 
 // Usage:
@@ -24,6 +25,30 @@ const BASE = argv.base ? ('/' + argv.base.replace(/^\/+|\/+$/g, '') + '/') : '/'
 const ORIGIN = argv.origin || '__SITE_ORIGIN__';
 const OUT = argv.out || 'public';
 const STATIC = Boolean(argv.static);
+const SIGNUP_API = argv['subscribe-api'] !== undefined ? String(argv['subscribe-api']) : STATIC ? signupEndpoint : '/api/subscribe';
+if (SIGNUP_API && !/^https:\/\/[^\s"<>]+$/.test(SIGNUP_API) && SIGNUP_API !== '/api/subscribe') {
+  throw new Error('The signup API must be an HTTPS URL or /api/subscribe.');
+}
+const SIGNUP_ENABLED = Boolean(SIGNUP_API);
+const escapeAttr = (s) => s.replaceAll('&', '&amp;').replaceAll('"', '&quot;');
+const followCopy = {
+  'zh-CN': {
+    navCta: '关注进展', ctaPrimary: '关注项目进展',
+    subText: '邮箱订阅正在准备中。你可以先查看我们的研究，或关注 GitHub 项目，了解最新进展。',
+    title: '在这里继续关注', research: '查看最新研究', github: '关注 GitHub 项目',
+    copy: '复制页面链接', note: '此页面目前不会收集或保存你的邮箱。',
+    faqProduct: '不能。目前仍处于研究与概念探索阶段，还没有成品。原型进展会更新在项目页面。',
+    faqQuestion: '怎样关注后续进展？', faqAnswer: '你可以收藏这个页面，或通过 GitHub 的 Watch 关注项目。邮箱订阅开放后，我们会在这里更新入口。'
+  },
+  en: {
+    navCta: 'Follow along', ctaPrimary: 'Follow our progress',
+    subText: 'Email updates are being prepared. Explore our research or follow the project on GitHub to see what happens next.',
+    title: 'Keep in touch with the project', research: 'Explore the research', github: 'Follow on GitHub',
+    copy: 'Copy page link', note: 'This page does not collect or save your email yet.',
+    faqProduct: 'No. We are still at the research and concept stage. Prototype progress will be shared on the project page.',
+    faqQuestion: 'How can I follow your progress?', faqAnswer: 'Bookmark this page or use Watch on GitHub to follow the project. We will add the email signup here when it is ready.'
+  }
+};
 // --images=all (default) | minimal (hero + full-bleed only) | none (typographic variant)
 const IMGS = argv.images || (argv['no-images'] ? 'none' : 'all');
 const NOIMG = IMGS === 'none';
@@ -68,7 +93,12 @@ const rail = (label, dark = false) => {
 const chain = (nodes, arrow) =>
   nodes.map((x, i) => `<span class="node">${x}</span>${i < nodes.length - 1 ? `<span class="arrow" aria-hidden="true">${arrow}</span>` : ''}`).join('');
 
-const html = (c) => {
+const html = (original) => {
+  const f = followCopy[original.lang];
+  const c = SIGNUP_ENABLED ? original : {
+    ...original, navCta: f.navCta, ctaPrimary: f.ctaPrimary, subText: f.subText,
+    faqs: [original.faqs[0], { ...original.faqs[1], a: f.faqProduct }, { q: f.faqQuestion, a: f.faqAnswer }]
+  };
   const other = c.lang === 'en' ? 'zh' : 'en';
   const otherLang = c.lang === 'en' ? 'zh-CN' : 'en';
   const me = c.lang === 'en' ? 'en' : 'zh';
@@ -101,8 +131,9 @@ const html = (c) => {
 <meta name="twitter:image" content="__SITE_ORIGIN__/og-${me}.jpg">
 <meta name="pc-base" content="${BASE}">
 <meta name="pc-mode" content="${STATIC ? 'static' : 'server'}">
-<link rel="preload" href="/fonts/pc-serif.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="preload" href="/fonts/pc-sans.woff2" as="font" type="font/woff2" crossorigin>
+<meta name="pc-subscribe-api" content="${escapeAttr(SIGNUP_API)}">
+${c.lang === 'en' ? '' : '<link rel="preload" href="/fonts/pc-serif.woff2" as="font" type="font/woff2" crossorigin>'}
+<link rel="preload" href="/fonts/pc-latin.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="icon" href="/favicon.svg?v=2" type="image/svg+xml" sizes="any">
 <link rel="icon" href="/favicon.ico?v=2" sizes="32x32">
 <link rel="apple-touch-icon" href="/apple-touch-icon.png?v=2">
@@ -408,25 +439,32 @@ const html = (c) => {
           <p class="intro">${c.subText}</p>
         </div>
         <div class="sub-r">
-          <form id="subscribe-form" class="form">
+          ${SIGNUP_ENABLED ? `<form id="subscribe-form" class="form" method="post" action="${escapeAttr(SIGNUP_API)}">
+            <noscript><p class="static-note">${c.lang === 'en' ? 'Please enable JavaScript to save your signup securely.' : '请开启 JavaScript 后提交订阅。'}</p></noscript>
             <label class="em-l" for="email">${c.emailLabel}</label>
             <div class="em-row">
               <input id="email" name="email" type="email" autocomplete="email" placeholder="${c.emailPlaceholder}" maxlength="254" required aria-describedby="email-help form-status">
-              <button id="submit-button" class="btn" type="submit">${c.ctaPrimary}</button>
+              <button id="submit-button" class="btn" type="submit" disabled>${c.ctaPrimary}</button>
             </div>
             <div class="hp" aria-hidden="true"><label for="website">Website</label><input id="website" name="website" tabindex="-1" autocomplete="off"></div>
             <label class="consent"><input name="consent" id="consent" type="checkbox" required><span>${c.consent}</span></label>
             <p id="form-status" class="status" role="status" aria-live="polite"></p>
             <p class="privacy" id="email-help">${c.consentNote}</p>
-            <p class="privacy-note">${c.privacyText}</p>${STATIC ? `
-            <p class="static-note">${c.staticNote}</p>` : ''}
+            <details class="privacy-details"><summary>${c.privacyTitle}</summary><p class="privacy-note">${c.privacyText}</p></details>
           </form>
           <div id="success" class="success" hidden role="status" tabindex="-1">
             <p class="s-k">${c.successLabel}</p>
             <h3>${c.successTitle}</h3>
             <p class="s-t">${c.successLead} <strong id="saved-email"></strong> ${c.successAfter}<br>${c.successText}</p>
             <button class="link-quiet" id="reset-form" type="button">${c.reset}</button>
-          </div>
+          </div>` : `<div class="follow-panel">
+            <p class="static-note">${f.note}</p>
+            <h3>${f.title}</h3>
+            <a class="btn" href="#research">${f.research}</a>
+            <a class="follow-link" href="https://github.com/wujiajunhahah/TLE-WAY2GOOD" target="_blank" rel="noopener noreferrer">${f.github} <span aria-hidden="true">↗</span></a>
+            <button type="button" class="link-quiet" id="copy-link">${f.copy}</button>
+            <p id="copy-status" class="status" role="status" aria-live="polite"></p>
+          </div>`}
         </div>
         <div class="faq">
           <h3 class="faq-h">${c.faqTitle}</h3>

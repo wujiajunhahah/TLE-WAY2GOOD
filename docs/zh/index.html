@@ -27,8 +27,9 @@
 <meta name="twitter:image" content="https://wujiajunhahah.github.io/TLE-WAY2GOOD/og-zh.jpg">
 <meta name="pc-base" content="/TLE-WAY2GOOD/">
 <meta name="pc-mode" content="static">
+<meta name="pc-subscribe-api" content="https://way2good-signup.vercel.app/api/subscribe">
 <link rel="preload" href="/TLE-WAY2GOOD/fonts/pc-serif.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="preload" href="/TLE-WAY2GOOD/fonts/pc-sans.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/TLE-WAY2GOOD/fonts/pc-latin.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="icon" href="/TLE-WAY2GOOD/favicon.svg?v=2" type="image/svg+xml" sizes="any">
 <link rel="icon" href="/TLE-WAY2GOOD/favicon.ico?v=2" sizes="32x32">
 <link rel="apple-touch-icon" href="/TLE-WAY2GOOD/apple-touch-icon.png?v=2">
@@ -395,18 +396,18 @@
           <p class="intro">留下邮箱，只有出现实质进展时我们才会来信：研究发现、原型进展或体验招募。</p>
         </div>
         <div class="sub-r">
-          <form id="subscribe-form" class="form">
+          <form id="subscribe-form" class="form" method="post" action="https://way2good-signup.vercel.app/api/subscribe">
+            <noscript><p class="static-note">请开启 JavaScript 后提交订阅。</p></noscript>
             <label class="em-l" for="email">邮箱地址</label>
             <div class="em-row">
               <input id="email" name="email" type="email" autocomplete="email" placeholder="you@example.com" maxlength="254" required aria-describedby="email-help form-status">
-              <button id="submit-button" class="btn" type="submit">订阅项目进展</button>
+              <button id="submit-button" class="btn" type="submit" disabled>订阅项目进展</button>
             </div>
             <div class="hp" aria-hidden="true"><label for="website">Website</label><input id="website" name="website" tabindex="-1" autocomplete="off"></div>
             <label class="consent"><input name="consent" id="consent" type="checkbox" required><span>我同意接收本项目的进展及体验招募邮件。</span></label>
             <p id="form-status" class="status" role="status" aria-live="polite"></p>
             <p class="privacy" id="email-help">邮箱仅用于本项目联系，不公开、不出售。订阅免费，不代表预订或购买。</p>
-            <p class="privacy-note">我们保存你的邮箱、订阅时间、所选语言和同意版本，用于项目进展与体验招募联系。目前不会自动发送邮件。</p>
-            <p class="static-note">此公开页面暂未开启邮箱保存。你可以先收藏研究页，关注后续更新。</p>
+            <details class="privacy-details"><summary>邮箱会怎样被使用？</summary><p class="privacy-note">登记成功后，邮箱会保存在项目的私有存储中，仅用于进展与体验招募联系。我们不会自动发送营销邮件；收到来信后可回复要求停止联系。</p></details>
           </form>
           <div id="success" class="success" hidden role="status" tabindex="-1">
             <p class="s-k">登记成功</p>

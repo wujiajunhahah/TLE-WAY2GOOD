@@ -35,4 +35,6 @@ node build.mjs --static --images=none --base=/TLE-WAY2GOOD/ --origin=https://wuj
 
 `docs/` is the GitHub Pages source on `main`. It contains both language routes, search metadata, fonts and downloadable research files. The existing warm visual design is retained; [DESIGN_NOTES.md](DESIGN_NOTES.md) archives the earlier design decisions and verification history.
 
-For the local Node preview, run `node server.mjs` and open `http://localhost:4317/`. Static Pages has no email signup backend; its page states that registration is not saved. `data/`, local build work and `.DS_Store` files are excluded from Git.
+For the local Node preview, run `node server.mjs` and open `http://localhost:4317/`. Local signups are stored in `data/subscribers.jsonl`. Published Pages signups use the independent Vercel API configured in `site.config.mjs`, with a private Blob store. See [backend setup and subscriber export](backend/README.md). Email sending is manual at this stage.
+
+To build a version without email collection, pass `--subscribe-api=`. It replaces the form and subscription promises with research/GitHub links and a share action; it never posts to a missing static endpoint. `data/`, credentials, local build work and `.DS_Store` files are excluded from Git.

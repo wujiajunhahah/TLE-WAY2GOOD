@@ -30,6 +30,9 @@
   --font-sans:'PC Latin','PC Sans',-apple-system,BlinkMacSystemFont,'PingFang SC','Hiragino Sans GB','Microsoft YaHei',sans-serif;
 }
 
+/* CJK curly punctuation is full width. English display type uses Latin metrics. */
+html[lang="en"]{--font-serif:Georgia,'Times New Roman',serif}
+
 *,*::before,*::after{box-sizing:border-box}
 html{scroll-behavior:smooth;scroll-padding-top:104px;-webkit-text-size-adjust:100%}
 body{margin:0;background:var(--paper);color:var(--ink);font:17px/1.75 var(--font-sans);-webkit-font-smoothing:antialiased}

@@ -2,3 +2,6 @@ data/
 .DS_Store
 .fontwork/src/
 .sync-research-build/
+node_modules/
+.vercel/
+.env*

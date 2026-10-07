@@ -27,8 +27,9 @@
 <meta name="twitter:image" content="https://wujiajunhahah.github.io/TLE-WAY2GOOD/og-en.jpg">
 <meta name="pc-base" content="/TLE-WAY2GOOD/">
 <meta name="pc-mode" content="static">
-<link rel="preload" href="/TLE-WAY2GOOD/fonts/pc-serif.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="preload" href="/TLE-WAY2GOOD/fonts/pc-sans.woff2" as="font" type="font/woff2" crossorigin>
+<meta name="pc-subscribe-api" content="https://way2good-signup.vercel.app/api/subscribe">
+
+<link rel="preload" href="/TLE-WAY2GOOD/fonts/pc-latin.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="icon" href="/TLE-WAY2GOOD/favicon.svg?v=2" type="image/svg+xml" sizes="any">
 <link rel="icon" href="/TLE-WAY2GOOD/favicon.ico?v=2" sizes="32x32">
 <link rel="apple-touch-icon" href="/TLE-WAY2GOOD/apple-touch-icon.png?v=2">
@@ -395,18 +396,18 @@
           <p class="intro">Leave your email. We only write when there is something real: findings, prototype progress, or a testing invitation.</p>
         </div>
         <div class="sub-r">
-          <form id="subscribe-form" class="form">
+          <form id="subscribe-form" class="form" method="post" action="https://way2good-signup.vercel.app/api/subscribe">
+            <noscript><p class="static-note">Please enable JavaScript to save your signup securely.</p></noscript>
             <label class="em-l" for="email">Email address</label>
             <div class="em-row">
               <input id="email" name="email" type="email" autocomplete="email" placeholder="you@example.com" maxlength="254" required aria-describedby="email-help form-status">
-              <button id="submit-button" class="btn" type="submit">Get project updates</button>
+              <button id="submit-button" class="btn" type="submit" disabled>Get project updates</button>
             </div>
             <div class="hp" aria-hidden="true"><label for="website">Website</label><input id="website" name="website" tabindex="-1" autocomplete="off"></div>
             <label class="consent"><input name="consent" id="consent" type="checkbox" required><span>I agree to receive project updates and testing invitations.</span></label>
             <p id="form-status" class="status" role="status" aria-live="polite"></p>
             <p class="privacy" id="email-help">Your email is used for this project only. Never published or sold. Subscribing is free and is not a purchase or a reservation.</p>
-            <p class="privacy-note">We store your email, signup time, language and consent version to contact you about project progress and testing. No automated emails are sent at this stage.</p>
-            <p class="static-note">Email registration is not enabled on this public site yet. Bookmark the research page to follow updates.</p>
+            <details class="privacy-details"><summary>How will my email be used?</summary><p class="privacy-note">After a successful signup, your email is stored privately for project updates and testing invitations. No automated marketing emails are sent. Reply to any update to ask us to stop contacting you.</p></details>
           </form>
           <div id="success" class="success" hidden role="status" tabindex="-1">
             <p class="s-k">You’re on the list</p>
