@@ -102,6 +102,9 @@ const html = (c) => {
 <link rel="preload" href="/fonts/pc-serif.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="/fonts/pc-sans.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="icon" href="/favicon.ico" sizes="32x32">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<link rel="manifest" href="/site.webmanifest">
 <link rel="stylesheet" href="/style.css">
 <link rel="stylesheet" href="/theme-pet.css">
 <script src="/app.js" defer></script>
@@ -443,10 +446,9 @@ const html = (c) => {
 
 <footer class="foot">
   <div class="shell foot-in">
-    <p class="foot-brand"><svg class="foot-cat" viewBox="0 -16 122 80" aria-hidden="true">
-        <path d="M 8 54 C 8 32 26 18 44 18 C 52 18 56 21 60 25 C 64 21 68 18 76 18 C 94 18 112 32 112 54"/>
-        <path d="M 20 20 L 30 6 L 40 18"/><path d="M 80 18 L 90 6 L 100 20"/>
-        <path d="M 96 6 h 12 l -12 10 h 12"/><path d="M 106 -4 h 10 l -10 8 h 10"/>
+    <p class="foot-brand"><svg class="foot-mark" viewBox="0 0 64 64" aria-hidden="true">
+        <path d="M15.5 46.5 C16.8 39.5 19.4 34.6 22.2 31.6 L25.2 23.4 L30.6 30.9 C31.3 30.6 32.7 30.6 33.4 30.9 L38.8 23.4 L41.8 31.6 C44.6 34.6 47.2 39.5 48.5 46.5" fill="none" stroke="#2A1C12" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
+        <path d="M5 52 L59 52" fill="none" stroke="#E8912F" stroke-width="5.4" stroke-linecap="round"/>
       </svg>way2good<small>${c.footerNote}</small></p>
     <p class="foot-links">
       <a class="foot-lang" href="/${other}/" lang="${otherLang}" hreflang="${other}">${c.footerLang}</a>
@@ -494,7 +496,9 @@ if (STATIC) {
   writeFileSync(`${OUT}/robots.txt`, `User-agent: *\nAllow: /\nSitemap: ${SITE}sitemap.xml\n`);
   writeFileSync(`${OUT}/sitemap.xml`, `<?xml version="1.0" encoding="UTF-8"?><urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">${['zh', 'en'].map((l) => `<url><loc>${SITE}${l}/</loc><xhtml:link rel="alternate" hreflang="zh-CN" href="${SITE}zh/"/><xhtml:link rel="alternate" hreflang="en" href="${SITE}en/"/><xhtml:link rel="alternate" hreflang="x-default" href="${SITE}zh/"/></url>`).join('')}</urlset>`);
   // the static host needs its own copy of the stylesheet, script and assets
-  for (const f of ['style.css', 'theme-pet.css', 'app.js', 'favicon.svg', 'og-zh.jpg', 'og-en.jpg']) cpSync(`public/${f}`, `${OUT}/${f}`);
+  for (const f of ['style.css', 'theme-pet.css', 'app.js', 'favicon.svg', 'favicon.ico',
+  'apple-touch-icon.png', 'icon-192.png', 'icon-512.png', 'icon-maskable-512.png',
+  'site.webmanifest', 'og-zh.jpg', 'og-en.jpg']) cpSync(`public/${f}`, `${OUT}/${f}`);
   cpSync('public/brand', `${OUT}/brand`, { recursive: true });
   if (IMGS !== 'none') cpSync('public/assets', `${OUT}/assets`, { recursive: true });
   cpSync('public/fonts', `${OUT}/fonts`, { recursive: true });
