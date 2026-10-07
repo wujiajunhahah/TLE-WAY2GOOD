@@ -7,6 +7,30 @@ const m = en
 
 const signupAPI = document.querySelector('meta[name="pc-subscribe-api"]')?.content || '';
 
+// Web fonts change the height of the long research page after the browser's first
+// fragment jump. Align a deep link once layout settles, unless the visitor has moved on.
+const initialHash = location.hash;
+if (initialHash) {
+  let interacted = false;
+  const noticeInteraction = () => { interacted = true; };
+  for (const type of ['wheel', 'touchmove', 'pointerdown', 'keydown']) {
+    window.addEventListener(type, noticeInteraction, { once: true, passive: true });
+  }
+  const alignFragment = async () => {
+    await document.fonts.ready;
+    requestAnimationFrame(() => requestAnimationFrame(() => {
+      if (!interacted && location.hash === initialHash) {
+        try {
+          document.getElementById(decodeURIComponent(initialHash.slice(1)))?.scrollIntoView({ behavior: 'instant', block: 'start' });
+        } catch { /* An invalid URL fragment must not break signup. */ }
+      }
+      for (const type of ['wheel', 'touchmove', 'pointerdown', 'keydown']) window.removeEventListener(type, noticeInteraction);
+    }));
+  };
+  if (document.readyState === 'complete') alignFragment();
+  else window.addEventListener('load', alignFragment, { once: true });
+}
+
 const switchLink = document.querySelector('.nav .lang');
 if (switchLink) {
   const base = switchLink.getAttribute('href');
