@@ -215,7 +215,7 @@ html[lang="en"] h2{line-height:1.06;letter-spacing:-.03em}
 }
 
 @media(prefers-reduced-motion:reduce){
-  .pet-headgroup{transform:none!important;transition:none}
+  .pet-headgroup{transform:none!important;transition:none;animation:none!important}
   .pet-line{stroke-dashoffset:0!important;transition:none}
   .pet-flow{animation:none;opacity:.85}
 }
@@ -233,6 +233,14 @@ html[lang="en"] h2{line-height:1.06;letter-spacing:-.03em}
    own amber line would be invisible, so the whole figure takes --paper: the cat, the
    tail, the way, and the pulse that travels along it. */
 .pet-headgroup{transform-origin:280px 390px;transition:transform .3s cubic-bezier(.22,.61,.36,1)}
+/* Touch has no hover and no cursor, and the header mark cannot react at all — it sits
+   inside a link, so tapping it navigates and any gesture is erased by the reload. The
+   hero cat is not a link, so that is where a tap can mean "poke": it shakes, once. */
+.arch-panel.poked .pet-headgroup{animation:pet-shake .46s cubic-bezier(.36,.07,.19,.97)}
+@keyframes pet-shake{
+  0%{transform:rotate(0)}16%{transform:rotate(-5deg)}34%{transform:rotate(4.4deg)}
+  52%{transform:rotate(-2.8deg)}70%{transform:rotate(1.5deg)}86%{transform:rotate(-.5deg)}
+  100%{transform:rotate(0)}}
 .pet-head{fill:none;stroke:var(--paper);stroke-width:2.6;stroke-linejoin:round;stroke-linecap:round}
 /* the tail is a stroke, not a filled mass: a solid shape next to a 2.6u
    outlined head reads as two different drawings in one picture */

@@ -118,51 +118,76 @@ if (netFig) {
   }
 }
 
-// Wake the brand cat on hover. The class is what gates the leave animation in the
-// stylesheet: without it the base-state animation fires on page load. Touch devices
-// get the same gesture on tap, since there is no hover to trigger it there.
-for (const brand of document.querySelectorAll('.brand')) {
-  brand.addEventListener('mouseenter', () => brand.classList.add('was-awake'));
-  brand.addEventListener('pointerdown', (e) => {
-    if (e.pointerType === 'mouse') return;
-    brand.classList.toggle('woke');
-    brand.classList.add('was-awake');
-  });
-}
+// ── the brand cat ────────────────────────────────────────────────────────────
+// Capability, not user-agent. A coarse pointer has no cursor to follow and no leave to
+// animate, and iOS Safari keeps :hover applied after a tap, so the stylesheet gates its
+// hover rules behind the same query. Everything here is decoration: if the visitor has
+// asked for less motion, none of it is registered at all.
+const fine = window.matchMedia('(hover: hover) and (pointer: fine)').matches;
+const calm = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-// The cat watches the pointer: the head leans and turns toward wherever the cursor is,
-// so entering from the left and entering from the right do not look the same, and
-// circling the figure keeps its attention. Each figure declares its own magnitudes —
-// the header mark's head is 33 units wide and the hero cat's is 290, so one shared
-// translate would be invisible on the first and violent on the second.
-function watchPointer(host, head, lean, rise, rot) {
-  if (!host || !head) return;
-  if (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+// The cat watches the pointer. The head leans and turns toward wherever the cursor is and
+// the pupils travel inside the eyes, so entering from the left and from the right do not
+// look the same, and circling the figure keeps its attention.
+//
+// Two things are per-figure. The magnitudes: the header mark's head is 33 units wide and the
+// hero cat's is 290, so one shared translate would be invisible on the first and violent on
+// the second. And the range: normalising by the head's own width saturates almost instantly
+// — the header head is 31px across, so the cat read as binary left/right rather than as
+// following. The range is the distance at which the figure has turned as far as it will.
+function watchPointer(host, headEl, o) {
+  if (!host || !headEl) return;
   const clamp = (v) => (v < -1 ? -1 : v > 1 ? 1 : v);
-  // The rect is cached and refreshed on entry, scroll and resize. Reading it inside
-  // pointermove would force a style recalc on every event, on a page this long.
+  // The rect is cached and invalidated on entry, scroll and resize. Reading it inside
+  // pointermove would force a style recalc on every event, on a page over 10,000px long.
   let rect = null;
   const aim = (e) => {
     if (!rect || !rect.width) {
-      rect = head.getBoundingClientRect();
+      rect = headEl.getBoundingClientRect();
       if (!rect.width) return;
     }
-    const x = clamp((e.clientX - (rect.left + rect.width / 2)) / (rect.width * 0.9));
-    const y = clamp((e.clientY - (rect.top + rect.height / 2)) / (rect.height * 1.4));
-    head.style.transform = `translate(${(x * lean).toFixed(2)}px, ${(y * rise).toFixed(2)}px) rotate(${(x * rot).toFixed(2)}deg)`;
+    const x = clamp((e.clientX - (rect.left + rect.width / 2)) / o.rangeX);
+    const y = clamp((e.clientY - (rect.top + rect.height / 2)) / o.rangeY);
+    headEl.style.transform = `translate(${(x * o.lean).toFixed(2)}px, ${(y * o.rise).toFixed(2)}px) rotate(${(x * o.rot).toFixed(2)}deg)`;
+    if (o.pupils) o.pupils.style.transform = `translate(${(x * o.eyeX).toFixed(2)}px, ${(y * o.eyeY).toFixed(2)}px)`;
   };
+  const rest = () => { headEl.style.transform = ''; if (o.pupils) o.pupils.style.transform = ''; };
   const forget = () => { rect = null; };
   host.addEventListener('pointerenter', (e) => { forget(); aim(e); });
   host.addEventListener('pointermove', aim);
-  host.addEventListener('pointerleave', () => { head.style.transform = ''; forget(); });
+  host.addEventListener('pointerleave', () => { rest(); forget(); });
   addEventListener('scroll', forget, { passive: true });
   addEventListener('resize', forget, { passive: true });
 }
 
-// The host has to be wider than the mark. Listening on .brand meant the pointer could
-// only ever be to the right of it — the mark sits at the brand's left edge — so the cat
-// could look right and nowhere else. The whole header gives it a full range.
-const barEl = document.querySelector('.top') || document.querySelector('.brand');
-if (barEl) watchPointer(barEl, barEl.querySelector('.w2g-track') || document.querySelector('.w2g-track'), 1.7, 1.0, 9);
-const heroEl = document.querySelector('.arch-panel');
-if (heroEl) watchPointer(heroEl, heroEl.querySelector('.pet-headgroup'), 13, 7, 7);
+if (fine && !calm) {
+  // The host has to be wider than the mark. Listening on .brand meant the pointer could
+  // only ever be to its right — the mark sits at the brand's left edge — so the cat could
+  // look right and nowhere else. The header gives it a full horizontal range; the hero
+  // panel gives it all four directions.
+  const bar = document.querySelector('.top') || document.querySelector('.brand');
+  if (bar) watchPointer(bar, bar.querySelector('.w2g-track'), {
+    pupils: bar.querySelector('.w2g-pupils'),
+    lean: 1.5, rise: 0.9, rot: 8, eyeX: 2.6, eyeY: 1.6,
+    rangeX: 460, rangeY: 90,
+  });
+  const panel = document.querySelector('.arch-panel');
+  if (panel) watchPointer(panel, panel.querySelector('.pet-headgroup'), {
+    lean: 13, rise: 7, rot: 7, rangeX: 210, rangeY: 200,
+  });
+}
+
+// On a coarse pointer there is no cursor to follow and no leave to animate. The header
+// mark cannot react either way: it sits inside a link, so tapping it navigates and any
+// gesture is erased by the reload. The hero cat is not a link, so a tap there is a poke.
+if (!fine) {
+  const panel = document.querySelector('.arch-panel');
+  if (panel) {
+    panel.addEventListener('pointerdown', (e) => {
+      if (e.pointerType === 'mouse') return;
+      panel.classList.remove('poked');
+      void panel.offsetWidth;   // force a reflow so the animation restarts on every poke
+      panel.classList.add('poked');
+    });
+  }
+}

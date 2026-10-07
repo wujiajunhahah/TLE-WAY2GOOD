@@ -58,31 +58,43 @@ a:hover{text-decoration:underline;text-underline-offset:4px}
 .brand{display:flex;align-items:center;gap:11px}
 .brand-mark{display:block;width:31px;height:31px;flex:none}
 .brand-mark svg{display:block;width:100%;height:100%;overflow:visible}
-/* the mark's intro animation: the way draws itself, then the cat peeks over it */
+/* ── the header mark ────────────────────────────────────────────────────────
+   Four nested transforms, each owning one job so they compose instead of
+   overwriting each other: .w2g-cat rises on load, .w2g-track follows the pointer,
+   .w2g-head runs the shake, .w2g-pupils move inside the eyes.
+   ────────────────────────────────────────────────────────────────────────── */
 .w2g .w2g-way{animation:w2g-draw .5s cubic-bezier(.25,.7,.3,1) both}
 .w2g .w2g-cat{animation:w2g-peek .86s cubic-bezier(.2,.7,.3,1) .42s both}
 @keyframes w2g-draw{to{stroke-dashoffset:0}}
 @keyframes w2g-peek{0%{transform:translateY(15px)}60%{transform:translateY(0)}
   79%{transform:translateY(2.6px)}100%{transform:translateY(0)}}
-/* Hover wakes the cat: the head shakes, then the eyes open. Leaving plays it back.
-   Only the HEAD rotates — the amber line is the ground, and a ground line that
-   tilts with the head reads as a mistake. The pivot is the base of the cheeks,
-   so the head hinges on its neck instead of spinning in place. */
+
+/* Only the head rotates, and it hinges on the base of the cheeks rather than the canvas
+   centre. The amber line is the ground; a ground line that tilts with the head reads as
+   a mistake, not as movement. */
 .brand-mark .w2g-track,.brand-mark .w2g-head{transform-origin:32px 46.5px}
-/* the tracking layer eases, so the head follows the pointer instead of snapping */
 .brand-mark .w2g-track{transition:transform .26s cubic-bezier(.22,.61,.36,1)}
-.brand-mark .w2g-eyes{fill:#2A1C12;opacity:0;transform:scale(.3);transform-origin:32px 41.4px}
-.brand:hover .w2g-head{animation:w2g-shake .46s cubic-bezier(.36,.07,.19,.97) both}
-.brand:hover .w2g-eyes{animation:w2g-open .3s cubic-bezier(.34,1.56,.64,1) .22s both}
-/* The leave gesture needs its OWN animation-name. A browser restarts a CSS animation
-   only when the computed animation-name changes, so reusing w2g-shake with a different
-   duration does not replay it and the out-shake silently never runs. Keyframes are
-   duplicated on purpose. `.was-awake` is set by app.js on the first hover: without that
-   gate the base-state animation fires on load and the cat shakes at nobody. */
-.brand.was-awake:not(:hover):not(.woke) .w2g-head{animation:w2g-shake-out .44s cubic-bezier(.36,.07,.19,.97) both}
-.brand.was-awake:not(:hover):not(.woke) .w2g-eyes{animation:w2g-close .16s ease-in both}
-.brand.woke .w2g-head{animation:w2g-shake .46s cubic-bezier(.36,.07,.19,.97) both}
-.brand.woke .w2g-eyes{animation:w2g-open .3s cubic-bezier(.34,1.56,.64,1) .22s both}
+
+/* The eyes are lit from the moment the page loads — the cat is awake and watching, not
+   asleep. The pupils travel inside them on the shorter easing of the two, because an eye
+   moves before a head does. */
+.brand-mark .w2g-eyes{fill:#2A1C12}
+.brand-mark .w2g-pupils{transition:transform .16s cubic-bezier(.22,.61,.36,1)}
+
+/* Hover is gated behind an explicit capability query: iOS Safari keeps :hover applied
+   after a tap, so an ungated rule means the leave gesture never fires on touch. */
+@media (hover: hover) and (pointer: fine) {
+  .brand:hover .w2g-head{animation:w2g-shake .46s cubic-bezier(.36,.07,.19,.97) both}
+  /* The leave gesture needs its OWN animation-name. A browser restarts a CSS animation
+     only when the computed animation-name changes, so reusing w2g-shake with a shorter
+     duration does not replay it and the out-shake silently never runs. Keyframes are
+     duplicated on purpose. `.was-awake` is set by app.js on the first hover: without that
+     gate the base-state animation fires on load and the cat shakes at nobody. */
+  .brand.was-awake:not(:hover) .w2g-head{animation:w2g-shake-out .44s cubic-bezier(.36,.07,.19,.97) both}
+}
+
+
+
 @keyframes w2g-shake{
   0%{transform:rotate(0)}16%{transform:rotate(-5deg)}34%{transform:rotate(4.4deg)}
   52%{transform:rotate(-2.8deg)}70%{transform:rotate(1.5deg)}86%{transform:rotate(-.5deg)}
@@ -91,19 +103,16 @@ a:hover{text-decoration:underline;text-underline-offset:4px}
   0%{transform:rotate(0)}16%{transform:rotate(5deg)}34%{transform:rotate(-4.4deg)}
   52%{transform:rotate(2.8deg)}70%{transform:rotate(-1.5deg)}86%{transform:rotate(.5deg)}
   100%{transform:rotate(0)}}
-@keyframes w2g-open{from{opacity:0;transform:scale(.3)}60%{opacity:1;transform:scale(1.3)}
-  to{opacity:1;transform:scale(1)}}
-@keyframes w2g-close{from{opacity:1;transform:scale(1)}to{opacity:0;transform:scale(.3)}}
+
 /* decoration only — never load-bearing */
 @media (prefers-reduced-motion: reduce){
   .w2g .w2g-way{animation:none;stroke-dashoffset:0}
   .w2g .w2g-cat{animation:none;transform:none}
-  /* the shake is decoration; the state change is the content, so the eyes still
-     open, they just do not travel */
-  .brand .w2g-head,.brand.was-awake:not(:hover):not(.woke) .w2g-head{animation:none!important}
-  .brand-mark .w2g-track{transform:none!important;transition:none}
-  .brand:hover .w2g-eyes,.brand.woke .w2g-eyes{animation:none!important;opacity:1;transform:scale(1)}
-  .brand.was-awake:not(:hover):not(.woke) .w2g-eyes{animation:none!important;opacity:0;transform:scale(.3)}
+  /* Everything here is motion for its own sake, so it all stops. The eyes stay lit:
+     they are state, not movement. */
+  .brand .w2g-head,.brand.was-awake:not(:hover) .w2g-head{animation:none!important}
+  .brand-mark .w2g-track,
+  .brand-mark .w2g-pupils{transform:none!important;transition:none}
 }
 .brand-text{font-size:15px;font-weight:600;line-height:1.2}
 .brand-text small{display:block;font-size:12px;font-weight:400;color:var(--ink-3);letter-spacing:.02em;margin-top:2px}
