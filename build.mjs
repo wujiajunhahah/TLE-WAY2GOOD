@@ -103,10 +103,10 @@ const html = (c) => {
 <meta name="pc-mode" content="${STATIC ? 'static' : 'server'}">
 <link rel="preload" href="/fonts/pc-serif.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="/fonts/pc-sans.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="icon" href="/favicon.svg" type="image/svg+xml">
-<link rel="icon" href="/favicon.ico" sizes="32x32">
-<link rel="apple-touch-icon" href="/apple-touch-icon.png">
-<link rel="manifest" href="/site.webmanifest">
+<link rel="icon" href="/favicon.svg?v=2" type="image/svg+xml" sizes="any">
+<link rel="icon" href="/favicon.ico?v=2" sizes="32x32">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png?v=2">
+<link rel="manifest" href="/site.webmanifest?v=2">
 <link rel="stylesheet" href="/style.css">
 <link rel="stylesheet" href="/theme-pet.css">
 <script src="/app.js" defer></script>
@@ -481,6 +481,9 @@ if (STATIC) {
 <link rel="canonical" href="${zhUrl}">
 <link rel="alternate" hreflang="zh-CN" href="${SITE}zh/">
 <link rel="alternate" hreflang="en" href="${SITE}en/">
+<link rel="icon" href="${BASE}favicon.svg?v=2" type="image/svg+xml" sizes="any">
+<link rel="icon" href="${BASE}favicon.ico?v=2" sizes="32x32">
+<link rel="apple-touch-icon" href="${BASE}apple-touch-icon.png?v=2">
 </head>
 <body>
 <p><a href="${BASE}zh/">中文</a> · <a href="${BASE}en/">English</a></p>
