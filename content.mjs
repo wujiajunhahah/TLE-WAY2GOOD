@@ -8,7 +8,7 @@ export const content = {
   "zh": {
     "lang": "zh-CN",
     "sourceNote": "Group 6 · 2026年10月6日更新 · 5位访谈、31份有效问卷与15项媒体来源；小样本探索，不代表全部养宠人。",
-    "title": "宠物远程陪伴研究 | Pet Companionship",
+    "title": "宠物远程陪伴研究 | way2good",
     "desc": "5位养宠人访谈与31份问卷：看到宠物之后，怎样更安心、保持连接并及时照应？了解宠物远程陪伴的研究发现、低打扰交互方向与后续原型进展。",
     "ogLocale": "zh_CN",
     "ogLocaleAlt": "en_US",
@@ -375,7 +375,7 @@ export const content = {
   "en": {
     "lang": "en",
     "sourceNote": "Group 6 · Updated 6 October 2026 · 5 interviews, 31 valid survey responses and 15 media sources. Exploratory research, not population estimates.",
-    "title": "Remote Pet Companionship Research | Pet Companionship",
+    "title": "Remote Pet Companionship Research | way2good",
     "desc": "Five owner interviews and 31 survey responses explore remote pet care: reassurance, everyday connection and timely response. Follow our research, gentle interaction concepts and future prototypes.",
     "ogLocale": "en_US",
     "ogLocaleAlt": "zh_CN",
