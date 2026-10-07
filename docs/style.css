@@ -68,7 +68,9 @@ a:hover{text-decoration:underline;text-underline-offset:4px}
    Only the HEAD rotates — the amber line is the ground, and a ground line that
    tilts with the head reads as a mistake. The pivot is the base of the cheeks,
    so the head hinges on its neck instead of spinning in place. */
-.brand-mark .w2g-head{transform-origin:32px 46.5px}
+.brand-mark .w2g-track,.brand-mark .w2g-head{transform-origin:32px 46.5px}
+/* the tracking layer eases, so the head follows the pointer instead of snapping */
+.brand-mark .w2g-track{transition:transform .26s cubic-bezier(.22,.61,.36,1)}
 .brand-mark .w2g-eyes{fill:#2A1C12;opacity:0;transform:scale(.3);transform-origin:32px 41.4px}
 .brand:hover .w2g-head{animation:w2g-shake .46s cubic-bezier(.36,.07,.19,.97) both}
 .brand:hover .w2g-eyes{animation:w2g-open .3s cubic-bezier(.34,1.56,.64,1) .22s both}
@@ -99,6 +101,7 @@ a:hover{text-decoration:underline;text-underline-offset:4px}
   /* the shake is decoration; the state change is the content, so the eyes still
      open, they just do not travel */
   .brand .w2g-head,.brand.was-awake:not(:hover):not(.woke) .w2g-head{animation:none!important}
+  .brand-mark .w2g-track{transform:none!important;transition:none}
   .brand:hover .w2g-eyes,.brand.woke .w2g-eyes{animation:none!important;opacity:1;transform:scale(1)}
   .brand.was-awake:not(:hover):not(.woke) .w2g-eyes{animation:none!important;opacity:0;transform:scale(.3)}
 }

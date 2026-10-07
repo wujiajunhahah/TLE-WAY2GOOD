@@ -129,3 +129,40 @@ for (const brand of document.querySelectorAll('.brand')) {
     brand.classList.add('was-awake');
   });
 }
+
+// The cat watches the pointer: the head leans and turns toward wherever the cursor is,
+// so entering from the left and entering from the right do not look the same, and
+// circling the figure keeps its attention. Each figure declares its own magnitudes —
+// the header mark's head is 33 units wide and the hero cat's is 290, so one shared
+// translate would be invisible on the first and violent on the second.
+function watchPointer(host, head, lean, rise, rot) {
+  if (!host || !head) return;
+  if (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+  const clamp = (v) => (v < -1 ? -1 : v > 1 ? 1 : v);
+  // The rect is cached and refreshed on entry, scroll and resize. Reading it inside
+  // pointermove would force a style recalc on every event, on a page this long.
+  let rect = null;
+  const aim = (e) => {
+    if (!rect || !rect.width) {
+      rect = head.getBoundingClientRect();
+      if (!rect.width) return;
+    }
+    const x = clamp((e.clientX - (rect.left + rect.width / 2)) / (rect.width * 0.9));
+    const y = clamp((e.clientY - (rect.top + rect.height / 2)) / (rect.height * 1.4));
+    head.style.transform = `translate(${(x * lean).toFixed(2)}px, ${(y * rise).toFixed(2)}px) rotate(${(x * rot).toFixed(2)}deg)`;
+  };
+  const forget = () => { rect = null; };
+  host.addEventListener('pointerenter', (e) => { forget(); aim(e); });
+  host.addEventListener('pointermove', aim);
+  host.addEventListener('pointerleave', () => { head.style.transform = ''; forget(); });
+  addEventListener('scroll', forget, { passive: true });
+  addEventListener('resize', forget, { passive: true });
+}
+
+// The host has to be wider than the mark. Listening on .brand meant the pointer could
+// only ever be to the right of it — the mark sits at the brand's left edge — so the cat
+// could look right and nowhere else. The whole header gives it a full range.
+const barEl = document.querySelector('.top') || document.querySelector('.brand');
+if (barEl) watchPointer(barEl, barEl.querySelector('.w2g-track') || document.querySelector('.w2g-track'), 1.7, 1.0, 9);
+const heroEl = document.querySelector('.arch-panel');
+if (heroEl) watchPointer(heroEl, heroEl.querySelector('.pet-headgroup'), 13, 7, 7);

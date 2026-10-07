@@ -53,10 +53,15 @@
           <g clip-path="url(#w2g-hdr-clip)"><g class="w2g-cat">
             <!-- .w2g-cat runs the load intro (the head rises past the clip);
                  .w2g-head is the hover pivot, so the two never fight. -->
-            <g class="w2g-head">
-              <path d="M15.5 46.5 C16.8 39.5 19.4 34.6 22.2 31.6 L25.2 23.4 L30.6 30.9 C31.3 30.6 32.7 30.6 33.4 30.9 L38.8 23.4 L41.8 31.6 C44.6 34.6 47.2 39.5 48.5 46.5" fill="none" stroke="#2A1C12" stroke-width="4.8"
-                    stroke-linecap="round" stroke-linejoin="round"/>
-              <g class="w2g-eyes"><circle cx="25.6" cy="41.4" r="2.7"/><circle cx="38.4" cy="41.4" r="2.7"/></g>
+            <!-- three nested transforms, each owning one thing so they compose
+                 instead of overwriting: .w2g-cat rises on load, .w2g-track follows
+                 the pointer, .w2g-head runs the shake. -->
+            <g class="w2g-track">
+              <g class="w2g-head">
+                <path d="M15.5 46.5 C16.8 39.5 19.4 34.6 22.2 31.6 L25.2 23.4 L30.6 30.9 C31.3 30.6 32.7 30.6 33.4 30.9 L38.8 23.4 L41.8 31.6 C44.6 34.6 47.2 39.5 48.5 46.5" fill="none" stroke="#2A1C12" stroke-width="4.8"
+                      stroke-linecap="round" stroke-linejoin="round"/>
+                <g class="w2g-eyes"><circle cx="25.6" cy="41.4" r="2.7"/><circle cx="38.4" cy="41.4" r="2.7"/></g>
+              </g>
             </g>
           </g></g>
         </svg>
@@ -90,8 +95,16 @@
       <div class="arch-panel rv">
         <svg viewBox="0 0 520 470" role="img" aria-label="A line drawing of a cat whose tail extends into a line reaching the owner, with pulses travelling both ways.">
           <path class="pet-tail" d="M440 391 C464 366 476 328 478 288 C480 252 472 224 456 210 C444 200 432 204 430 214"/>
-          <path class="pet-head" d="M135.0 390.0 C146.4 328.5 169.3 285.4 193.9 259.1 L220.2 187.0 L267.7 252.9 C273.8 250.3 286.2 250.3 292.3 252.9 L339.8 187.0 L366.1 259.1 C390.7 285.4 413.6 328.5 425.0 390.0"/>
-          <ellipse class="pet-eye" cx="223.8" cy="345.2" rx="14" ry="16"/><ellipse class="pet-eye" cx="336.2" cy="345.2" rx="14" ry="16"/>
+          <g class="pet-headgroup">
+
+            <path class="pet-head" d="M135.0 390.0 C146.4 328.5 169.3 285.4 193.9 259.1 L220.2 187.0 L267.7 252.9 C273.8 250.3 286.2 250.3 292.3 252.9 L339.8 187.0 L366.1 259.1 C390.7 285.4 413.6 328.5 425.0 390.0"/>
+
+            
+            <ellipse class="pet-eye" cx="223.8" cy="345.2" rx="14" ry="16"/>
+
+            <ellipse class="pet-eye" cx="336.2" cy="345.2" rx="14" ry="16"/>
+
+          </g>
           <path class="pet-line" d="M26 390 L520 390" pathLength="1"/>
           <path class="pet-flow" d="M26 390 L520 390"/>
           <path class="pet-flow pet-flow-back" d="M26 390 L520 390"/>

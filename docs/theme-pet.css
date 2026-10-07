@@ -215,6 +215,7 @@ html[lang="en"] h2{line-height:1.06;letter-spacing:-.03em}
 }
 
 @media(prefers-reduced-motion:reduce){
+  .pet-headgroup{transform:none!important;transition:none}
   .pet-line{stroke-dashoffset:0!important;transition:none}
   .pet-flow{animation:none;opacity:.85}
 }
@@ -231,6 +232,7 @@ html[lang="en"] h2{line-height:1.06;letter-spacing:-.03em}
 /* The hero is the mark, reversed onto the amber arch. On an amber ground the mark's
    own amber line would be invisible, so the whole figure takes --paper: the cat, the
    tail, the way, and the pulse that travels along it. */
+.pet-headgroup{transform-origin:280px 390px;transition:transform .3s cubic-bezier(.22,.61,.36,1)}
 .pet-head{fill:none;stroke:var(--paper);stroke-width:2.6;stroke-linejoin:round;stroke-linecap:round}
 /* the tail is a stroke, not a filled mass: a solid shape next to a 2.6u
    outlined head reads as two different drawings in one picture */
